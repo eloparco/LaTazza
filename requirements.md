@@ -24,7 +24,7 @@ Version:
 - [Glossary](#glossary)
 - [System design](#system-design)
 
-#Abtract
+# Abstract
 
 LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of coffee capsules in the workplace.
 
