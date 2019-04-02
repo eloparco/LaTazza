@@ -32,6 +32,13 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 
 # Stakeholders
 
+| Stakeholder name  	| Description 							    | 
+|-----------------------|:-----------------------------------------:|
+| Manager    			| Manage the purchase and sale of capsules	| 
+| Employee  			| Buy capsules from manager 			    |
+| Visitor        		| Buy capsules from manager      			|
+| Coffee Capsule Vendor | Sell capsules to manager 				    |
+
 # Context Diagram and interfaces
 
 ## Context Diagram
