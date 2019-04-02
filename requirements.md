@@ -8,6 +8,7 @@ Version:
 
 # Contents
 
+- [Abstract](#abstract)
 - [Stakeholders](#stakeholders)
 - [Context Diagram and interfaces](#context-diagram-and-interfaces)
   + [Context Diagram](#context-diagram)
@@ -23,6 +24,11 @@ Version:
 - [Glossary](#glossary)
 - [System design](#system-design)
 
+#Abtract
+
+LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of coffee capsules in the workplace.
+
+One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
 
 # Stakeholders
 
