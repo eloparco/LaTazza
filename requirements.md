@@ -74,6 +74,9 @@ The banking/credit card system is not listed in the actors because, even if the 
 ## Persona 2
 ![LaTazza](persona2.png "")
 *LaTazza manager*
+## Persona 3
+![LaTazza](persona3.png "")
+*LaTazza client*
 
 # Functional and non functional requirements
 
