@@ -33,7 +33,7 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 # Stakeholders
 
 | Stakeholder name  	| Description 							    | 
-|-----------------------|:-----------------------------------------:|
+|-----------------------|-------------------------------------------|
 | Manager    			| Manage the purchase and sale of capsules	| 
 | Employee  			| Buy capsules from manager 			    |
 | Visitor        		| Buy capsules from manager      			|
@@ -43,7 +43,28 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 
 ## Context Diagram
 
+```plantuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Manager as m
+actor "Coffe Capsule Vendor" as v
+
+rectangle system {
+    (LaTazza) as lt
+    m -- lt
+    lt -- v
+}
+```
+
 ## Interfaces
+
+| Actor                         | Logical Interface	| Physical Interface    |
+|-------------------------------|:-----------------:|:---------------------:|
+| Manager      			        | GUI			    | Screen, keyboard		|
+| Coffee Capsule Vendor         | Web service, APIs	| Internet connection	|
+
+The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager choose to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application). 
 
 # Stories and personas
 
