@@ -79,7 +79,7 @@ The banking/credit card system is not listed in the actors because, even if the 
 *LaTazza client*
 
 ## Story 1
-David, LaTazza manger notices they are running low on capsules.
+David, LaTazza manger notices the inventory is are running low on capsules.
 
 He sends an order to the supplier for two boxes of coffee and one of lemon tea. 
 He doesn't want to waste too much time. He runs LaTazza and easily completes the order.
@@ -96,14 +96,14 @@ Since her balance is negative, she pays 10€ to add credit on her account and t
 
 She proceeds to the hall to drink her tea and chat with other employees.
 
-# Story 3
+## Story 3
 It's Thursday morning.
 
 Mark is a temporary guest in this company. He was called as a consultant to review and improve the security system. 
 
 He is tired because last night he worked on a project until late, he wants to buy coffee at a convenient price.
 
-He asks the manager to buy in cash, he recieves a coffee capsule quickly and he goes to the coffee maker right after.
+He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the coffee maker right after.
 
 
 
