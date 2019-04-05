@@ -123,4 +123,45 @@ He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the 
 
 # Glossary
 
+```plantuml
+
+class Manager {
+	+cashAccount
+}
+class Box {
+	+barcode
+	+type
+	+price
+}
+class Capsule {
+	+type
+	+sellPrice
+}
+class User {
+	+name
+}
+class Visitor {
+
+}
+class Employee {
+	+ID
+	+name
+	+balance
+}
+
+User <|-- Employee
+User <|-- Visitor
+Employee <|-- Manager
+Manager "1" -- "*" Box : orders >
+Box "1" -- "50" Capsule : contains > 
+User "1" -- "*" Capsule : buys >
+Manager "1" -- "*" Employee : adds credit >
+
+note "sellPrice includes profit percentage" as N1
+note "price is the payment to vendor, without profit percentage" as N2
+Capsule .. N1
+N2 .. Box
+
+```
+
 # System Design
