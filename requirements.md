@@ -69,13 +69,13 @@ The banking/credit card system is not listed in the actors because, even if the 
 # Stories and personas
 
 ## Persona 1
-![LaTazza](persona1.png "")
+![LaTazza](pictures/persona1.png "")
 *LaTazza client*
 ## Persona 2
-![LaTazza](persona2.png "")
+![LaTazza](pictures/persona2.png "")
 *LaTazza manager*
 ## Persona 3
-![LaTazza](persona3.png "")
+![LaTazza](pictures/persona3.png "")
 *LaTazza client*
 
 ## Story 1
