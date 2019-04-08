@@ -270,7 +270,6 @@ class Visitor {
 }
 class Employee {
 	+ID
-	+name
 	+balance
 }
 
