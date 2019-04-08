@@ -276,3 +276,21 @@ N2 .. Box
 ```
 
 # System Design
+```plantuml
+class LaTazzaSystem {
+  +registerEmployee()
+  +sellCredits()
+  +sellCapsulesWithCredits()
+  +sellCapsulesWithCash()
+  +showInventory()
+  +showCashAccount()
+  +showPendingOrders()
+  +buyBoxesOfCapsules()
+  +confirmOrderReception()
+}
+
+class Computer {
+}
+
+LaTazzaSystem o-- Computer
+```
