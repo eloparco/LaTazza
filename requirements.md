@@ -28,15 +28,13 @@ Version: 1.0.0
 - [Glossary](#glossary)
 - [System design](#system-design)
 
+
 # Abstract
 
 LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of coffee capsules in the workplace.
 
 One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
 
-<!---LaTazza application GUI should be something similar to the one represented below:
-![LaTazza GUI](UI_prototype.png "")
-*LaTazza GUI*--->
 
 # Stakeholders
 
@@ -46,6 +44,7 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 | Employee  			| Buy capsules from manager 			    |
 | Visitor        		| Buy capsules from manager      			|
 | Coffee Capsule Vendor | Sell capsules to manager 				    |
+
 
 # Context Diagram and interfaces
 
@@ -73,6 +72,7 @@ rectangle system {
 | Coffee Capsule Vendor         | Web service, APIs	| Internet connection	|
 
 The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
+
 
 # Stories and personas
 
@@ -113,6 +113,7 @@ He is tired because last night he worked on a project until late, he wants to bu
 
 He asks to buy in cash, he receives a coffee capsule quickly and he goes to the coffee maker right after.
 
+
 # Functional and non functional requirements
 
 ## Functional Requirements
@@ -137,6 +138,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 |  NFR5     | Portability | The application can be run on the most common operating systems (Windows, Linux, Mac) |
 |  NFR6     | Usability | User should be able to use the application with less than 10 min training |
 |  NFR7     | Robustness | Probability of data corruption on failure less than 1% |
+
 
 # Use case diagram and use cases
 
@@ -179,6 +181,7 @@ note left of sca1 : only for employees,\nvisitors can buy only with cash
 ```
 
 ## Use Cases
+
 
 # Relevant scenarios
 ### Registration of a new employee
@@ -255,6 +258,7 @@ Post condition: list of pending orders and inventory are updated
 | 4                | System sets selected orders as received (orders disappear from the pending order table) |
 | 5                | System increases number of capsules in inventory |
 
+
 # Glossary
 
 ```plantuml
@@ -294,6 +298,7 @@ note "price is the payment to vendor, without profit percentage" as N2
 Capsule .. N1
 N2 .. Box
 ```
+
 
 # System Design
 ```plantuml
