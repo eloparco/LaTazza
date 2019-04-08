@@ -120,6 +120,15 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 | F6   | Show pending orders |
 
 ## Non Functional Requirements
+| ID        | Type (efficiency, reliability, ..)           | Description  |
+| ------------- |:-------------:| :-----:|
+|  NFR1     | Domain | Currency is € |
+|  NFR2     | Efficiency - speed | Operations completed in less than 0.1 sec |
+|  NFR3     | Efficiency - memory | Ram used by the application should be less than 1Mbyte |
+|  NFR4     | Reliability | There must be less than 1 crashes each month |
+|  NFR5     | Portability | The application can be run on the most common operating systems (Windows, Linux, Mac) |
+|  NFR6     | Usability | User should be able to use the application with less than 10 min training |
+|  NFR7     | Robustness | Probability of data corruption on failure less than 1% |
 
 # Use case diagram and use cases
 
