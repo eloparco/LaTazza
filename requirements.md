@@ -105,11 +105,20 @@ He is tired because last night he worked on a project until late, he wants to bu
 
 He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the coffee maker right after.
 
-
-
 # Functional and non functional requirements
 
 ## Functional Requirements
+
+| ID   | Description  |
+|:----:| ------------ |
+| F1   | Register employee |
+| F2   | Sell capsules (for credits or cash) |
+| F3   | Buy boxes of capsules |
+| F3.1 | Send order |
+| F3.2 | Confirm reception of order |
+| F4   | Sell credits |
+| F5   | Show inventory and cash account |
+| F6   | Show pending orders |
 
 ## Non Functional Requirements
 
@@ -124,7 +133,6 @@ He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the 
 # Glossary
 
 ```plantuml
-
 class Manager {
 	+cashAccount
 }
@@ -161,7 +169,6 @@ note "sellPrice includes profit percentage" as N1
 note "price is the payment to vendor, without profit percentage" as N2
 Capsule .. N1
 N2 .. Box
-
 ```
 
 # System Design
