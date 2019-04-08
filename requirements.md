@@ -303,6 +303,9 @@ N2 .. Box
 # System Design
 ```plantuml
 class LaTazzaSystem {
+}
+
+class Computer {
   +registerEmployee()
   +sellCredits()
   +sellCapsulesWithCredits()
@@ -312,9 +315,6 @@ class LaTazzaSystem {
   +showPendingOrders()
   +buyBoxesOfCapsules()
   +confirmOrderReception()
-}
-
-class Computer {
 }
 
 class CapsuleVendorGateway {
