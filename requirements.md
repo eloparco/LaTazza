@@ -1,13 +1,13 @@
 # Requirements Document
 
-Authors: 
-Bonelli Lorenzo     213262
-Ruggeri Franco      265682
-Rosso Alessandro    265485
-Loparco Enrico      261072
-
+Authors:  
+Bonelli Lorenzo     213262  
+Ruggeri Franco      265682  
+Rosso Alessandro    265485  
+Loparco Enrico      261072  
+  
 Date: 10/04/19
-
+  
 Version: 1.0.0
 
 # Contents
@@ -243,7 +243,10 @@ Post condition: cash account is decreases and order is stored as pending
 | 6                | System notifies the vendor |
 
 ### Successful reception of an order
-| Scenario ID: SC5 | Corresponds to UC: Send order |
+Precondition: order is (physically) received  
+Post condition: inventory is updated with received capsules  
+
+| Scenario ID: SC6 | Corresponds to UC: Send order |
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
 | 1                | Manager clicks on 'Show Order' |
