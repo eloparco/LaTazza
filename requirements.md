@@ -48,7 +48,7 @@ left to right direction
 skinparam packageStyle rectangle
 
 actor Manager as m
-actor "Coffe Capsule Vendor" as v
+actor "Coffee Capsule Vendor" as v
 
 rectangle system {
     (LaTazza) as lt
@@ -64,7 +64,7 @@ rectangle system {
 | Manager      			        | GUI			    | Screen, keyboard		|
 | Coffee Capsule Vendor         | Web service, APIs	| Internet connection	|
 
-The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager choose to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application). 
+The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
 
 # Stories and personas
 
@@ -79,7 +79,7 @@ The banking/credit card system is not listed in the actors because, even if the 
 *LaTazza client*
 
 ## Story 1
-David, LaTazza manger notices the inventory is are running low on capsules.
+David, LaTazza manager notices the inventory is running low on capsules.
 
 He sends an order to the supplier for two boxes of coffee and one of lemon tea. 
 He doesn't want to waste too much time. He runs LaTazza and easily completes the order.
@@ -99,11 +99,11 @@ She proceeds to the hall to drink her tea and chat with other employees.
 ## Story 3
 It's Thursday morning.
 
-Mark is a temporary guest in this company. He was called as a consultant to review and improve the security system. 
+Mark is a temporary guest in this company. He was called as a consultant to review and improve the security system.
 
 He is tired because last night he worked on a project until late, he wants to buy coffee at a convenient price.
 
-He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the coffee maker right after.
+He asks to buy in cash, he receives a coffee capsule quickly and he goes to the coffee maker right after.
 
 # Functional and non functional requirements
 
