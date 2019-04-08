@@ -31,7 +31,7 @@ Version: 1.0.0
 
 # Abstract
 
-LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of coffee capsules in the workplace.
+LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of capsules in the workplace.
 
 One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
 
@@ -43,7 +43,7 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 | Manager    			| Manage the purchase and sale of capsules	| 
 | Employee  			| Buy capsules from manager 			    |
 | Visitor        		| Buy capsules from manager      			|
-| Coffee Capsule Vendor | Sell capsules to manager 				    |
+| Capsule Vendor | Sell capsules to manager 				    |
 
 
 # Context Diagram and interfaces
@@ -55,7 +55,7 @@ left to right direction
 skinparam packageStyle rectangle
 
 actor Manager as m
-actor "Coffee Capsule Vendor" as v
+actor "Capsule Vendor" as v
 
 rectangle system {
     (LaTazza) as lt
@@ -69,7 +69,7 @@ rectangle system {
 | Actor                         | Logical Interface	| Physical Interface    |
 |-------------------------------|:-----------------:|:---------------------:|
 | Manager      			        | GUI			    | Screen, keyboard		|
-| Coffee Capsule Vendor         | Web service, APIs	| Internet connection	|
+| Capsule Vendor         | Web service, APIs	| Internet connection	|
 
 The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
 
@@ -147,7 +147,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 left to right direction
 
 :Manager: as m
-:Coffee Capsule Vendor: as ccv
+:Capsule Vendor: as ccv
 
 (Register employee) as re
 together {
@@ -317,5 +317,11 @@ class LaTazzaSystem {
 class Computer {
 }
 
+class CapsuleVendorGateway {
+  +sendOrder()
+}
+
 LaTazzaSystem o-- Computer
+
+Computer -- CapsuleVendorGateway
 ```
