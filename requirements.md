@@ -28,15 +28,13 @@ Version: 1.0.0
 - [Glossary](#glossary)
 - [System design](#system-design)
 
+
 # Abstract
 
-LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of coffee capsules in the workplace.
+LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of capsules in the workplace.
 
 One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
 
-<!---LaTazza application GUI should be something similar to the one represented below:
-![LaTazza GUI](UI_prototype.png "")
-*LaTazza GUI*--->
 
 # Stakeholders
 
@@ -45,7 +43,8 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 | Manager    			| Manage the purchase and sale of capsules	| 
 | Employee  			| Buy capsules from manager 			    |
 | Visitor        		| Buy capsules from manager      			|
-| Coffee Capsule Vendor | Sell capsules to manager 				    |
+| Capsule Vendor | Sell capsules to manager 				    |
+
 
 # Context Diagram and interfaces
 
@@ -56,7 +55,7 @@ left to right direction
 skinparam packageStyle rectangle
 
 actor Manager as m
-actor "Coffee Capsule Vendor" as v
+actor "Capsule Vendor" as v
 
 rectangle system {
     (LaTazza) as lt
@@ -70,9 +69,10 @@ rectangle system {
 | Actor                         | Logical Interface	| Physical Interface    |
 |-------------------------------|:-----------------:|:---------------------:|
 | Manager      			        | GUI			    | Screen, keyboard		|
-| Coffee Capsule Vendor         | Web service, APIs	| Internet connection	|
+| Capsule Vendor         | Web service, APIs	| Internet connection	|
 
 The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
+
 
 # Stories and personas
 
@@ -113,6 +113,7 @@ He is tired because last night he worked on a project until late, he wants to bu
 
 He asks to buy in cash, he receives a coffee capsule quickly and he goes to the coffee maker right after.
 
+
 # Functional and non functional requirements
 
 ## Functional Requirements
@@ -138,6 +139,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 |  NFR6     | Usability | User should be able to use the application with less than 10 min training |
 |  NFR7     | Robustness | Probability of data corruption on failure less than 1% |
 
+
 # Use case diagram and use cases
 
 ## Use case diagram
@@ -145,7 +147,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 left to right direction
 
 :Manager: as m
-:Coffee Capsule Vendor: as ccv
+:Capsule Vendor: as ccv
 
 (Register employee) as re
 together {
@@ -179,6 +181,7 @@ note left of sca1 : only for employees,\nvisitors can buy only with cash
 ```
 
 ## Use Cases
+
 
 # Relevant scenarios
 ### Registration of a new employee
@@ -255,6 +258,7 @@ Post condition: list of pending orders and inventory are updated
 | 4                | System sets selected orders as received (orders disappear from the pending order table) |
 | 5                | System increases number of capsules in inventory |
 
+
 # Glossary
 
 ```plantuml
@@ -295,6 +299,7 @@ Capsule .. N1
 N2 .. Box
 ```
 
+
 # System Design
 ```plantuml
 class LaTazzaSystem {
@@ -312,5 +317,11 @@ class LaTazzaSystem {
 class Computer {
 }
 
+class CapsuleVendorGateway {
+  +sendOrder()
+}
+
 LaTazzaSystem o-- Computer
+
+Computer -- CapsuleVendorGateway
 ```
