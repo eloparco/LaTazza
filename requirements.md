@@ -108,7 +108,6 @@ He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the 
 # Functional and non functional requirements
 
 ## Functional Requirements
-
 | ID   | Description  |
 |:----:| ------------ |
 | F1   | Register employee |
@@ -125,7 +124,6 @@ He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the 
 # Use case diagram and use cases
 
 ## Use case diagram
-
 ```plantuml
 left to right direction
 
@@ -166,6 +164,32 @@ note left of sca1 : only for employees,\nvisitors can buy only with cash
 ## Use Cases
 
 # Relevant scenarios
+### Registration of a new employee
+Precondition: employee works in the company and has not been registered yet
+Post condition: employee has an account
+
+| Scenario ID: SC1 | Corresponds to UC: Register employee |
+|:----------------:| ------------------------------------ |
+| Step #           | Description                          |
+| 1                | Manager selects 'Add new employee' |
+| 2                | System shows the form for adding details about employee (name, surname, etc.) |
+| 3                | Manager compiles the form and clicks 'confirm' |
+| 4                | System creates a new account for the employee with balance 0 |
+
+### Successful sale of capsules for credits (to an employee)
+Precondition: employee has an account, its balance has enough credits and there are enough capsules of the desired beverage
+Post condition: employee has bought the capsules, balance of the account and inventory are updated (decreased)
+
+| Scenario ID: SC2 | Corresponds to UC: Sell capsules for credits |
+|:----------------:| -------------------------------------------- |
+| Step #           | Description                                  |
+| 1                | Manager selects 'Yes' for 'By credits', sets employee, beverage and number of capsules and finally clicks 'Sell' |
+| 2                | System checks availability of capsules in the inventory and credits of employee |
+| 3                | System decreases number of capsules in inventory and credits of employee |
+
+### Successful sale of capsules for cash to a visitor
+
+### Sell credits
 
 # Glossary
 
