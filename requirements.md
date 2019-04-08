@@ -30,6 +30,10 @@ LaTazza is a simple desktop application adopted by a group of office workers to 
 
 One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
 
+LaTazza application GUI should be something similar to the one represented below:
+![LaTazza GUI](pictures/GUI.png "")
+*LaTazza GUI*
+
 # Stakeholders
 
 | Stakeholder name  	| Description 							    | 
