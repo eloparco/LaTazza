@@ -126,6 +126,43 @@ He asks to buy in cash, he recieves a coffee capsule quickly and he goes to the 
 
 ## Use case diagram
 
+```plantuml
+left to right direction
+
+:Manager: as m
+:Coffee Capsule Vendor: as ccv
+
+(Register employee) as re
+together {
+	(Sell capsules) as sca
+	(Sell capsules for credits) as sca1
+	(Sell capsules for cash) as sca2
+}
+together {
+	(Buy boxes of capsules) as bbc
+	(Send order) as so
+	(Confirm reception of order) as cro
+}
+(Sell credits) as scr
+(Show inventory and\ncash account) as sica
+(Show pending orders) as spo
+
+m --> re
+m --> sca
+m --> bbc
+ccv <-- so
+m --> scr
+m --> sica
+m --> spo
+
+sca <|-- sca1
+sca <|-- sca2
+so <. bbc : include
+bbc ..> cro : include
+
+note left of sca1 : only for employees,\nvisitors can buy only with cash
+```
+
 ## Use Cases
 
 # Relevant scenarios
