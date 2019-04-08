@@ -1,10 +1,10 @@
 # Requirements Document
 
 Authors:  
-Bonelli Lorenzo     213262  
-Ruggeri Franco      265682  
-Rosso Alessandro    265485  
-Loparco Enrico      261072  
+* Bonelli Lorenzo       267563  
+* Ruggeri Franco        265682  
+* Rosso Alessandro      265485  
+* Loparco Enrico        261072  
   
 Date: 10/04/19
   
@@ -129,7 +129,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 
 ## Non Functional Requirements
 | ID        | Type (efficiency, reliability, ..)           | Description  |
-| ------------- |:-------------:| :-----:|
+| ------------- |:-------------:| -------|
 |  NFR1     | Domain | Currency is € |
 |  NFR2     | Efficiency - speed | Operations completed in less than 0.1 sec |
 |  NFR3     | Efficiency - memory | Ram used by the application should be less than 1Mbyte |
