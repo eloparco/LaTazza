@@ -269,7 +269,7 @@ class Capsule {
 	+type
 	+sellPrice
 }
-class User {
+class Customer {
 	+name
 }
 class Visitor {
@@ -280,12 +280,12 @@ class Employee {
 	+balance
 }
 
-User <|-- Employee
-User <|-- Visitor
+Customer <|-- Employee
+Customer <|-- Visitor
 Employee <|-- Manager
 Manager "1" -- "*" Box : orders >
 Box "1" -- "50" Capsule : contains > 
-User "1" -- "*" Capsule : buys >
+Customer "1" -- "*" Capsule : buys >
 Manager "1" -- "*" Employee : adds credit >
 
 note "sellPrice includes profit percentage" as N1
