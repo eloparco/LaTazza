@@ -1,10 +1,14 @@
 # Requirements Document
 
 Authors: 
+Bonelli Lorenzo     213262
+Ruggeri Franco      265682
+Rosso Alessandro    265485
+Loparco Enrico      261072
 
-Date:
+Date: 10/04/19
 
-Version:
+Version: 1.0.0
 
 # Contents
 
@@ -83,7 +87,7 @@ The banking/credit card system is not listed in the actors because, even if the 
 *LaTazza client*
 
 ## Story 1
-David, LaTazza manager notices the inventory is running low on capsules.
+David, LaTazza manager, notices the inventory is running low on capsules.
 
 He sends an order to the supplier for two boxes of coffee and one of lemon tea. 
 He doesn't want to waste too much time. He runs LaTazza and easily completes the order.
@@ -178,7 +182,7 @@ note left of sca1 : only for employees,\nvisitors can buy only with cash
 
 # Relevant scenarios
 ### Registration of a new employee
-Precondition: employee works in the company and has not been registered yet
+Precondition: employee works in the company and has not been registered yet  
 Post condition: employee has an account
 
 | Scenario ID: SC1 | Corresponds to UC: Register employee |
@@ -190,7 +194,7 @@ Post condition: employee has an account
 | 4                | System creates a new account for the employee with balance 0 |
 
 ### Successful sale of capsules for credits (to an employee)
-Precondition: employee has an account, its balance has enough credits and there are enough capsules in inventory of the desired beverage
+Precondition: employee has an account, its balance has enough credits and there are enough capsules in inventory of the desired beverage  
 Post condition: employee has bought the capsules, balance of the account and inventory are updated (decreased)
 
 | Scenario ID: SC2 | Corresponds to UC: Sell capsules for credits |
@@ -202,7 +206,7 @@ Post condition: employee has bought the capsules, balance of the account and inv
 | 4                | System decreases number of capsules in inventory and credits of employee |
 
 ### Successful sale of capsules for cash to a visitor
-Precondition: visitor has enough cash and there are enough capsules in inventory of the desired beverage
+Precondition: visitor has enough cash and there are enough capsules in inventory of the desired beverage  
 Post condition: visitor has bought the capsules, cash account and inventory are updated
 
 | Scenario ID: SC3 | Corresponds to UC: Sell capsules for cash |
@@ -214,7 +218,7 @@ Post condition: visitor has bought the capsules, cash account and inventory are 
 | 4                | System decreases number of capsules in inventory and increases cash account |
 
 ### Successful sale of credits to an employee
-Precondition: employee has an account and enough cash
+Precondition: employee has an account and enough cash  
 Post condition: balance of the account and cash account are updated (increased)
 
 | Scenario ID: SC4 | Corresponds to UC: Sell credits |
@@ -225,7 +229,7 @@ Post condition: balance of the account and cash account are updated (increased)
 | 3                | System increases credits of employee and cash account |
 
 ### Successful sending of an order
-Precondition: there is enough money in the cash account
+Precondition: there is enough money in the cash account  
 Post condition: cash account is decreases and order is stored as pending
 
 | Scenario ID: SC5 | Corresponds to UC: Send order |
