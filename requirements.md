@@ -206,7 +206,7 @@ Post condition: balance of the account and cash account are updated (increased)
 |:----------------:| ------------------------------- |
 | Step #           | Description                     |
 | 1                | Manager sets employee and amount and clicks 'Payment' |
-| 2                | System increases balance of the account and cash account |
+| 2                | System increases credits of employee and cash account |
 
 ### Successful sending of an order
 Precondition: there is enough money in the cash account
@@ -216,8 +216,12 @@ Post condition: cash account is decreases and order is stored as pending
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
 | 1                | Manager sets beverage and number of boxes and clicks 'Buy' |
-| 2                | System checks the cash account |
-| 3                | System stores the order as pending |
+| 2                | System checks cash account |
+| 3                | System decreases cash account |
+| 4                | System stores the order as pending |
+| 5                | System notifies the vendor |
+
+### Successful reception of an order
 
 # Glossary
 
