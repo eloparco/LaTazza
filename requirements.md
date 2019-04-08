@@ -188,7 +188,7 @@ Post condition: employee has an account
 | Scenario ID: SC1 | Corresponds to UC: Register employee |
 |:----------------:| ------------------------------------ |
 | Step #           | Description                          |
-| 1                | Manager selects 'Register employee' |
+| 1                | Manager clicks on 'Register Employee' |
 | 2                | System shows the form for adding details about employee (ID, name, surname) |
 | 3                | Manager compiles the form and clicks 'Register' |
 | 4                | System creates a new account for the employee with balance 0 |
@@ -202,7 +202,7 @@ Post condition: employee has bought the capsules, balance of the account and inv
 | Step #           | Description                                  |
 | 1                | Manager clicks on 'Sell Capsules' |
 | 2                | Manager checks the checkbox 'Pay With Credits', sets 'Employee', 'Capsule Type' and 'Quantity' and finally clicks 'Sell' |
-| 3                | System checks availability of capsules in the inventory and credits of employee |
+| 3                | System checks availability of capsules in inventory and credits of employee |
 | 4                | System decreases number of capsules in inventory and credits of employee |
 
 ### Successful sale of capsules for cash to a visitor
@@ -214,7 +214,7 @@ Post condition: visitor has bought the capsules, cash account and inventory are 
 | Step #           | Description                               |
 | 1                | Manager clicks on 'Sell Capsules' |
 | 2                | Manager do not check the 'Pay With Credits' checkbox, sets 'Capsule Type' and 'Quantity' and finally clicks 'Sell' |
-| 3                | System checks availability of capsules in the inventory |
+| 3                | System checks availability of capsules in inventory |
 | 4                | System decreases number of capsules in inventory and increases cash account |
 
 ### Successful sale of credits to an employee
@@ -243,16 +243,17 @@ Post condition: cash account is decreases and order is stored as pending
 | 6                | System notifies the vendor |
 
 ### Successful reception of an order
-Precondition: order is (physically) received  
-Post condition: inventory is updated with received capsules  
+Precondition: there is at least a pending order  
+Post condition: list of pending orders and inventory are updated  
 
 | Scenario ID: SC6 | Corresponds to UC: Send order |
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
 | 1                | Manager clicks on 'Show Order' |
 | 2                | Manager checks for each received order the corresponding checkbox from the pending order table |
-| 5                | System sets the order as received (the order disappear from the pending order table) |
-| 6                | System increases number of capsules in inventory |
+| 3                | Manager clicks on 'Confirm Selected' |
+| 4                | System sets selected orders as received (orders disappear from the pending order table) |
+| 5                | System increases number of capsules in inventory |
 
 # Glossary
 
