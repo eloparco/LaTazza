@@ -322,7 +322,6 @@ class Computer {
   +sellCredits()
   +showInventory()
   +showPendingOrders()
-  +makeOrder()
   +sendOrderViaEmail()
   +confirmOrderReception()
   +cancelOrder()
