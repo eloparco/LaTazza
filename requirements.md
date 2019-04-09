@@ -133,7 +133,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 
 ## Non Functional Requirements
 | ID   | Type        | Description  | Refers to |
-|:----:|:-----------:| ------------ |
+|:----:|:-----------:| ------------ |:---------:|
 | NFR1 | Efficiency  | Operations should be completed in less than 0.1 sec | all FRs |
 | NFR2 | Efficiency  | The application should use at most 1 Mbyte of RAM | all FRs |
 | NFR3 | Reliability | The application should crash at most 1 time each month | all FRs |
@@ -199,6 +199,7 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 
 ### Register employee
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | Employee works in the company |
 | Post condition   | Employee has an account |
 | Nominal scenario | Successful registration of new employee |
@@ -206,6 +207,7 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 
 ### Delete employee
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | Employee works in the company |
 | Post condition   | Employee does not have an account |
 | Nominal scenario | Successful deletion of employee |
@@ -213,6 +215,7 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 
 ### Sell capsules for credits
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | Employee works in the company |
 | Post condition   | - (it depends on the scenario) |
 | Nominal scenario | Successful sale of capsules for credits (credits and number of capsules in inventory decreased) |
@@ -220,20 +223,23 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 
 ### Sell capsules for cash
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | - (it depends on the scenario) |
 | Post condition   | - (it depends on the scenario) |
 | Nominal scenario | Successful sale of capsules for cash (cash account increase and number of capsules in inventory decreased) |
 | Variants         | Sale refused (reasons: not enough capsules in inventory, not valid quantity (e.g. negative number)) |
 
 ### Send order
-| Actors involved  | Manager, Capsule Vendor|
+| Actors involved  | Manager, Capsule Vendor |
+|:----------------:| ---------------------- |
 | Precondition     | - (it depends on the scenario) |
 | Post condition   | - (it depends on the scenario) |
 | Nominal scenario | Successful sending of order (order stored as pending and email sent) |
-| Variants         | Order refused and email not sent (reason: not enough money in cash account) |
+| Variants         | Order refused and email not sent (reason: not enough money in cash account, not valid quantities (e.g. negative numbers)) |
 
 ### Conclude order
-| Actors involved  | Manager, Capsule Vendor|
+| Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | Order has been sent and is pending |
 | Post condition   | Order removed from the list of pending orders |
 | Nominal scenario | Successful reception of order (inventory updated) |
@@ -241,13 +247,15 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 
 ### Sell credits
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | employee has an account |
 | Post condition   | - (it depends on the scenario) |
 | Nominal scenario | Successful sale of credits to employee |
-| Variants         | Sale refused (reasons: not valid number of credits to sell (e.g. negative number))|
+| Variants         | Sale refused (reasons: not valid number of credits to sell (e.g. negative number)) |
 
 ### Monitor
 | Actors involved  | Manager |
+|:----------------:| ------- |
 | Precondition     | - |
 | Post condition   | Data are shown |
 | Nominal scenario | Correct visualization of data |
@@ -291,7 +299,7 @@ Post condition: visitor has bought the capsules, cash account and inventory are 
 | 4                | System decreases number of capsules in inventory and increases cash account |
 
 ### Successful sale of credits to an employee
-Precondition: employee has an account and enough cash  
+Precondition: employee has an account  
 Post condition: balance of the employee and cash account are updated (increased)
 
 | Scenario ID: SC4 | Corresponds to UC: Sell credits |
@@ -327,6 +335,30 @@ Post condition: list of pending orders and inventory are updated
 | 3                | Manager clicks on 'Confirm Selected' |
 | 4                | System sets selected orders as received (orders disappear from the pending order table) |
 | 5                | System increases number of capsules in inventory |
+
+### Unsuccessful sale of capsules for credits for unavailability in inventory
+Precondition: employee has an account  
+Post condition: N/A
+
+| Scenario ID: SC7 | Corresponds to UC: Sell capsules for credits |
+|:----------------:| -------------------------------------------- |
+| Step #           | Description                                  |
+| 1                | Manager clicks on 'Sell Capsules' |
+| 2                | Manager checks the checkbox 'Pay With Credits', sets 'Employee', 'Capsule Type' and 'Quantity' and finally clicks 'Sell' |
+| 3                | System checks availability of capsules in inventory |
+| 4                | System shows error message 'Not enough capsules in inventory' |
+
+### Unsuccessful sending of an order for unavailability in cash account
+Precondition: -  
+Post condition: N/A
+
+| Scenario ID: SC8 | Corresponds to UC: Send order |
+|:----------------:| ----------------------------- |
+| Step #           | Description                   |
+| 1                | Manager clicks on 'Orders' |
+| 2                | Manager sets for each beverage the number of boxes he wants to buy and clicks 'Buy' |
+| 3                | System checks cash account |
+| 4                | System shows error message 'Not enough money in cash account' |
 
 
 # Glossary
