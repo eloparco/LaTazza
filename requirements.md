@@ -285,18 +285,26 @@ class Employee {
 	+balance
 }
 
+class Order {
+    +date
+    +state
+}
+
 Customer <|-- Employee
 Customer <|-- Visitor
 Employee <|-- Manager
-Manager "1" -- "*" Box : orders >
+Manager "1" -- "*" Order : makes >
+Order "1" -- "1..*" Box : contains >
 Box "1" -- "50" Capsule : contains > 
 Customer "1" -- "*" Capsule : buys >
 Manager "1" -- "*" Employee : adds credit >
 
 note "sellPrice includes profit percentage" as N1
 note "price is the payment to vendor, without profit percentage" as N2
+note left of Order: state: pending or received
 Capsule .. N1
 N2 .. Box
+
 ```
 
 
