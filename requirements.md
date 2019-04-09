@@ -191,13 +191,13 @@ Post condition: employee has an account
 | Scenario ID: SC1 | Corresponds to UC: Register employee |
 |:----------------:| ------------------------------------ |
 | Step #           | Description                          |
-| 1                | Manager clicks on 'Register Employee' |
+| 1                | Manager clicks on 'Employees' |
 | 2                | System shows the form for adding details about employee (ID, name, surname) |
 | 3                | Manager compiles the form and clicks 'Register' |
 | 4                | System creates a new account for the employee with balance 0 |
 
 ### Successful sale of capsules for credits (to an employee)
-Precondition: employee has an account, its balance has enough credits and there are enough capsules in inventory of the desired beverage  
+Precondition: employee has an account and there are enough capsules in inventory of the desired beverage  
 Post condition: employee has bought the capsules, balance of the account and inventory are updated (decreased)
 
 | Scenario ID: SC2 | Corresponds to UC: Sell capsules for credits |
@@ -205,7 +205,7 @@ Post condition: employee has bought the capsules, balance of the account and inv
 | Step #           | Description                                  |
 | 1                | Manager clicks on 'Sell Capsules' |
 | 2                | Manager checks the checkbox 'Pay With Credits', sets 'Employee', 'Capsule Type' and 'Quantity' and finally clicks 'Sell' |
-| 3                | System checks availability of capsules in inventory and credits of employee |
+| 3                | System checks availability of capsules in inventory |
 | 4                | System decreases number of capsules in inventory and credits of employee |
 
 ### Successful sale of capsules for cash to a visitor
@@ -227,7 +227,7 @@ Post condition: balance of the account and cash account are updated (increased)
 | Scenario ID: SC4 | Corresponds to UC: Sell credits |
 |:----------------:| ------------------------------- |
 | Step #           | Description |
-| 1                | Manager clicks on 'Sell Credits'  |
+| 1                | Manager clicks on 'Employees'  |
 | 2                | Manager sets 'Employee' and 'Credits to sell' and clicks 'Sell' |
 | 3                | System increases credits of employee and cash account |
 
@@ -238,7 +238,7 @@ Post condition: cash account is decreases and order is stored as pending
 | Scenario ID: SC5 | Corresponds to UC: Send order |
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
-| 1                | Manager clicks on 'Make New Order' |
+| 1                | Manager clicks on 'Orders' |
 | 2                | Manager sets for each beverage the number of boxes he wants to buy and clicks 'Buy' |
 | 3                | System checks cash account |
 | 4                | System decreases cash account |
@@ -252,7 +252,7 @@ Post condition: list of pending orders and inventory are updated
 | Scenario ID: SC6 | Corresponds to UC: Send order |
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
-| 1                | Manager clicks on 'Show Order' |
+| 1                | Manager clicks on 'Orders' |
 | 2                | Manager checks for each received order the corresponding checkbox from the pending order table |
 | 3                | Manager clicks on 'Confirm Selected' |
 | 4                | System sets selected orders as received (orders disappear from the pending order table) |
