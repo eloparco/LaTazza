@@ -120,13 +120,14 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 | ID   | Description  |
 |:----:| ------------ |
 | F1   | Register employee |
-| F2   | Sell capsules (for credits or cash) |
-| F3   | Buy boxes of capsules |
-| F3.1 | Send order |
-| F3.2 | Conclude order |
-| F4   | Sell credits |
-| F5   | Show inventory and cash account |
-| F6   | Show pending orders |
+| F2   | Delete employee |
+| F3   | Sell capsules (for credits or cash) |
+| F4   | Buy boxes of capsules |
+| F4.1 | Send order |
+| F4.2 | Conclude order |
+| F5   | Sell credits |
+| F6   | Show inventory and cash account |
+| F7   | Show pending orders |
 
 ## Non Functional Requirements
 | ID        | Type (efficiency, reliability, ..)           | Description  |
@@ -149,7 +150,10 @@ left to right direction
 :Manager: as m
 :Capsule Vendor: as ccv
 
-(Register employee) as re
+together {
+	(Register employee) as re
+	(Delete employee) as de
+}
 together {
 	(Sell capsules) as sca
 	(Sell capsules for credits) as sca1
@@ -165,6 +169,7 @@ together {
 (Show pending orders) as spo
 
 m --> re
+m --> de
 m --> sca
 m --> bbc
 ccv <-- so
@@ -177,11 +182,24 @@ sca <|-- sca2
 so <. bbc : include
 bbc ..> co : include
 
-note left of sca1 : only for employees,\nvisitors can buy only with cash
+Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 ```
 
 ## Use Cases
 
+### Register employee
+
+### Delete employee
+
+### Sell capsules
+
+### Buy boxes of capsules
+
+### Sell credits
+
+### Show inventory and\ncash account
+
+### Show pending orders
 
 # Relevant scenarios
 ### Registration of a new employee
@@ -315,23 +333,21 @@ class LaTazzaSystem {
 
 class Computer {
   +registerEmployee()
-  +removeEmployee()
-  +showEmployees()
+  +sellCredits()
   +sellCapsulesWithCredits()
   +sellCapsulesWithCash()
-  +sellCredits()
   +showInventory()
+  +showCashAccount()
   +showPendingOrders()
-  +sendOrderViaEmail()
+  +buyBoxesOfCapsules()
   +confirmOrderReception()
-  +cancelOrder()
 }
 
-class EmailGateway {
-  +sendOrderViaEmail()
+class CapsuleVendorGateway {
+  +sendOrder()
 }
 
 LaTazzaSystem o-- Computer
 
-Computer -- EmailGateway
+Computer -- CapsuleVendorGateway
 ```
