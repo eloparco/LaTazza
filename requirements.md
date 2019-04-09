@@ -123,7 +123,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 | F2   | Sell capsules (for credits or cash) |
 | F3   | Buy boxes of capsules |
 | F3.1 | Send order |
-| F3.2 | Confirm reception of order |
+| F3.2 | Conclude order |
 | F4   | Sell credits |
 | F5   | Show inventory and cash account |
 | F6   | Show pending orders |
