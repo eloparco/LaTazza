@@ -315,21 +315,24 @@ class LaTazzaSystem {
 
 class Computer {
   +registerEmployee()
-  +sellCredits()
+  +removeEmployee()
+  +showEmployees()
   +sellCapsulesWithCredits()
   +sellCapsulesWithCash()
+  +sellCredits()
   +showInventory()
-  +showCashAccount()
   +showPendingOrders()
-  +buyBoxesOfCapsules()
+  +makeOrder()
+  +sendOrderViaEmail()
   +confirmOrderReception()
+  +cancelOrder()
 }
 
-class CapsuleVendorGateway {
-  +sendOrder()
+class EmailGateway {
+  +sendOrderViaEmail()
 }
 
 LaTazzaSystem o-- Computer
 
-Computer -- CapsuleVendorGateway
+Computer -- EmailGateway
 ```
