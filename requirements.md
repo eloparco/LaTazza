@@ -43,7 +43,7 @@ One employee takes the role of manager, he acts as a seller handling the supply 
 | Manager    			| Manage the purchase and sale of capsules	| 
 | Employee  			| Buy capsules from manager 			    |
 | Visitor        		| Buy capsules from manager      			|
-| Capsule Vendor | Sell capsules to manager 				    |
+| Capsule Vendor        | Sell capsules to manager 				    |
 
 
 # Context Diagram and interfaces
@@ -56,20 +56,23 @@ skinparam packageStyle rectangle
 
 actor Manager as m
 actor "Capsule Vendor" as v
+actor "Email System" as es
 
 rectangle system {
     (LaTazza) as lt
     m -- lt
+    es -- lt
     lt -- v
 }
 ```
 
 ## Interfaces
 
-| Actor                         | Logical Interface	| Physical Interface    |
-|-------------------------------|:-----------------:|:---------------------:|
-| Manager      			        | GUI			    | Screen, keyboard		|
-| Capsule Vendor         | Web service, APIs	| Internet connection	|
+| Actor                         | Logical Interface	            | Physical Interface    |
+|-------------------------------|-------------------------------|:---------------------:|
+| Manager      			        | GUI			                | Screen, keyboard		|
+| Capsule Vendor                | Web service, APIs	            | Internet connection	|
+| Email System                  | Web service, POP, IMAP, SMTP  | Internet connection	|
 
 The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
 
