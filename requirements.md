@@ -158,7 +158,7 @@ together {
 together {
 	(Buy boxes of capsules) as bbc
 	(Send order) as so
-	(Confirm reception of order) as cro
+	(Conclude order) as co
 }
 (Sell credits) as scr
 (Show inventory and\ncash account) as sica
@@ -175,7 +175,7 @@ m --> spo
 sca <|-- sca1
 sca <|-- sca2
 so <. bbc : include
-bbc ..> cro : include
+bbc ..> co : include
 
 note left of sca1 : only for employees,\nvisitors can buy only with cash
 ```
