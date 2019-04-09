@@ -188,21 +188,70 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 ## Use Cases
 
 ### Register employee
+| Actors involved  | Manager |
+| Precondition     | Employee works in the company |
+| Post condition   | Employee has an account |
+| Nominal scenario | Successful registration of new employee |
+| Variants         | Registration refused (reasons: employee already registered, not valid ID (wrong format)) |
 
 ### Delete employee
+| Actors involved  | Manager |
+| Precondition     | Employee works in the company |
+| Post condition   | Employee does not have an account |
+| Nominal scenario | Successful deletion of employee |
+| Variants         | Manager does not find employee (reason: employee not registered) |
 
-### Sell capsules
+### Sell capsules for credits
+| Actors involved  | Manager |
+| Precondition     | Employee works in the company |
+| Post condition   | - (it depends on the scenario) |
+| Nominal scenario | Successful sale of capsules for credits (credits and number of capsules in inventory decreased) |
+| Variants         | Manager does not find employee (reason: employee not registered), Sale refused (reasons: not enough capsules in inventory, not valid quantity (e.g. negative number)) |
 
-### Buy boxes of capsules
+### Sell capsules for cash
+| Actors involved  | Manager |
+| Precondition     | - (it depends on the scenario) |
+| Post condition   | - (it depends on the scenario) |
+| Nominal scenario | Successful sale of capsules for cash (cash account increase and number of capsules in inventory decreased) |
+| Variants         | Sale refused (reasons: not enough capsules in inventory, not valid quantity (e.g. negative number)) |
+
+### Send order
+| Actors involved  | Manager, Capsule Vendor|
+| Precondition     | - (it depends on the scenario) |
+| Post condition   | - (it depends on the scenario) |
+| Nominal scenario | Successful sending of order (order stored as pending and email sent) |
+| Variants         | Order refused and email not sent (reason: not enough money in cash account) |
+
+### Conclude order
+| Actors involved  | Manager, Capsule Vendor|
+| Precondition     | Order has been sent and is pending |
+| Post condition   | Order removed from the list of pending orders |
+| Nominal scenario | Successful reception of order (inventory updated) |
+| Variants         | Order canceled by manager (involving cash account increased due to refund; reason: order canceled by vendor) |
 
 ### Sell credits
+| Actors involved  | Manager |
+| Precondition     | employee has an account |
+| Post condition   | - (it depends on the scenario) |
+| Nominal scenario | Successful sale of credits to employee |
+| Variants         | Sale refused (reasons: not valid number of credits to sell (e.g. negative number))|
 
-### Show inventory and\ncash account
+### Show inventory and cash account
+| Actors involved  | Manager |
+| Precondition     | - |
+| Post condition   | Summary is shown |
+| Nominal scenario | Correct visualization of summary |
+| Variants         | - |
 
 ### Show pending orders
+| Actors involved  | Manager |
+| Precondition     | - |
+| Post condition   | List of pending orders is shown |
+| Nominal scenario | Correct visualization of pending orders |
+| Variants         | - |
 
 # Relevant scenarios
-### Registration of a new employee
+### Successful registration of a new employee
 Precondition: employee works in the company and has not been registered yet  
 Post condition: employee has an account
 
@@ -216,7 +265,7 @@ Post condition: employee has an account
 
 ### Successful sale of capsules for credits (to an employee)
 Precondition: employee has an account and there are enough capsules in inventory of the desired beverage  
-Post condition: employee has bought the capsules, balance of the account and inventory are updated (decreased)
+Post condition: employee has bought the capsules, balance of the employee and inventory are updated (decreased)
 
 | Scenario ID: SC2 | Corresponds to UC: Sell capsules for credits |
 |:----------------:| -------------------------------------------- |
@@ -240,7 +289,7 @@ Post condition: visitor has bought the capsules, cash account and inventory are 
 
 ### Successful sale of credits to an employee
 Precondition: employee has an account and enough cash  
-Post condition: balance of the account and cash account are updated (increased)
+Post condition: balance of the employee and cash account are updated (increased)
 
 | Scenario ID: SC4 | Corresponds to UC: Sell credits |
 |:----------------:| ------------------------------- |
@@ -261,13 +310,13 @@ Post condition: cash account is decreases and order is stored as pending
 | 3                | System checks cash account |
 | 4                | System decreases cash account |
 | 5                | System stores the order as pending |
-| 6                | System notifies the vendor |
+| 6                | System notifies the vendor (email) |
 
 ### Successful reception of an order
 Precondition: there is at least a pending order  
 Post condition: list of pending orders and inventory are updated  
 
-| Scenario ID: SC6 | Corresponds to UC: Send order |
+| Scenario ID: SC6 | Corresponds to UC: Conclude order |
 |:----------------:| ----------------------------- |
 | Step #           | Description                   |
 | 1                | Manager clicks on 'Orders' |
