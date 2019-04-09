@@ -147,6 +147,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 
 ## Use case diagram
 ```plantuml
+@startuml
 left to right direction
 
 :Manager: as m
@@ -166,9 +167,13 @@ together {
 	(Send order) as so
 	(Conclude order) as co
 }
+together {
+	(Monitor) as mo
+	(Monitor balances) as mb
+	(Monitor inventory and\ncash account) as mica
+	(Monitor pending orders) as mpo
+}
 (Sell credits) as scr
-(Show inventory and\ncash account) as sica
-(Show pending orders) as spo
 
 m --> re
 m --> de
@@ -176,15 +181,18 @@ m --> sca
 m --> bbc
 ccv <-- so
 m --> scr
-m --> sica
-m --> spo
+m --> mo
 
 sca <|-- sca1
 sca <|-- sca2
 so <. bbc : include
 bbc ..> co : include
+mo <|-- mb
+mo <|-- mica
+mo <|-- mpo
 
 Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
+@enduml
 ```
 
 ## Use Cases
@@ -238,18 +246,11 @@ Note right of sca1 : Only for employees.\nVisitors can buy only with cash.
 | Nominal scenario | Successful sale of credits to employee |
 | Variants         | Sale refused (reasons: not valid number of credits to sell (e.g. negative number))|
 
-### Show inventory and cash account
+### Monitor
 | Actors involved  | Manager |
 | Precondition     | - |
-| Post condition   | Summary is shown |
-| Nominal scenario | Correct visualization of summary |
-| Variants         | - |
-
-### Show pending orders
-| Actors involved  | Manager |
-| Precondition     | - |
-| Post condition   | List of pending orders is shown |
-| Nominal scenario | Correct visualization of pending orders |
+| Post condition   | Data are shown |
+| Nominal scenario | Correct visualization of data |
 | Variants         | - |
 
 # Relevant scenarios
