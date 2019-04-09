@@ -33,8 +33,8 @@ Version: 1.0.0
 
 LaTazza is a simple desktop application adopted by a group of office workers to satisfy the necessity of capsules in the workplace.
 
-One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.
-
+One employee takes the role of manager, he acts as a seller handling the supply and the resale of capsules while turning a small profit.  
+As soon as an order is placed, an email is sent to the capsule supplier who ships the boxes. The order is agreed to be paid in cash upon delivery.
 
 # Stakeholders
 
@@ -73,9 +73,6 @@ rectangle system {
 | Manager      			        | GUI			                | Screen, keyboard		|
 | Capsule Vendor                | Web service, APIs	            | Internet connection	|
 | Email System                  | Web service, POP, IMAP, SMTP  | Internet connection	|
-
-The banking/credit card system is not listed in the actors because, even if the application makes the orders automatically once the manager chooses to buy new boxes of capsules from the GUI, the payment to the vendor is handled separately (by the manager, not the application).
-
 
 # Stories and personas
 
