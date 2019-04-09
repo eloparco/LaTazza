@@ -117,28 +117,30 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 # Functional and non functional requirements
 
 ## Functional Requirements
-| ID   | Description  |
-|:----:| ------------ |
-| F1   | Register employee |
-| F2   | Delete employee |
-| F3   | Sell capsules (for credits or cash) |
-| F4   | Buy boxes of capsules |
-| F4.1 | Send order |
-| F4.2 | Conclude order |
-| F5   | Sell credits |
-| F6   | Show inventory and cash account |
-| F7   | Show pending orders |
+| ID    | Description  |
+|:-----:| ------------ |
+| FR1   | The manager shall be able to create an account for a non-registered employee |
+| FR2   | The manager shall be able to delete an account for a registered employee |
+| FR3   | The manager shall be able to sell capsules for credits to a registered employee |
+| FR3   | The manager shall be able to sell capsules for cash to an employee or a visitor |
+| FR4   | The manager shall be able to order boxes of capsules |
+| FR5   | The manager shall be able to confirm the receiption of a pending order |
+| FR6   | The manager shall be able to delete a canceled order |
+| FR7   | The manager shall be able to sell credits to a registered employee |
+| FR8   | The manager shall be able to monitor the balances of the employees |
+| FR9   | The manager shall be able to monitor inventory and cash account |
+| FR10  | The manager shall be able to monitor pending orders |
 
 ## Non Functional Requirements
-| ID        | Type (efficiency, reliability, ..)           | Description  |
-| ------------- |:-------------:| -------|
-|  NFR1     | Domain | Currency is € |
-|  NFR2     | Efficiency - speed | Operations completed in less than 0.1 sec |
-|  NFR3     | Efficiency - memory | Ram used by the application should be less than 1Mbyte |
-|  NFR4     | Reliability | There must be less than 1 crashes each month |
-|  NFR5     | Portability | The application can be run on the most common operating systems (Windows, Linux, Mac) |
-|  NFR6     | Usability | User should be able to use the application with less than 10 min training |
-|  NFR7     | Robustness | Probability of data corruption on failure less than 1% |
+| ID   | Type        | Description  | Refers to |
+|:----:|:-----------:| ------------ |
+| NFR1 | Efficiency  | Operations should be completed in less than 0.1 sec | all FRs |
+| NFR2 | Efficiency  | The application should use at most 1 Mbyte of RAM | all FRs |
+| NFR3 | Reliability | The application should crash at most 1 time each month | all FRs |
+| NFR4 | Portability | The application should be runnable on the most common operating systems (Windows, Linux, Mac) | all FRs |
+| NFR5 | Usability   | The manager should be able to use the application with less than 10 minutes of training | all FRs |
+| NFR6 | Robustness  | Probability of data corruption on failure should be less than 1% | all FRs |
+| NFR7 | Domain      | Currency is € | FR4, FR5, FR7, FR8, FR9 |
 
 
 # Use case diagram and use cases
