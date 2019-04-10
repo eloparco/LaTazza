@@ -76,12 +76,14 @@ rectangle system {
 ## Persona 1
 ![LaTazza](pictures/persona1.png "")  
 *LaTazza manager*
-## Persona 2
+## Persona 2 \*
 ![LaTazza](pictures/persona2.png "")  
 *LaTazza employee*
-## Persona 3
+## Persona 3 \*
 ![LaTazza](pictures/persona3.png "")  
 *LaTazza visitor*
+
+_\*=Wendy and Mark aren't proper personas (because they are no actors). However they add useful informations since they are clients and this project was specifically created for them._
 
 ## Story 1
 David, LaTazza manager, notices the inventory is running low on capsules.
