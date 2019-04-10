@@ -122,14 +122,14 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 | FR1   | The manager shall be able to create an account for a non-registered employee |
 | FR2   | The manager shall be able to delete an account for a registered employee |
 | FR3   | The manager shall be able to sell capsules for credits to a registered employee |
-| FR3   | The manager shall be able to sell capsules for cash to an employee or a visitor |
-| FR4   | The manager shall be able to order boxes of capsules |
-| FR5   | The manager shall be able to confirm the receiption of a pending order |
-| FR6   | The manager shall be able to delete a canceled order |
-| FR7   | The manager shall be able to sell credits to a registered employee |
-| FR8   | The manager shall be able to monitor the balances of the employees |
-| FR9   | The manager shall be able to monitor inventory and cash account |
-| FR10  | The manager shall be able to monitor pending orders |
+| FR4   | The manager shall be able to sell capsules for cash to an employee or a visitor |
+| FR5   | The manager shall be able to order boxes of capsules |
+| FR6   | The manager shall be able to confirm the receiption of a pending order |
+| FR7   | The manager shall be able to delete a canceled order |
+| FR8   | The manager shall be able to sell credits to a registered employee |
+| FR9   | The manager shall be able to monitor the balances of the employees |
+| FR10   | The manager shall be able to monitor inventory and cash account |
+| FR11  | The manager shall be able to monitor pending orders |
 
 ## Non Functional Requirements
 | ID   | Type        | Description  | Refers to |
@@ -140,7 +140,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 | NFR4 | Portability | The application should be runnable on the most common operating systems (Windows, Linux, Mac) | all FRs |
 | NFR5 | Usability   | The manager should be able to use the application with less than 10 minutes of training | all FRs |
 | NFR6 | Robustness  | Probability of data corruption on failure should be less than 1% | all FRs |
-| NFR7 | Domain      | Currency is € | FR4, FR5, FR7, FR8, FR9 |
+| NFR7 | Domain      | Currency is € | FR4, FR5, FR8, FR9, FR10 |
 
 
 # Use case diagram and use cases
