@@ -98,9 +98,9 @@ After two days the order is shipped to the company, he pays the supplier and the
 It's Tuesday 16:47.
 
 Wendy takes a break to have an afternoon tea. She wants to buy 4 capsules for the rest of the week.
-She doesn't want to wait long to complete the transaction and she doesn't have coins.
+She doesn't want to wait long to complete the transaction and she doesn't have coins, only banknotes.
 
-Since her balance is negative, she pays 10€ to add credit on her account and then she completes the purchase.
+Since her balance is negative, she pays 20€ to add credit on her account and then she completes the purchase.
 
 She proceeds to the hall to drink her tea and chat with other employees.
 
