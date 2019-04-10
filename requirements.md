@@ -397,7 +397,7 @@ Customer <|-- Visitor
 Employee <|-- Manager
 Manager "1" -- "*" Order : makes >
 Order "1" -- "1..*" Box : contains >
-Box "1" -- "50" Capsule : contains > 
+Box "1" o-- "50" Capsule : contains > 
 Customer "1" -- "*" Capsule : buys >
 Manager "1" -- "*" Employee : adds credit >
 
