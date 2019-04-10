@@ -78,13 +78,13 @@ rectangle system {
 
 ## Persona 1
 ![LaTazza](pictures/persona1.png "")  
-*LaTazza client*
+*LaTazza manager*
 ## Persona 2
 ![LaTazza](pictures/persona2.png "")  
-*LaTazza manager*
+*LaTazza employee*
 ## Persona 3
 ![LaTazza](pictures/persona3.png "")  
-*LaTazza client*
+*LaTazza visitor*
 
 ## Story 1
 David, LaTazza manager, notices the inventory is running low on capsules.
