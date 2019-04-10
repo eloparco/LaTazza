@@ -54,14 +54,12 @@ left to right direction
 skinparam packageStyle rectangle
 
 actor Manager as m
-actor "Capsule Vendor" as v
 actor "Email System" as es
 
 rectangle system {
     (LaTazza) as lt
     m -- lt
-    es -- lt
-    lt -- v
+    lt -- es
 }
 ```
 
@@ -70,7 +68,6 @@ rectangle system {
 | Actor                         | Logical Interface	            | Physical Interface    |
 |-------------------------------|-------------------------------|:---------------------:|
 | Manager      			        | GUI			                | Screen, keyboard		|
-| Capsule Vendor                | Web service, APIs	            | Internet connection	|
 | Email System                  | Web service, POP, IMAP, SMTP  | Internet connection	|
 
 
@@ -152,7 +149,7 @@ He asks to buy in cash, he receives a coffee capsule quickly and he goes to the 
 left to right direction
 
 :Manager: as m
-:Capsule Vendor: as ccv
+:Email System: as es
 
 together {
 	(Register employee) as re
@@ -180,7 +177,7 @@ m --> re
 m --> de
 m --> sca
 m --> bbc
-ccv <-- so
+es <-- so
 m --> scr
 m --> mo
 
