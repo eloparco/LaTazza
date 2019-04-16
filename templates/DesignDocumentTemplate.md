@@ -23,6 +23,18 @@ UML diagrams **MUST** be written using plantuml notation.
 
 # Package diagram
 
+```plantuml
+folder latazza as l
+folder latazza.data as ld
+folder latazza.exceptions as le
+folder latazza.gui as lg
+
+l ~~> ld
+l ~~> lg
+ld ~~> le
+lg ~~> ld
+```
+
 \<define UML package diagram >
 
 \<explain rationales for choices> 
