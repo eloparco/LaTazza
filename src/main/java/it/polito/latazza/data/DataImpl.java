@@ -15,7 +15,7 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class DataImpl implements DataInterface {
 	
-	private Map<Date, List<Transaction>> transactions = new HashMap<>();
+	private List<Transaction> transactions = new ArrayList<>();
 	private Map<Integer, Employee> employees = new HashMap<>();
 	private Map<Integer, Beverage> beverages = new HashMap<>();
 	private LaTazzaAccount laTazzaAccount = new LaTazzaAccount();
@@ -35,11 +35,7 @@ public class DataImpl implements DataInterface {
 		else
 			laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Consumption());
-		transactions.put(d, lt);
+		transactions.add(new Consumption());
 		//TODO: what to return???
 		return 0;
 	}
@@ -53,11 +49,7 @@ public class DataImpl implements DataInterface {
 		b.decreaseAvailableQuantity(numberOfCapsules);
 		laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Consumption());
-		transactions.put(d, lt);
+		transactions.add(new Consumption());
 	}
 
 	@Override
@@ -68,11 +60,7 @@ public class DataImpl implements DataInterface {
 		e.decreaseBalance(amountInCents);
 		laTazzaAccount.increaseBalance(amountInCents);
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Recharge());
-		transactions.put(d, lt);
+		transactions.add(new Recharge());
 		//TODO: what to return 
 		return 0;
 	}
@@ -85,24 +73,18 @@ public class DataImpl implements DataInterface {
 		b.increaseAvailableQuantity(boxQuantity);
 		laTazzaAccount.decreaseBalance(b.getBoxPrice()*boxQuantity);
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new BoxPurchase());
-		transactions.put(d, lt);
+		transactions.add(new BoxPurchase());
 	}
 
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
-		// TODO Auto-generated method stub
-		return new ArrayList<String>();
+		return transactions.stream().filter(l -> (l instanceof Consumption) && ((Consumption)l).getEmployee().getId() == employeeId && l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
-		//TODO: sono liste dentro la map!!!! (FA SCHIFO QUELLO CHE HO SCRITTO, SFRUTTARE LA MAPPA)
-		return transactions.values().stream().filter(l -> l.getDate() >= startDate & l.getDate() <= endDate).map(l -> l.toString()).collect(java.util.stream.Collectors.toList());
+		return transactions.stream().filter(l -> l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
