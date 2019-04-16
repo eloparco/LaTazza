@@ -1,5 +1,6 @@
 package it.polito.latazza.data;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,31 +14,82 @@ import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class DataImpl implements DataInterface {
+	
+	private Map<Date, List<Transaction>> transactions = new HashMap<>();
+	private Map<Integer, Employee> employees = new HashMap<>();
+	private Map<Integer, Beverage> beverages = new HashMap<>();
+	private LaTazzaAccount laTazzaAccount = new LaTazzaAccount();
 
 	@Override
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
-		// TODO Auto-generated method stub
+		Employee e = employees.get(employeeId);
+		Beverage b = beverages.get(beverageId);
+		if(e==null)
+			throw new EmployeeException();
+		if(b==null)
+			throw new BeverageException();
+		b.decreaseAvailableQuantity(numberOfCapsules);
+		if(fromAccount)
+			e.decreaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+		else
+			laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+		Date d = Date.from(Instant.now());
+		List<Transaction> lt = transactions.get(d);
+		if(lt == null)
+			lt = new ArrayList<>();
+		lt.add(new Consumption());
+		transactions.put(d, lt);
+		//TODO: what to return???
 		return 0;
 	}
 
 	@Override
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
-		// TODO Auto-generated method stub
-		
+		Beverage b = beverages.get(beverageId);
+		if(b==null)
+			throw new BeverageException();
+		b.decreaseAvailableQuantity(numberOfCapsules);
+		laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+		Date d = Date.from(Instant.now());
+		List<Transaction> lt = transactions.get(d);
+		if(lt == null)
+			lt = new ArrayList<>();
+		lt.add(new Consumption());
+		transactions.put(d, lt);
 	}
 
 	@Override
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
-		// TODO Auto-generated method stub
+		Employee e = employees.get(id);
+		if(e==null)
+			throw new EmployeeException();
+		e.decreaseBalance(amountInCents);
+		laTazzaAccount.increaseBalance(amountInCents);
+		Date d = Date.from(Instant.now());
+		List<Transaction> lt = transactions.get(d);
+		if(lt == null)
+			lt = new ArrayList<>();
+		lt.add(new Recharge());
+		transactions.put(d, lt);
+		//TODO: what to return 
 		return 0;
 	}
 
 	@Override
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
-		// TODO Auto-generated method stub
-		
+		Beverage b = beverages.get(beverageId);
+		if(b==null)
+			throw new BeverageException();
+		b.increaseAvailableQuantity(boxQuantity);
+		laTazzaAccount.decreaseBalance(b.getBoxPrice()*boxQuantity);
+		Date d = Date.from(Instant.now());
+		List<Transaction> lt = transactions.get(d);
+		if(lt == null)
+			lt = new ArrayList<>();
+		lt.add(new BoxPurchase());
+		transactions.put(d, lt);
 	}
 
 	@Override
@@ -49,8 +101,8 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
-		// TODO Auto-generated method stub
-		return new ArrayList<String>();
+		//TODO: sono liste dentro la map!!!! (FA SCHIFO QUELLO CHE HO SCRITTO, SFRUTTARE LA MAPPA)
+		return transactions.values().stream().filter(l -> l.getDate() >= startDate & l.getDate() <= endDate).map(l -> l.toString()).collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
