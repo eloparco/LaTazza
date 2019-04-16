@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.DateException;
@@ -109,45 +110,59 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
-		// TODO Auto-generated method stub
-		return 0;
+		//TODO: when to throw BeverageException???
+		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1)+1;
+		Beverage b = new Beverage(key, name, capsulesPerBox, boxPrice);
+		beverages.put(key, b);
+		// TODO: return beverage id?
+		return key;
 	}
 
 	@Override
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
-		// TODO Auto-generated method stub
-		
+		Beverage b = beverages.get(id);
+		if ( b == null )
+			throw new BeverageException();
+		b.setBoxPrice(boxPrice);
+		b.setCapsulesPerBox(capsulesPerBox);
+		b.setName(name);
+		beverages.put(id, b);
 	}
 
 	@Override
 	public String getBeverageName(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		return "";
+		Beverage b = beverages.get(id);
+		if ( b == null )
+			throw new BeverageException();
+		return b.getName();
 	}
 
 	@Override
 	public Integer getBeverageCapsulesPerBox(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		return 0;
+		Beverage b = beverages.get(id);
+		if ( b == null )
+			throw new BeverageException();
+		return b.getCapsulesPerBox();
 	}
 
 	@Override
 	public Integer getBeverageBoxPrice(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		return 0;
+		Beverage b = beverages.get(id);
+		if ( b == null )
+			throw new BeverageException();
+		return b.getBoxPrice();
 	}
 
 	@Override
 	public List<Integer> getBeveragesId() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Integer>();
+		return beverages.values().stream().map(l -> l.getId()).collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, String> getBeverages() {
-		// TODO Auto-generated method stub
-		return new HashMap<Integer, String>();
+		return beverages.entrySet().stream().map(l -> new Entry() {
+		}<Integer, String>);
 	}
 
 	@Override

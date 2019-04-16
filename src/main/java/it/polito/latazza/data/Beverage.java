@@ -5,6 +5,13 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 public class Beverage {
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
+	
+	public Beverage(int id, String name, int capsulePerBox, int availableCapsules) {
+		this.name=name;
+		this.capsulesPerBox=capsulePerBox;
+		this.availableCapsules=availableCapsules;
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
