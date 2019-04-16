@@ -44,6 +44,141 @@ lg ~~> ld
 
 # Class diagram
 
+```plantuml
+class Beverage {
+- beverageId : Integer
+- name : String
+- boxPrice : Integer
+- capsulesPerBox : Integer
+- availableQuantity : Integer
++ getId() : Integer
++ getName() : String
++ getCapsulesPerBox() : Integer
++ getCapsulesPrice() : Integer
++ getBoxPrice() : Integer
++ getQuantity() : Integer
++ setId(Integer id) : void
++ setName(String name) : void
++ setBoxPrice(Integer price) : void
++ setCapsulesPerBox(Integer capsulePerBox) : void
++ increaseAvailableQuantity(Integer amount) : void
++ decreaseAvailableQuantity(Integer amount) : void
++ toString() : String
+}
+
+class Employee {
+- employeeId : Integer
+- name : String
+- surname : String
+- balance : Integer
++ getId() : Integer
++ getName() : String
++ getSurname() : String
++ getBalance() : Integer
++ setId(Integer id) : void
++ setName(String name) : void
++ setSurname(String surname) : void
++ increaseBalance(Integer amount) : void
++ decreaseBalance(Integer amount) : void
++ toString() : String
+}
+
+class Transaction {
+- date : Date
+- amount : Integer
++ getDate() : Date
++ getAmount() : Integer
++ setDate(Date date) : void
++ setAmount(Integer amount) : Integer
+}
+
+class Consumption {
+- numberOfCapsules : Integer
+- fromAccount : Boolean
+- employee : Employee
+- beverage : Beverage
++ getNumberOfCapsules() : Integer
++ getFromAccount() : Boolean
++ getEmployee() : Employee
++ getBeverage() : Beverage
++ setEmployee(Employee employee) : void
++ setBeverage(Beverage beverage) : void
++ setNumberOfCapsules(Integer qnt) : void
++ setFromAccount(Boolean fromAccount) : void
++ toString() : String
+}
+
+class BoxPurchase {
+- boxQuantity : Integer
+- beverage : Beverage
++ getBeverage() : Beverage
++ setBeverage(Beverage beverage) : void
++ getBoxQuantity() : Integer
++ setBoxQuantity(Integer qnt) : void
++ toString() : String
+}
+
+class Recharge {
+- employee : Employee
++ getEmployee() : Employee
++ setEmployee(Employee employee) : void
++ toString() : String
+}
+
+class LaTazzaAccount {
+- balance : Integer
++ increaseBalance(Integer amount) : void
++ decreaseBalance(Integer amount) : void
++ getBalance() : Integer
+}
+
+class DataImpl {
+- transactions : Map<Date, List<Transaction>>
+- employees : Map<Integer, Employee>
+- beverages : Map<Integer, Beverage> 
+- laTazzaAccount : LaTazzaAccount
++ sellCapsules()
++ sellCapsulesToVisitor()
++ rechargeAccount()
++ buyBoxes()
++ getEmployeeReport()
++ getReport()
++ createBeverage()
++ updateBeverage()
++ getBeverageName()
++ getBeverageCapsulesPerBox()
++ getBeverageBoxPrice()
++ getBeveragesId()
++ getBeverages()
++ getBeverageCapsules()
++ createEmployee()
++ updateEmployee()
++ getEmployeeName()
++ getEmployeeSurname()
++ getEmployeeBalance()
++ getEmployeesId()
++ getEmployees()
++ getBalance()
+}
+
+DataImpl "1" --> "*" Transaction
+DataImpl "1" --> "1" LaTazzaAccount
+DataImpl "1" --> "*" Employee
+DataImpl "1" --> "*" Beverage
+
+
+Transaction <|-- Recharge
+Transaction <|-- Consumption
+Transaction <|-- BoxPurchase
+
+Consumption "*" --> "0, 1" Employee
+Consumption "*" --> "1" Beverage
+
+Recharge "*" --> "1" Employee
+
+BoxPurchase "*" --> "1" Beverage
+```
+
 \<for each package define class diagram with classes defined in the package>
 
 \<mention design patterns used, if any>
