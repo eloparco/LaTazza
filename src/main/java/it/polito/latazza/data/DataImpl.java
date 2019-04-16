@@ -15,7 +15,7 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class DataImpl implements DataInterface {
 	
-	private Map<Date, List<Transaction>> transactions = new HashMap<>();
+	private List<Transaction> transactions = new ArrayList<>();
 	private Map<Integer, Employee> employees = new HashMap<>();
 	private Map<Integer, Beverage> beverages = new HashMap<>();
 	private LaTazzaAccount laTazzaAccount = new LaTazzaAccount();
@@ -24,78 +24,83 @@ public class DataImpl implements DataInterface {
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
 		Employee e = employees.get(employeeId);
-		Beverage b = beverages.get(beverageId);
-		if(e==null)
+		if(e == null)
 			throw new EmployeeException();
-		if(b==null)
+		
+		Beverage b = beverages.get(beverageId);
+		if(b == null)
 			throw new BeverageException();
+		
 		b.decreaseAvailableQuantity(numberOfCapsules);
-		if(fromAccount)
-			e.decreaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+		if (fromAccount)
+			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		else
-			laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
+		
+		// TODO: date format (compliant with GUI)
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Consumption());
-		transactions.put(d, lt);
-		//TODO: what to return???
-		return 0;
+		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules, d);
+		transactions.add(c);
+		
+		//TODO: return updated employee balance?
+		return e.getBalance();
 	}
 
 	@Override
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
 		Beverage b = beverages.get(beverageId);
-		if(b==null)
+		if (b == null)
 			throw new BeverageException();
+		
 		b.decreaseAvailableQuantity(numberOfCapsules);
-		laTazzaAccount.increaseBalance(b.getCapsulesPrice()*numberOfCapsules);
+		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
+		
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Consumption());
-		transactions.put(d, lt);
+		Consumption c = new Consumption(null, b, false, numberOfCapsules, d);
+		transactions.add(c);
 	}
 
 	@Override
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
 		Employee e = employees.get(id);
-		if(e==null)
+		if (e == null)
 			throw new EmployeeException();
+		
 		e.decreaseBalance(amountInCents);
 		laTazzaAccount.increaseBalance(amountInCents);
+		
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new Recharge());
-		transactions.put(d, lt);
-		//TODO: what to return 
-		return 0;
+		Recharge r = new Recharge(e, amountInCents, d);
+		transactions.add(r);
+		
+		//TODO: what to return? updated balance in cents?
+		return e.getBalance();
 	}
 
 	@Override
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		Beverage b = beverages.get(beverageId);
-		if(b==null)
+		if (b == null)
 			throw new BeverageException();
+		
 		b.increaseAvailableQuantity(boxQuantity);
-		laTazzaAccount.decreaseBalance(b.getBoxPrice()*boxQuantity);
+		laTazzaAccount.decreaseBalance(b.getBoxPrice() * boxQuantity);
+		
 		Date d = Date.from(Instant.now());
-		List<Transaction> lt = transactions.get(d);
-		if(lt == null)
-			lt = new ArrayList<>();
-		lt.add(new BoxPurchase());
-		transactions.put(d, lt);
+		BoxPurchase bp = new BoxPurchase(b, boxQuantity, d);
+		transactions.add(bp);
 	}
 
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
-		// TODO Auto-generated method stub
+		Employee e = employees.get(employeeId);
+		if (e == null)
+			throw new EmployeeException();
+		
+		
+		// TODO Auto-generated method stub 
 		return new ArrayList<String>();
 	}
 

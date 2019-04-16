@@ -3,7 +3,7 @@ package it.polito.latazza.data;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class Beverage {
-	private int id, boxPrice, capsulesPerBox, availableQuantity;
+	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
 
 	public int getId() {
@@ -31,17 +31,17 @@ public class Beverage {
 	}
 	
 	public int getAvailableQuantity() {
-		return availableQuantity;
+		return availableCapsules;
 	}
 	
-	public void increaseAvailableQuantity(int amount) {
-		this.availableQuantity += amount*this.capsulesPerBox;
+	public void increaseAvailableQuantity(int numberOfBoxes) {
+		this.availableCapsules += numberOfBoxes * this.capsulesPerBox;
 	}
 	
-	public void decreaseAvailableQuantity(int amount) throws NotEnoughCapsules {
-		if (this.availableQuantity < amount)
+	public void decreaseAvailableQuantity(int numberOfCapsules) throws NotEnoughCapsules {
+		if (this.availableCapsules < numberOfCapsules)
 			throw new NotEnoughCapsules();
-		this.availableQuantity -= amount;
+		this.availableCapsules -= numberOfCapsules;
 	}
 	
 	public String getName() {
