@@ -1,11 +1,21 @@
 package it.polito.latazza.data;
 
+import java.util.Date;
+
 public class Consumption extends Transaction {
 	private Employee employee;
 	private Beverage beverage;
 	private boolean fromAccount;
 	private int numberOfCapsules;
-		
+	
+	public Consumption(Employee employee, Beverage beverage, boolean fromAccount, int numberOfCapsules, Date date) {
+		super(date);
+		this.employee = employee;
+		this.beverage = beverage;
+		this.fromAccount = fromAccount;
+		this.numberOfCapsules = numberOfCapsules;
+	}
+
 	public Employee getEmployee() {
 		return employee;
 	}
