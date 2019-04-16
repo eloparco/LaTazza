@@ -156,73 +156,91 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public List<Integer> getBeveragesId() {
-		return beverages.values().stream().map(l -> l.getId()).collect(java.util.stream.Collectors.toList());
+		return beverages.keySet().stream().collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, String> getBeverages() {
-		return beverages.entrySet().stream().map(l -> new Entry() {
-		}<Integer, String>);
+		return beverages.values().stream().collect(java.util.stream.Collectors.toMap(l -> l.getId(), l -> l.getName()));
 	}
 
 	@Override
 	public Integer getBeverageCapsules(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		return 0;
+		Beverage b = beverages.get(id);
+		if ( b == null )
+			throw new BeverageException();
+		return b.getAvailableQuantity();
 	}
 
 	@Override
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return 0;
+		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1)+1;
+		Employee e = new Employee(key,name,surname,0);
+		employees.put(key, e);
+		//TODO: return employee id?
+		return key;
 	}
 
 	@Override
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
-		// TODO Auto-generated method stub
-		
+		Employee e = employees.get(id);
+		if ( e == null )
+			throw new EmployeeException();
+		e.setName(name);
+		e.setSurname(surname);
+		//TODO: balance??
+		employees.put(id, e);
 	}
 
 	@Override
 	public String getEmployeeName(Integer id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return "";
+		Employee e = employees.get(id);
+		if ( e == null )
+			throw new EmployeeException();
+		return e.getName();
 	}
 
 	@Override
 	public String getEmployeeSurname(Integer id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return "";
+		Employee e = employees.get(id);
+		if ( e == null )
+		throw new EmployeeException();
+		return e.getSurname();
 	}
 
 	@Override
 	public Integer getEmployeeBalance(Integer id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return 0;
+		Employee e = employees.get(id);
+		if ( e == null )
+			throw new EmployeeException();
+		return e.getBalance();
 	}
 
 	@Override
 	public List<Integer> getEmployeesId() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Integer>();
+		return employees.keySet().stream().collect(java.util.stream.Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, String> getEmployees() {
-		// TODO Auto-generated method stub
-		return new HashMap<Integer, String>();
+		return employees.values().stream().collect(java.util.stream.Collectors.toMap(l -> l.getId(), l -> l.getName()));
 	}
 
 	@Override
 	public Integer getBalance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return laTazzaAccount.getBalance();
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		try {
+			laTazzaAccount.decreaseBalance(laTazzaAccount.getBalance());
+		} catch (NotEnoughBalance e) {
+			laTazzaAccount = new LaTazzaAccount();
+		}
+		employees.clear();
+		beverages.clear();
+		transactions.clear();
 	}
 
 }
