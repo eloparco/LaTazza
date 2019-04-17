@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.DateException;
@@ -98,8 +99,27 @@ public class DataImpl implements DataInterface {
 		Employee e = employees.get(employeeId);
 		if (e == null)
 			throw new EmployeeException();
+		
 		//TODO: override Employee equals to check ID
-		return transactions.stream().filter(l -> (l instanceof Consumption) && (((Consumption)l).getEmployee() != null) && (((Consumption)l).getEmployee().getId() == e.getId()) && l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(java.util.stream.Collectors.toList());
+//		return transactions.stream().filter(l -> (l instanceof Consumption) && (((Consumption)l).getEmployee() != null) 
+//													&& (((Consumption)l).getEmployee().getId() == e.getId()) 
+//													&& l.getDate().after(startDate) 
+//													&& l.getDate().before(endDate))
+//									.map(l -> l.toString())
+//									.collect(Collectors.toList());
+		
+		// filter only recharge and consumpions
+		return transactions.stream().filter(l -> {
+											boolean ret = false;
+											if (l instanceof Consumption)
+												((Consumption)l).getEmployee().equals(e);
+											else if (l instanceof Recharge)
+												((Recharge)l).getEmployee().equals(e);
+											
+											return ret && l.getDate().after(startDate) && l.getDate().before(endDate);
+										})
+									.map(l -> l.toString())
+									.collect(Collectors.toList());
 	}
 
 	@Override
@@ -110,7 +130,12 @@ public class DataImpl implements DataInterface {
 	@Override
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
 		//TODO: when to throw BeverageException???
-		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1)+1;
+		//when adding beverage with same name of previous one, otherwise ambiguity in the GUI when choosing the beverage
+		boolean found = beverages.values().stream().anyMatch(b -> b.getName().equals(name));
+		if (found)
+			throw new BeverageException();
+		
+		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
 		Beverage b = new Beverage(key, name, capsulesPerBox, boxPrice);
 		beverages.put(key, b);
 		// TODO: return beverage id?
@@ -121,8 +146,9 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		Beverage b = beverages.get(id);
-		if ( b == null )
+		if (b == null)
 			throw new BeverageException();
+		
 		b.setBoxPrice(boxPrice);
 		b.setCapsulesPerBox(capsulesPerBox);
 		b.setName(name);
@@ -132,7 +158,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	public String getBeverageName(Integer id) throws BeverageException {
 		Beverage b = beverages.get(id);
-		if ( b == null )
+		if (b == null)
 			throw new BeverageException();
 		return b.getName();
 	}
@@ -140,7 +166,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	public Integer getBeverageCapsulesPerBox(Integer id) throws BeverageException {
 		Beverage b = beverages.get(id);
-		if ( b == null )
+		if (b == null)
 			throw new BeverageException();
 		return b.getCapsulesPerBox();
 	}
@@ -148,53 +174,53 @@ public class DataImpl implements DataInterface {
 	@Override
 	public Integer getBeverageBoxPrice(Integer id) throws BeverageException {
 		Beverage b = beverages.get(id);
-		if ( b == null )
+		if (b == null)
 			throw new BeverageException();
 		return b.getBoxPrice();
 	}
 
 	@Override
 	public List<Integer> getBeveragesId() {
-		return beverages.keySet().stream().collect(java.util.stream.Collectors.toList());
+		return beverages.keySet().stream().collect(Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, String> getBeverages() {
-		return beverages.values().stream().collect(java.util.stream.Collectors.toMap(l -> l.getId(), l -> l.getName()));
+		return beverages.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.getName()));
 	}
 
 	@Override
 	public Integer getBeverageCapsules(Integer id) throws BeverageException {
 		Beverage b = beverages.get(id);
-		if ( b == null )
+		if (b == null)
 			throw new BeverageException();
 		return b.getAvailableQuantity();
 	}
 
 	@Override
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
-		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1)+1;
-		Employee e = new Employee(key,name,surname,0);
+		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
+		Employee e = new Employee(key, name, surname, 0);
 		employees.put(key, e);
-		//TODO: return employee id?
+		//TODO: return employee id? it makes sense...
 		return key;
 	}
 
 	@Override
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
 		Employee e = employees.get(id);
-		if ( e == null )
+		if (e == null)
 			throw new EmployeeException();
 		e.setName(name);
 		e.setSurname(surname);
-		//TODO: balance??
+		//TODO: balance?? same as before the update...
 		employees.put(id, e);
 	}
 
 	@Override
 	public String getEmployeeName(Integer id) throws EmployeeException {
 		Employee e = employees.get(id);
-		if ( e == null )
+		if (e == null)
 			throw new EmployeeException();
 		return e.getName();
 	}
@@ -202,27 +228,27 @@ public class DataImpl implements DataInterface {
 	@Override
 	public String getEmployeeSurname(Integer id) throws EmployeeException {
 		Employee e = employees.get(id);
-		if ( e == null )
-		throw new EmployeeException();
+		if (e == null)
+			throw new EmployeeException();
 		return e.getSurname();
 	}
 
 	@Override
 	public Integer getEmployeeBalance(Integer id) throws EmployeeException {
 		Employee e = employees.get(id);
-		if ( e == null )
+		if (e == null)
 			throw new EmployeeException();
 		return e.getBalance();
 	}
 
 	@Override
 	public List<Integer> getEmployeesId() {
-		return employees.keySet().stream().collect(java.util.stream.Collectors.toList());
+		return employees.keySet().stream().collect(Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, String> getEmployees() {
-		return employees.values().stream().collect(java.util.stream.Collectors.toMap(l -> l.getId(), l -> l.getName()));
+		return employees.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.getName()));
 	}
 
 	@Override
@@ -232,11 +258,12 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public void reset() {
-		try {
-			laTazzaAccount.decreaseBalance(laTazzaAccount.getBalance());
-		} catch (NotEnoughBalance e) {
-			laTazzaAccount = new LaTazzaAccount();
-		}
+//		try {
+//			laTazzaAccount.decreaseBalance(laTazzaAccount.getBalance());
+//		} catch (NotEnoughBalance e) {
+//			laTazzaAccount = new LaTazzaAccount();
+//		}
+		laTazzaAccount.setBalance(0);
 		employees.clear();
 		beverages.clear();
 		transactions.clear();

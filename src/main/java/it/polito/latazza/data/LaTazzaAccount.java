@@ -7,6 +7,10 @@ public class LaTazzaAccount {
 	public int getBalance() {
 		return balance;
 	}
+	
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 
 	public void increaseBalance(int amount) {
 		this.balance += amount;
