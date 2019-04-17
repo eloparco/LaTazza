@@ -30,8 +30,6 @@ public class Recharge extends Transaction {
 	
 	@Override
 	public String toString() {
-		// TODO: check date format
-		// TODO: check amount format
-		return this.getDate().toGMTString() +  " RECHARGE " + this.employee + " " + this.getAmount() + "€cent";
+		return this.getDateFormatted() +  " RECHARGE " + this.employee + " " + (float) this.getAmount() / 100 + "€";
 	}
 }

@@ -1,7 +1,5 @@
 package it.polito.latazza.data;
 
-import it.polito.latazza.exceptions.NotEnoughBalance;
-
 public class Employee {
 	private int id;
 	private String name, surname;

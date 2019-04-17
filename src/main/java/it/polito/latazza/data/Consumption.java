@@ -50,8 +50,11 @@ public class Consumption extends Transaction {
 
 	@Override
 	public String toString() {
-		// TODO: check date format
-		// TODO: check amount format
-		return this.getDate().toGMTString() +  ( (this.fromAccount) ? " BALANCE " : " CASH " ) + ( (this.employee == null) ? "VISITOR" : this.employee ) + " " + this.beverage + " " + this.numberOfCapsules;
+		String s = " VISITOR ";
+		if (this.employee != null)
+			s = (this.fromAccount ? " BALANCE " : " CASH ") + this.employee + " ";
+		
+		return this.getDateFormatted() + s + this.beverage + " " + this.numberOfCapsules;
+//		return this.getDateFormatted() +  ( (this.fromAccount) ? " BALANCE " : " CASH " ) + ( (this.employee == null) ? "VISITOR" : this.employee ) + " " + this.beverage + " " + this.numberOfCapsules;
 	}
 }

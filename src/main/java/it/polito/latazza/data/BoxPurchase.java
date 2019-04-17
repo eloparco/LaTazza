@@ -30,8 +30,6 @@ public class BoxPurchase extends Transaction {
 
 	@Override
 	public String toString() {
-		// TODO: check date format
-		// TODO: check amount format
-		return this.getDate().toGMTString() + " BUY " + this.beverage + " " + this.boxQuantity;
+		return this.getDateFormatted() + " BUY " + this.beverage + " " + this.boxQuantity;
 	}
 }

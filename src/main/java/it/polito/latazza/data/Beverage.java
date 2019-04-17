@@ -3,6 +3,7 @@ package it.polito.latazza.data;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class Beverage {
+	// all prices are expressed in cents
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
 	
@@ -60,7 +61,7 @@ public class Beverage {
 	}
 	
 	public int getCapsulesPrice() {
-		return boxPrice/capsulesPerBox;
+		return boxPrice / capsulesPerBox;
 	}
 	
 	@Override

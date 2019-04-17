@@ -1,5 +1,6 @@
 package it.polito.latazza.data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Transaction {
@@ -25,4 +26,10 @@ public abstract class Transaction {
 //	public void setAmount(int amount) {
 //		this.amount = amount;
 //	}	
+	
+	// date format compliant with GUI (in the requirements)
+	public String getDateFormatted() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(date);
+	}
 }
