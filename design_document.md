@@ -44,6 +44,14 @@ lg ~~> ld
 
 # Class diagram
 
+## it.polito.latazza
+```plantuml
+class LaTazza {
+    + main(String[]) : void
+}
+```
+
+## it.polito.latazza.data
 ```plantuml
 class Beverage {
 - beverageId : Integer
@@ -177,6 +185,33 @@ Consumption "*" --> "1" Beverage
 Recharge "*" --> "1" Employee
 
 BoxPurchase "*" --> "1" Beverage
+```
+
+## it.polito.latazza.exceptions
+```plantuml
+class Exception {
+    
+}
+class BeverageException {
+    
+}
+class DateException {
+    
+}
+class EmployeeException {
+    
+}
+class NotEnoughBalance {
+    
+}
+class NotEnoughCapsules {
+    
+}
+Exception <|-- BeverageException
+Exception <|-- DateException
+Exception <|-- EmployeeException
+Exception <|-- NotEnoughBalance
+Exception <|-- NotEnoughCapsules
 ```
 
 \<for each package define class diagram with classes defined in the package>
