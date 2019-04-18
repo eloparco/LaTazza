@@ -43,126 +43,139 @@ The architectural pattern used is the MVC pattern, to connect the data to the GU
 ## it.polito.latazza
 ```plantuml
 class LaTazza {
-    + main(String[]) : void
+    + main(String[] args) : void
 }
 ```
 
 ## it.polito.latazza.data
 ```plantuml
 class Beverage {
-- beverageId : Integer
+- beverageId : int
 - name : String
-- boxPrice : Integer
-- capsulesPerBox : Integer
-- availableQuantity : Integer
-+ getId() : Integer
+- boxPrice : int
+- capsulesPerBox : int
+- availableCapsules : int
++ Beverage(int, String, int, int)
++ getId() : int
++ setId(int id) : void
++ getBoxPrice() : int
++ setBoxPrice(int boxPrice) : void
++ getCapsulesPerBox() : int
++ setCapsulesPerBox(int capsulesPerBox) : void
++ getAvailableQuantity() : int
++ increaseAvailableQuantity(int numberOfBoxes) : void
++ decreaseAvailableQuantity(int numberOfCapsules) : void
 + getName() : String
-+ getCapsulesPerBox() : Integer
-+ getCapsulesPrice() : Integer
-+ getBoxPrice() : Integer
-+ getQuantity() : Integer
-+ setId(Integer id) : void
 + setName(String name) : void
-+ setBoxPrice(Integer price) : void
-+ setCapsulesPerBox(Integer capsulePerBox) : void
-+ increaseAvailableQuantity(Integer amount) : void
-+ decreaseAvailableQuantity(Integer amount) : void
++ getCapsulesPrice() : int
 + toString() : String
 }
 
 class Employee {
-- employeeId : Integer
+- employeeId : int
 - name : String
 - surname : String
-- balance : Integer
-+ getId() : Integer
+- balance : int
++ Employee(int id, String name, String surname, int balance) : Employee(int
++ getId() : int
++ setId(int id) : void
 + getName() : String
-+ getSurname() : String
-+ getBalance() : Integer
-+ setId(Integer id) : void
 + setName(String name) : void
++ getSurname() : String
 + setSurname(String surname) : void
-+ increaseBalance(Integer amount) : void
-+ decreaseBalance(Integer amount) : void
++ getBalance() : int
++ setBalance(int balance) : void
++ increaseBalance(int amount) : void
++ decreaseBalance(int amount) : void
++ hashCode() : int
++ equals(Object obj) : boolean
 + toString() : String
+
 }
 
 class Transaction {
 - date : Date
-- amount : Integer
++ Transaction(Date date)
 + getDate() : Date
-+ getAmount() : Integer
 + setDate(Date date) : void
-+ setAmount(Integer amount) : Integer
++ getDateFormatted() : String
 }
 
 class Consumption {
-- numberOfCapsules : Integer
-- fromAccount : Boolean
+- numberOfCapsules : int
+- fromAccount : boolean
 - employee : Employee
 - beverage : Beverage
-+ getNumberOfCapsules() : Integer
-+ getFromAccount() : Boolean
++ Consumption(Employee employee, Beverage beverage, boolean fromAccount, int numberOfCapsules, Date date)
 + getEmployee() : Employee
-+ getBeverage() : Beverage
 + setEmployee(Employee employee) : void
++ getBeverage() : Beverage
 + setBeverage(Beverage beverage) : void
-+ setNumberOfCapsules(Integer qnt) : void
-+ setFromAccount(Boolean fromAccount) : void
++ isFromAccount() : boolean
++ setFromAccount(boolean fromAccount) : void
++ getNumberOfCapsules() : int
++ setNumberOfCapsules(int numberOfCapsules) : void
 + toString() : String
 }
 
 class BoxPurchase {
-- boxQuantity : Integer
+- boxQuantity : int
 - beverage : Beverage
++ BoxPurchase(Beverage beverage, int boxQuantity, Date date)
 + getBeverage() : Beverage
 + setBeverage(Beverage beverage) : void
-+ getBoxQuantity() : Integer
-+ setBoxQuantity(Integer qnt) : void
++ getboxQuantity() : int
++ setboxQuantity(int boxQuantity) : void
 + toString() : String
 }
 
 class Recharge {
 - employee : Employee
+- amount : int
++ Recharge(Employee employee, int amount, Date date)
 + getEmployee() : Employee
 + setEmployee(Employee employee) : void
++ getAmount() : int
++ setAmount(int amount) : void
 + toString() : String
 }
 
 class LaTazzaAccount {
-- balance : Integer
-+ increaseBalance(Integer amount) : void
-+ decreaseBalance(Integer amount) : void
-+ getBalance() : Integer
+- balance : int
++ getBalance() : int
++ setBalance(int balance) : void
++ increaseBalance(int amount) : void
++ decreaseBalance(int amount) : void
 }
 
 interface DataInterface {
-+ sellCapsules()
-+ sellCapsulesToVisitor()
-+ rechargeAccount()
-+ buyBoxes()
-+ getEmployeeReport()
-+ getReport()
-+ createBeverage()
-+ updateBeverage()
-+ getBeverageName()
-+ getBeverageCapsulesPerBox()
-+ getBeverageBoxPrice()
-+ getBeveragesId()
-+ getBeverages()
-+ getBeverageCapsules()
-+ createEmployee()
-+ updateEmployee()
-+ getEmployeeName()
-+ getEmployeeSurname()
-+ getEmployeeBalance()
-+ getEmployeesId()
-+ getEmployees()
-+ getBalance()
++ sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount) : Integer
++ sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules) : void
++ rechargeAccount(Integer id, Integer amountInCents) : Integer
++ buyBoxes(Integer beverageId, Integer boxQuantity) : void
++ getEmployeeReport(Integer employeeId, Date startDate, Date endDate) : List<String>
++ getReport(Date startDate, Date endDate) : List<String>
++ createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) : Integer
++ updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice) : void
++ getBeverageName(Integer id) : String
++ getBeverageCapsulesPerBox(Integer id) : Integer
++ getBeverageBoxPrice(Integer id) : Integer
++ getBeveragesId() : List<Integer>
++ String> getBeverages() : Map<Integer,
++ getBeverageCapsules(Integer id) : Integer
++ createEmployee(String name, String surname) : Integer
++ updateEmployee(Integer id, String name, String surname) : void
++ getEmployeeName(Integer id) : String
++ getEmployeeSurname(Integer id) : String
++ getEmployeeBalance(Integer id) : Integer
++ getEmployeesId() : List<Integer>
++ String> getEmployees() : Map<Integer,
++ getBalance() : Integer
++ reset() : void
 }
 
 class DataImpl {
-- transactions : Map<Date, List<Transaction>>
+- transactions : List<Transaction>
 - employees : Map<Integer, Employee>
 - beverages : Map<Integer, Beverage> 
 - laTazzaAccount : LaTazzaAccount
