@@ -35,12 +35,8 @@ ld ~~> le
 lg ~~> ld
 ```
 
-\<define UML package diagram >
-
-\<explain rationales for choices> 
-
-\<mention architectural patterns used, if any>
-
+The classes necessary for the implementation of the requirements has been added to 'it.polito.latazza.data' package.  
+The architectural pattern used is the MVC pattern, to connect the data to the GUI through a controller. It can also be seen as a three-layer architecture, composed of data (local files), presentation (GUI) and application logic.
 
 # Class diagram
 
@@ -190,6 +186,7 @@ Recharge "*" --> "1" Employee
 
 BoxPurchase "*" --> "1" Beverage
 ```
+Facade pattern: provide an interface to use the subsystem. The 'DataImpl' class acts as a wrapper, decoupling the application code that uses the system from the details of the system itself (implemented in 'Beverage', 'Employee', 'Transaction', etc.).
 
 ## it.polito.latazza.exceptions
 ```plantuml
@@ -217,11 +214,6 @@ Exception <|-- EmployeeException
 Exception <|-- NotEnoughBalance
 Exception <|-- NotEnoughCapsules
 ```
-
-\<for each package define class diagram with classes defined in the package>
-
-\<mention design patterns used, if any>
-
 
 # Verification traceability matrix
 
