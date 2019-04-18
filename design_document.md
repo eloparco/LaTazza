@@ -140,11 +140,7 @@ class LaTazzaAccount {
 + getBalance() : Integer
 }
 
-class DataImpl {
-- transactions : Map<Date, List<Transaction>>
-- employees : Map<Integer, Employee>
-- beverages : Map<Integer, Beverage> 
-- laTazzaAccount : LaTazzaAccount
+interface DataInterface {
 + sellCapsules()
 + sellCapsulesToVisitor()
 + rechargeAccount()
@@ -169,6 +165,14 @@ class DataImpl {
 + getBalance()
 }
 
+class DataImpl {
+- transactions : Map<Date, List<Transaction>>
+- employees : Map<Integer, Employee>
+- beverages : Map<Integer, Beverage> 
+- laTazzaAccount : LaTazzaAccount
+}
+
+DataInterface <|-- DataImpl
 DataImpl "1" --> "*" Transaction
 DataImpl "1" --> "1" LaTazzaAccount
 DataImpl "1" --> "*" Employee
