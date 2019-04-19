@@ -230,14 +230,16 @@ Exception <|-- NotEnoughCapsules
 
 # Verification traceability matrix
 
-\<for each functional requirement from the requirement document, list which classes concur to implement it>
-
-
-|  | Class x | Class y  | .. |
-| ------------- |:-------------:| -----:| -----:|
-| Functional requirement x  |  |  | |
-| Functional requirement y  |  |  | |
-| .. |  |  | |
+|  | DataImpl | LaTazzaAccount  | Employee | Beverage | Transaction | Consumption | BoxPurchase | Recharge
+| -----:| -----:| -----:| -----:| -----:| -----:| -----:| -----:| -----:| 
+| FR1  |<p align="center"> ***X*** | <p align="center"> ***X***|<p align="center"> ***X*** |<p align="center"> ***X***| <p align="center"> ***X***| <p align="center"> ***X***| | |
+| FR2  |<p align="center"> ***X*** |<p align="center"> ***X*** | |<p align="center"> ***X*** |<p align="center"> ***X*** |<p align="center"> ***X*** | | |
+| FR3  |<p align="center"> ***X*** |<p align="center"> ***X*** |<p align="center"> ***X*** | | <p align="center"> ***X***| | |<p align="center"> ***X***
+| FR4  |<p align="center"> ***X*** | <p align="center"> ***X***| | <p align="center"> ***X***| <p align="center"> ***X***| |<p align="center"> ***X*** | |
+| FR5  |<p align="center"> ***X*** | |<p align="center"> ***X*** |<p align="center"> ***X*** |<p align="center"> ***X***| <p align="center"> ***X***| |<p align="center"> ***X*** |
+| FR6  | <p align="center"> ***X***| | | <p align="center"> ***X***|<p align="center"> ***X*** | <p align="center"> ***X***| |<p align="center"> ***X*** |
+| FR7  |<p align="center"> ***X*** | | |<p align="center"> ***X*** | | | | |
+| FR8  |<p align="center"> ***X*** | <p align="center"> ***X***|<p align="center"> ***X*** | | | | | |
 
 # Verification sequence diagrams 
 \<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
