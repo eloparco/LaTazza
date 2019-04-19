@@ -1,10 +1,14 @@
 # Design Document Template
 
 Authors:
+* Bonelli Lorenzo 267563  
+* Ruggeri Franco 265682  
+* Rosso Alessandro 265485  
+* Loparco Enrico 261072  
 
-Date:
+Date: 23/04/19
 
-Version:
+Version: 1.0.0
 
 # Contents
 
@@ -12,14 +16,6 @@ Version:
 - [Class diagram](#class-diagram)
 - [Verification traceability matrix](#verification-traceability-matrix)
 - [Verification sequence diagrams](#verification-sequence-diagrams)
-
-# Instructions
-
-The design document has to comply with:
-1. [Official Requirement Document](../Official\ Requirements\ Document.md)
-2. [DataInterface.java](../src/main/java/it/polito/latazza/data/DataInterface.java)
-
-UML diagrams **MUST** be written using plantuml notation.
 
 # Package diagram
 
