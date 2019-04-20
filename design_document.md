@@ -121,8 +121,8 @@ Beverage : +getCapsulesPerBox() : int
 Beverage : +setCapsulesPerBox(capsulesPerBox:int) : void
 Beverage : +getAvailableCapsules() : int
 Beverage : +getCapsulesPrice() : int
-Beverage : +increaseAvailableQuantity(numberOfBoxes:int) : void
-Beverage : +decreaseAvailableQuantity(numberOfCapsules:int) : void
+Beverage : +increaseAvailableCapsules(numberOfBoxes:int) : void
+Beverage : +decreaseAvailableCapsules(numberOfCapsules:int) : void
 Beverage : +toString() : String
 
 LaTazzaAccount : -balance : int
@@ -208,9 +208,49 @@ Exception <|-- NotEnoughCapsules
 
 
 # Verification sequence diagrams 
-\<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
 
+## Scenario 1 - Colleague uses one capsule of type T
 ```plantuml
-": Class X" -> ": Class Y": "1: message1()"
-": Class X" -> ": Class Y": "2: message2()"
+autonumber
+
+actor Administrator as a order 1
+participant ":JButton" as jb order 2
+participant ":ActionListener" as al order 4
+participant ":DataInterface" as di order 5
+participant ":Employee" as e order 6
+participant ":Beverage" as b order 7
+participant ":Consumption" as c order 8
+participant ":JOptionPane" as jo order 3
+
+a -> jb: clickSell()
+jb -> al: actionPerformed(clickSellEvent)
+note left of di: returns a value >= 0
+al -> di: sellCapsules(employeeId, beverageId, 1, true)
+di -> e: decreaseBalance(1)
+di -> b: decreaseAvailableCapsules(1)
+di -> c: new Consumption(employee, beverage, 1, true)
+jo  <- al: showMessageDialog(JPanel.this, "Ok")
+```
+
+## Scenario 2 - Colleague uses one capsule of type T, account negative
+```plantuml
+autonumber
+
+actor Administrator as a order 1
+participant ":JButton" as jb order 2
+participant ":ActionListener" as al order 4
+participant ":DataInterface" as di order 5
+participant ":Employee" as e order 6
+participant ":Beverage" as b order 7
+participant ":Consumption" as c order 8
+participant ":JOptionPane" as jo order 3
+
+a -> jb: clickSell()
+jb -> al: actionPerformed(clickSellEvent)
+note left of di: returns a negative value
+al -> di: sellCapsules(employeeId, beverageId, 1, true)
+di -> e: decreaseBalance(1)
+di -> b: decreaseAvailableCapsules(1)
+di -> c: new Consumption(employee, beverage, 1, true)
+jo  <- al: showMessageDialog(JPanel.this, "Warning")
 ```
