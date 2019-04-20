@@ -35,29 +35,27 @@ note right of lg : view + controller
 note bottom of ld : model
 ```
 
-The architectural pattern used is *MV* (particular case of *MVC*), with view and model implemented in the *latazza.gui* and *latazza.data* packages, respectively. Since the chosen programming language is *Java*, in fact, it is possible (and it is broadly used) to embed the controllers in the view.
+An architectural pattern is used: *MV* (particular case of *MVC*). View and model are implemented in the *latazza.gui* and *latazza.data* packages, respectively, and controller is embedded in the view, as common in Java (chosen programming language).
 
 *Remark*: the *MV* pattern can be also seen as a 2-tier architecture (*layered* architectural pattern), composed of presentation (+ application logic) and data layers.
 
 
 # Class diagram
 
-## it.polito.latazza
+## latazza
 ```plantuml
 class LaTazza {
 	+main(args:String[]) : void
 }
 ```
 
-## it.polito.latazza.data
+## latazza.data
 ```plantuml
 interface DataInterface
 class DataImpl
 class Beverage
-together {
-	class Account
-	class EmployeeAccount
-}
+class LaTazzaAccount	
+class Employee
 together {
 	class Transaction
 	class Recharge
@@ -66,18 +64,17 @@ together {
 }
 
 DataInterface <|-- DataImpl
-Account <|-- EmployeeAccount
 Transaction <|-- Recharge
 Transaction <|-- Consumption
 Transaction <|-- BoxPurchase
 
 DataImpl "1" -- "*" Transaction
-DataImpl "1" -- "1" Account : LaTazza account
-DataImpl "1" -- "*" EmployeeAccount
+DataImpl "1" -- "1" LaTazzaAccount
+DataImpl "1" -- "*" Employee
 DataImpl "1" -- "*" Beverage
-Consumption "*" -- "0, 1" EmployeeAccount
+Consumption "*" -- "0, 1" Employee
 Consumption "*" -- "1" Beverage
-Recharge "*" -- "1" EmployeeAccount
+Recharge "*" -- "1" Employee
 BoxPurchase "*" -- "1" Beverage
 
 DataInterface : +sellCapsules(employeeId:Integer, beverageId:Integer, numberOfCapsules:Integer, fromAccount:Boolean) : Integer
@@ -128,22 +125,26 @@ Beverage : +increaseAvailableQuantity(numberOfBoxes:int) : void
 Beverage : +decreaseAvailableQuantity(numberOfCapsules:int) : void
 Beverage : +toString() : String
 
-Account : -balance : int
-Account : +Account(balance:int)
-Account : +getBalance() : int
-Account : +increaseBalance(amount:int) : void
-Account : +decreaseBalance(amount:int) : void
+LaTazzaAccount : -balance : int
+LaTazzaAccount : +Account(balance:int)
+LaTazzaAccount : +getBalance() : int
+LaTazzaAccount : +increaseBalance(amount:int) : void
+LaTazzaAccount : +decreaseBalance(amount:int) : void
 
-EmployeeAccount : -id : int
-EmployeeAccount : -name : String
-EmployeeAccount : -surname : String
-EmployeeAccount : +Employee(id:int, name:String, surname:String, balance:int)
-EmployeeAccount : +getId() : int
-EmployeeAccount : +getName() : String
-EmployeeAccount : +setName(name:String) : void
-EmployeeAccount : +getSurname() : String
-EmployeeAccount : +setSurname(surname:String) : void
-EmployeeAccount : +toString() : String
+Employee : -id : int
+Employee : -name : String
+Employee : -surname : String
+Employee : -balance : int
+Employee : +Employee(id:int, name:String, surname:String, balance:int)
+Employee : +getId() : int
+Employee : +getName() : String
+Employee : +setName(name:String) : void
+Employee : +getSurname() : String
+Employee : +setSurname(surname:String) : void
+Employee : +getBalance() : int
+Employee : +increaseBalance(amount:int) : void
+Employee : +decreaseBalance(amount:int) : void
+Employee : +toString() : String
 
 Transaction : -date : Date
 Transaction : +getDate() : Date
@@ -169,13 +170,13 @@ Consumption : +Consumption(employee:Employee, beverage:Beverage, numberOfCapsule
 Consumption : -getEmployee() : Employee
 Consumption : +toString() : String
 
-note right of DataInterface : Facade
-}
+note right of DataImpl : Facade
 ```
 
-Facade pattern: provide an interface to use the subsystem. The 'DataImpl' class acts as a wrapper, decoupling the application code that uses the system from the details of the system itself (implemented in 'Beverage', 'Employee', 'Transaction', etc.).
+A design pattern is used: *Facade*. The *DataImpl* class provides an easier usage of the package to the client, hiding the details of its composition. It is of course the unique public class in the package; all the others have package visibility.
 
-## it.polito.latazza.exceptions
+
+## latazza.exceptions
 ```plantuml
 class Exception
 class BeverageException
