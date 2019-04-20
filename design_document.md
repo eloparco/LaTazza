@@ -17,6 +17,7 @@ Version: 1.0.0
 - [Verification traceability matrix](#verification-traceability-matrix)
 - [Verification sequence diagrams](#verification-sequence-diagrams)
 
+
 # Package diagram
 
 ```plantuml
@@ -26,13 +27,18 @@ folder latazza.exceptions as le
 folder latazza.gui as lg
 
 l ~~> ld
-l ~~> lg
-ld ~~> le
+l ~> lg
+ld ~> le
 lg ~~> ld
+
+note right of lg : view + controller
+note bottom of ld : model
 ```
 
-The classes necessary for the implementation of the requirements has been added to 'it.polito.latazza.data' package.  
-The architectural pattern used is the MVC pattern, to connect the data to the GUI through a controller. It can also be seen as a three-layer architecture, composed of data (local files), presentation (GUI) and application logic.
+The architectural pattern used is *MV* (particular case of *MVC*), with view and model implemented in the *latazza.gui* and *latazza.data* packages, respectively. Since the chosen programming language is *Java*, in fact, it is possible (and it is broadly used) to embed the controllers in the view.
+
+*Remark*: the *MV* pattern can be also seen as a 2-tiers architecture (*layered* architectural pattern), composed of presentation (+ application logic) and data layers.
+
 
 # Class diagram
 
@@ -224,6 +230,7 @@ Exception <|-- NotEnoughBalance
 Exception <|-- NotEnoughCapsules
 ```
 
+
 # Verification traceability matrix
 
 |  | DataImpl | LaTazzaAccount  | Employee | Beverage | Transaction | Consumption | BoxPurchase | Recharge
@@ -236,6 +243,7 @@ Exception <|-- NotEnoughCapsules
 | FR6  | <p align="center"> ***X***| | | <p align="center"> ***X***|<p align="center"> ***X*** | <p align="center"> ***X***| |<p align="center"> ***X*** |
 | FR7  |<p align="center"> ***X*** | | |<p align="center"> ***X*** | | | | |
 | FR8  |<p align="center"> ***X*** | <p align="center"> ***X***|<p align="center"> ***X*** | | | | | |
+
 
 # Verification sequence diagrams 
 \<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
