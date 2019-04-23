@@ -69,12 +69,12 @@ Transaction <|-- Consumption
 Transaction <|-- BoxPurchase
 
 DataImpl "1" -- "*" Transaction
-DataImpl "1" -- "1" LaTazzaAccount
+DataImpl "1" - "1" LaTazzaAccount
 DataImpl "1" -- "*" Employee
 DataImpl "1" -- "*" Beverage
-Consumption "*" -- "0, 1" Employee
+Employee "0..1" -- "*" Consumption
 Consumption "*" -- "1" Beverage
-Recharge "*" -- "1" Employee
+Employee "1" -- "*" Recharge
 BoxPurchase "*" -- "1" Beverage
 
 DataInterface : +sellCapsules(employeeId:Integer, beverageId:Integer, numberOfCapsules:Integer, fromAccount:Boolean) : Integer
@@ -104,7 +104,14 @@ DataInterface : +reset() : void
 DataImpl : -transactions : List<Transaction>
 DataImpl : -employees : Map<Integer, Employee>
 DataImpl : -beverages : Map<Integer, Beverage> 
-DataImpl : -laTazzaAccount : Account
+DataImpl : -laTazzaAccount : LaTazzaAccount
+DataImpl : -<u>FILENAME_TRANSACTIONS : String
+DataImpl : -<u>FILENAME_EMPLOYEES : String
+DataImpl : -<u>FILENAME_BEVERAGES : String
+DataImpl : -<u>FILENAME_LA_TAZZA_ACCOUNT : String
+DataImpl : +DataImpl()
+DataImpl : +loadData() : void
+DataImpl : -saveObject(object:Object, filename:String, append:boolean) : void
 
 Beverage : -id : int
 Beverage : -name : String
@@ -171,9 +178,15 @@ Consumption : -getEmployee() : Employee
 Consumption : +toString() : String
 
 note right of DataImpl : Facade
+note "Implements Serializable" as N1
+Transaction . N1 
+N1 . Employee
+N1 .. Beverage
 ```
 
 A design pattern is used: *Facade*. The *DataImpl* class provides an easier usage of the package to the client, hiding the details of its composition. It is of course the unique public class in the package; all the others have package visibility.
+
+For the data persistence, *transactions*, *employees* and *beverages* are serialized by the *DataImpl* class after being created (appended to the respective file). Also *laTazzaAccount* is serialized after each modification, but it overwrites the respective file. At boot time, data are loaded from the *DataImpl* class (*loadData()* called by the constructor). This ensures also an easy portability from a PC to another one (NFR4).
 
 
 ## latazza.exceptions
