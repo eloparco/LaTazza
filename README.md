@@ -2,7 +2,7 @@
 
 In many work environments employees like to have coffee and other beverages. So they buy and share a coffee maker that uses capsules (see Figure 1 ). For the sake of a friendly working environment the purchase and payment of capsules must be managed. One of the employees (the manager) takes charge of managing this, using LaTazza.
 
-![LaTazza](pictures/latazzapic1.png "")
+![LaTazza](figures/latazzapic1.png "")
 
 *Figure 1: Expresso coffee maker*
 
@@ -21,5 +21,5 @@ The manager can:
 The application could have a GUI similar to the one in Figure 2
 
 
-![LaTazza screenshot](pictures/latazzascreenshot.png "Logo title text")
+![LaTazza screenshot](figures/latazzascreenshot.png "Logo title text")
 *Figure 2: LaTazza Screenshot*
