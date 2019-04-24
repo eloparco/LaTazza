@@ -68,14 +68,14 @@ Transaction <|-- Recharge
 Transaction <|-- Consumption
 Transaction <|-- BoxPurchase
 
-DataImpl "1" -- "*" Transaction
-DataImpl "1" - "1" LaTazzaAccount
-DataImpl "1" -- "*" Employee
-DataImpl "1" -- "*" Beverage
-Employee "0..1" -- "*" Consumption
-Consumption "*" -- "1" Beverage
-Employee "1" -- "*" Recharge
-BoxPurchase "*" -- "1" Beverage
+DataImpl "1" --> "*" Transaction
+DataImpl "1" -> "1" LaTazzaAccount
+DataImpl "1" --> "*" Employee
+DataImpl "1" --> "*" Beverage
+Employee "0..1" <-- "*" Consumption
+Consumption "*" --> "1" Beverage
+Employee "1" <-- "*" Recharge
+BoxPurchase "*" --> "1" Beverage
 
 DataInterface : +sellCapsules(employeeId:Integer, beverageId:Integer, numberOfCapsules:Integer, fromAccount:Boolean) : Integer
 DataInterface : +sellCapsulesToVisitor(beverageId:Integer, numberOfCapsules:Integer) : void
@@ -110,7 +110,7 @@ DataImpl : -<u>FILENAME_EMPLOYEES : String
 DataImpl : -<u>FILENAME_BEVERAGES : String
 DataImpl : -<u>FILENAME_LA_TAZZA_ACCOUNT : String
 DataImpl : +DataImpl()
-DataImpl : +loadData() : void
+DataImpl : -loadData() : void
 DataImpl : -saveObject(object:Object, filename:String, append:boolean) : void
 
 Beverage : -id : int
@@ -174,7 +174,7 @@ Consumption : -numberOfCapsules : int
 Consumption : -fromAccount : boolean
 Consumption : +Consumption(beverage:Beverage, numberOfCapsules:int)
 Consumption : +Consumption(employee:Employee, beverage:Beverage, numberOfCapsules:int, fromAccount:boolean)
-Consumption : -getEmployee() : Employee
+Consumption : +getEmployee() : Employee
 Consumption : +toString() : String
 
 note right of DataImpl : Facade
