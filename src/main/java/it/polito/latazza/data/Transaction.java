@@ -1,10 +1,12 @@
 package it.polito.latazza.data;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class Transaction {
-	protected Date date;
+public abstract class Transaction implements Serializable {
+	private static final long serialVersionUID = -754087344543485509L;
+	private Date date;
 
 	public Transaction() {
 		this.date = new Date();

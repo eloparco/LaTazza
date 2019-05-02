@@ -1,7 +1,10 @@
 package it.polito.latazza.data;
+
+import java.io.Serializable;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 
-public class LaTazzaAccount {
+public class LaTazzaAccount implements Serializable {
+	private static final long serialVersionUID = -8680112381552867658L;
 	private int balance = 0;
 
 	public int getBalance() {

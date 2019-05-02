@@ -1,6 +1,10 @@
 package it.polito.latazza.data;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+	private static final long serialVersionUID = -8150828679021620453L;
+	
 	private int id, balance;
 	private String name, surname;
 	

@@ -1,5 +1,12 @@
 package it.polito.latazza.data;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,12 +21,67 @@ import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class DataImpl implements DataInterface {
-
-    private List<Transaction> transactions = new ArrayList<>();
-	private Map<Integer, Employee> employees = new HashMap<>();
-	private Map<Integer, Beverage> beverages = new HashMap<>();
-	private LaTazzaAccount laTazzaAccount = new LaTazzaAccount();
+	private static final String PATHNAME = "data/";
+    private static final String FILENAME_TRANSACTIONS = PATHNAME + "transactions";
+	private static final String FILENAME_EMPLOYEES = PATHNAME + "employees";
+	private static final String FILENAME_BEVERAGES = PATHNAME + "beverages";
+	private static final String FILENAME_LA_TAZZA_ACCOUNT = PATHNAME + "latazza_account";
+	
+	private List<Transaction> transactions;
+	private Map<Integer, Employee> employees;
+	private Map<Integer, Beverage> beverages;
+	private LaTazzaAccount laTazzaAccount;
     
+	@SuppressWarnings("unchecked")
+	public DataImpl() {
+		/* create directory */
+		File directory = new File(PATHNAME);
+		if (!directory.exists()) {
+			if (directory.mkdir()) {
+				System.out.println("Directory " + PATHNAME + "created");
+			} else {
+				System.err.println("Error creating the directory " + PATHNAME);
+				System.exit(-1);
+			}
+		}
+		
+		/* create transactions */
+		try {
+			transactions = (List<Transaction>) loadObject(FILENAME_TRANSACTIONS);
+			System.out.println("Transactions loaded");
+		} catch (Exception e) {
+			transactions = new ArrayList<>();
+			System.err.println("Error reading " + FILENAME_TRANSACTIONS + " (" + e.getClass() + ")... new transaction list used");
+		}
+		
+		/* create employees */
+		try {
+			employees = (Map<Integer,Employee>) loadObject(FILENAME_EMPLOYEES);
+			System.out.println("Employees loaded");
+		} catch (Exception e) {
+			employees = new HashMap<>();
+			System.err.println("Error reading " + FILENAME_EMPLOYEES + " (" + e.getClass() + ")... new employee map used");
+		}
+		
+		/* create beverages */
+		try {
+			beverages = (Map<Integer,Beverage>) loadObject(FILENAME_BEVERAGES);
+			System.out.println("Beverages loaded");
+		} catch (Exception e) {
+			beverages = new HashMap<>();
+			System.err.println("Error reading " + FILENAME_BEVERAGES + " (" + e.getClass() + ")... new beverage map used");
+		}
+		
+		/* create LaTazza account */
+		try {
+			laTazzaAccount = (LaTazzaAccount) loadObject(FILENAME_LA_TAZZA_ACCOUNT);
+			System.out.println("LaTazza account loaded");
+		} catch (Exception e) {
+			laTazzaAccount = new LaTazzaAccount();
+			System.err.println("Error reading " + FILENAME_LA_TAZZA_ACCOUNT + " (" + e.getClass() + ")... new LaTazza account used");
+		}
+	}
+	
 	@Override
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
@@ -40,7 +102,14 @@ public class DataImpl implements DataInterface {
 		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		transactions.add(c);
 		
-		//TODO: return updated employee balance??
+		saveObject(transactions, FILENAME_TRANSACTIONS);
+		saveObject(beverages, FILENAME_BEVERAGES);
+		if (fromAccount)
+			saveObject(employees, FILENAME_EMPLOYEES);
+		else
+			saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		
+		System.out.println("Transaction completed: " + c);
 		return e.getBalance();
 	}
 
@@ -57,6 +126,11 @@ public class DataImpl implements DataInterface {
 		Consumption c = new Consumption(b, numberOfCapsules);
 		transactions.add(c);
 		
+		saveObject(transactions, FILENAME_TRANSACTIONS);
+		saveObject(beverages, FILENAME_BEVERAGES);
+		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		
+		System.out.println("Transaction completed: " + c);
 	}
 
 	@Override
@@ -71,7 +145,11 @@ public class DataImpl implements DataInterface {
 		Recharge r = new Recharge(e, amountInCents);
 		transactions.add(r);
 		
-		//TODO: what to return? updated balance in cents?
+		saveObject(transactions, FILENAME_TRANSACTIONS);
+		saveObject(employees, FILENAME_EMPLOYEES);
+		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		
+		System.out.println("Transaction completed: " + r);
 		return e.getBalance();
 	}
 
@@ -87,6 +165,11 @@ public class DataImpl implements DataInterface {
 		BoxPurchase bp = new BoxPurchase(b, boxQuantity);
 		transactions.add(bp);
 		
+		saveObject(transactions, FILENAME_TRANSACTIONS);
+		saveObject(beverages, FILENAME_BEVERAGES);
+		saveObject(beverages, FILENAME_LA_TAZZA_ACCOUNT);
+		
+		System.out.println("Transaction completed: " + bp);
 	}
 
 	@Override
@@ -120,6 +203,9 @@ public class DataImpl implements DataInterface {
 		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
 		Beverage b = new Beverage(key, name, boxPrice, capsulesPerBox);
 		beverages.put(key, b);
+		saveObject(beverages, FILENAME_BEVERAGES);
+		
+		System.out.println(b + " created");
 		return key;
 	}
 
@@ -134,7 +220,8 @@ public class DataImpl implements DataInterface {
 		b.setCapsulesPerBox(capsulesPerBox);
 		b.setName(name);
 		beverages.put(id, b);
-		
+		saveObject(beverages, FILENAME_BEVERAGES);
+		System.out.println(b + " updated");
 	}
 
 	@Override
@@ -184,6 +271,8 @@ public class DataImpl implements DataInterface {
 		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
 		Employee e = new Employee(key, name, surname, 0);
 		employees.put(key, e);
+		saveObject(employees, FILENAME_EMPLOYEES);
+		System.out.println(e + " created");
 		return key;
 	}
 
@@ -195,6 +284,8 @@ public class DataImpl implements DataInterface {
 		e.setName(name);
 		e.setSurname(surname);
 		employees.put(id, e);
+		saveObject(employees, FILENAME_EMPLOYEES);
+		System.out.println(e + " updated");
 	}
 
 	@Override
@@ -242,6 +333,32 @@ public class DataImpl implements DataInterface {
 		employees.clear();
 		beverages.clear();
 		transactions.clear();
+		
+		saveObject(transactions, FILENAME_TRANSACTIONS);
+		saveObject(employees, FILENAME_EMPLOYEES);
+		saveObject(beverages, FILENAME_BEVERAGES);
+		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		
+		System.out.println("Reset done");
+	}
+	
+	
+	/* Data persistency */
+	
+	private Object loadObject(String filename) throws IOException, ClassNotFoundException {
+		try (ObjectInputStream deserializer = new ObjectInputStream(new FileInputStream(filename))) {
+			return deserializer.readObject();
+		}
+	}
+	
+	private void saveObject(Object object, String filename) {
+		try (ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream(filename))) {
+			serializer.writeObject(object);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

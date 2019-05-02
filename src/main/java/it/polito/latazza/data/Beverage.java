@@ -1,8 +1,11 @@
 package it.polito.latazza.data;
 
+import java.io.Serializable;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
-public class Beverage {
+public class Beverage implements Serializable {
+	private static final long serialVersionUID = 3420502585988933185L;
+	
 	// all prices are expressed in cents
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;

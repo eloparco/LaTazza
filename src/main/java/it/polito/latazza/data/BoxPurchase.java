@@ -1,6 +1,8 @@
 package it.polito.latazza.data;
 
 public class BoxPurchase extends Transaction {
+	private static final long serialVersionUID = -6802904038958433577L;
+	
 	private Beverage beverage;
 	private int boxQuantity;
 

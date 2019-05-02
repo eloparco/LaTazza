@@ -1,6 +1,8 @@
 package it.polito.latazza.data;
 
 public class Recharge extends Transaction {
+	private static final long serialVersionUID = -3843956786039203483L;
+	
 	private Employee employee;
 	private int amount;
 
