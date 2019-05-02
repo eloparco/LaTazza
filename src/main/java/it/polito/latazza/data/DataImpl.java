@@ -2,12 +2,12 @@ package it.polito.latazza.data;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +31,9 @@ public class DataImpl implements DataInterface {
 	private Map<Integer, Employee> employees;
 	private Map<Integer, Beverage> beverages;
 	private LaTazzaAccount laTazzaAccount;
+	
+	private int nextEmployeeId;
+	private int nextBeverageId;
     
 	@SuppressWarnings("unchecked")
 	public DataImpl() {
@@ -57,18 +60,22 @@ public class DataImpl implements DataInterface {
 		/* load/create employees */
 		try {
 			employees = (Map<Integer,Employee>) loadObject(FILENAME_EMPLOYEES);
+			nextEmployeeId = employees.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
 			System.out.println("Employees loaded");
 		} catch (Exception e) {
 			employees = new HashMap<>();
+			nextEmployeeId = 0;
 			System.err.println("Error reading " + FILENAME_EMPLOYEES + " (" + e.getClass() + ")... new employee map used");
 		}
 		
 		/* load/create beverages */
 		try {
 			beverages = (Map<Integer,Beverage>) loadObject(FILENAME_BEVERAGES);
+			nextBeverageId = beverages.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
 			System.out.println("Beverages loaded");
 		} catch (Exception e) {
 			beverages = new HashMap<>();
+			nextBeverageId = 0;
 			System.err.println("Error reading " + FILENAME_BEVERAGES + " (" + e.getClass() + ")... new beverage map used");
 		}
 		
@@ -213,15 +220,14 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		
 		/* create */
-		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
-		Beverage b = new Beverage(key, name, boxPrice, capsulesPerBox);
-		beverages.put(key, b);
+		Beverage b = new Beverage(nextBeverageId, name, boxPrice, capsulesPerBox);
+		beverages.put(nextBeverageId, b);
 		System.out.println(b + " created");
 		
 		/* save */
 		saveObject(beverages, FILENAME_BEVERAGES);
 		
-		return key;
+		return nextBeverageId++;
 	}
 
 	@Override
@@ -292,15 +298,14 @@ public class DataImpl implements DataInterface {
 			throw new EmployeeException();
 		
 		/* create */
-		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
-		Employee e = new Employee(key, name, surname, 0);
-		employees.put(key, e);
+		Employee e = new Employee(nextEmployeeId, name, surname, 0);
+		employees.put(nextEmployeeId, e);
 		System.out.println(e + " created");
 		
 		/* save */
 		saveObject(employees, FILENAME_EMPLOYEES);
 		
-		return key;
+		return nextEmployeeId++;
 	}
 
 	@Override
@@ -388,8 +393,6 @@ public class DataImpl implements DataInterface {
 	private void saveObject(Object object, String filename) {
 		try (ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream(filename))) {
 			serializer.writeObject(object);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
