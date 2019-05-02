@@ -5,13 +5,9 @@ import java.util.Date;
 
 public abstract class Transaction {
 	protected Date date;
-	
-	public Transaction() {
 
-	}
-	
-	public Transaction(Date date) {
-		this.date = date;
+	public Transaction() {
+		this.date = new Date();
 	}
 
 	public Date getDate() {
