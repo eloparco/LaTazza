@@ -7,10 +7,11 @@ public class Beverage {
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
 	
-	public Beverage(int id, String name, int capsulePerBox, int availableCapsules) {
+	public Beverage(int id, String name, int boxPrice , int capsulePerBox) {
 		this.name=name;
 		this.capsulesPerBox=capsulePerBox;
-		this.availableCapsules=availableCapsules;
+		this.availableCapsules=0;
+		this.boxPrice=boxPrice;
 		this.id = id;
 	}
 

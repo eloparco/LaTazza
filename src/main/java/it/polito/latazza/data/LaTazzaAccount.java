@@ -4,8 +4,7 @@ import it.polito.latazza.exceptions.NotEnoughBalance;
 public class LaTazzaAccount {
 	private int balance = 0;
 
-	public LaTazzaAccount(int balance) {
-		this.balance = balance;
+	public LaTazzaAccount() {
 	}
 	
 	public int getBalance() {

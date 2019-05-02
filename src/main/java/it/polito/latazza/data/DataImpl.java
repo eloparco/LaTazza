@@ -1,7 +1,7 @@
 package it.polito.latazza.data;
 
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class DataImpl implements DataInterface {
 		else
 			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		
-		Consumption c = new Consumption(e, b, numberOfCapsules, fromAccount);
+		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		transactions.add(c);
 		
 		//TODO: return updated employee balance??
@@ -45,7 +45,7 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	public void sellCapsulesToVisitor(Integer bfromAccount,everageId, Integer numberOfCapsules)
+	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
 		Beverage b = beverages.get(beverageId);
 		if (b == null)
@@ -55,7 +55,8 @@ public class DataImpl implements DataInterface {
 		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		
 		Consumption c = new Consumption(b, numberOfCapsules);
-		transactions.add(c);		
+		transactions.add(c);
+		
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class DataImpl implements DataInterface {
 		if (e == null)
 			throw new EmployeeException();
 		
-		e.decreaseBalance(amountInCents);
+		e.increaseBalance(amountInCents);
 		laTazzaAccount.increaseBalance(amountInCents);
 		
 		Recharge r = new Recharge(e, amountInCents);
@@ -91,11 +92,14 @@ public class DataImpl implements DataInterface {
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
+		//TODO: when to throw date exception???
+		if(!employees.containsKey(employeeId))
+			throw new EmployeeException();
 		return transactions.stream().filter(l ->    (((l instanceof Consumption)
                                                     && (((Consumption)l).getEmployee() != null)
-													&& (((Consumption)l).getEmployee().getId() == e.getId()))
+													&& (((Consumption)l).getEmployee().getId() == employeeId))
 													|| ((l instanceof Recharge)
-													&& (((Recharge)l).getEmployee().getId() == e.getId())))
+													&& (((Recharge)l).getEmployee().getId() == employeeId)))
 													&& l.getDate().after(startDate)
 													&& l.getDate().before(endDate))
 									.map(l -> l.toString())
@@ -234,11 +238,7 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public void reset() {
-        try {
-			laTazzaAccount.decreaseBalance(laTazzaAccount.getBalance());
-		} catch (NotEnoughBalance e) {
-			laTazzaAccount = new LaTazzaAccount();
-		}
+        laTazzaAccount = new LaTazzaAccount();
 		employees.clear();
 		beverages.clear();
 		transactions.clear();
