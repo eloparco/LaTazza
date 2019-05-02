@@ -45,7 +45,7 @@ public class DataImpl implements DataInterface {
 			}
 		}
 		
-		/* create transactions */
+		/* load/create transactions */
 		try {
 			transactions = (List<Transaction>) loadObject(FILENAME_TRANSACTIONS);
 			System.out.println("Transactions loaded");
@@ -54,7 +54,7 @@ public class DataImpl implements DataInterface {
 			System.err.println("Error reading " + FILENAME_TRANSACTIONS + " (" + e.getClass() + ")... new transaction list used");
 		}
 		
-		/* create employees */
+		/* load/create employees */
 		try {
 			employees = (Map<Integer,Employee>) loadObject(FILENAME_EMPLOYEES);
 			System.out.println("Employees loaded");
@@ -63,7 +63,7 @@ public class DataImpl implements DataInterface {
 			System.err.println("Error reading " + FILENAME_EMPLOYEES + " (" + e.getClass() + ")... new employee map used");
 		}
 		
-		/* create beverages */
+		/* load/create beverages */
 		try {
 			beverages = (Map<Integer,Beverage>) loadObject(FILENAME_BEVERAGES);
 			System.out.println("Beverages loaded");
@@ -72,7 +72,7 @@ public class DataImpl implements DataInterface {
 			System.err.println("Error reading " + FILENAME_BEVERAGES + " (" + e.getClass() + ")... new beverage map used");
 		}
 		
-		/* create LaTazza account */
+		/* load/create LaTazza account */
 		try {
 			laTazzaAccount = (LaTazzaAccount) loadObject(FILENAME_LA_TAZZA_ACCOUNT);
 			System.out.println("LaTazza account loaded");
@@ -85,23 +85,27 @@ public class DataImpl implements DataInterface {
 	@Override
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
+		/* retrieve */
 		Employee e = employees.get(employeeId);
 		if(e == null)
 			throw new EmployeeException();
-		
 		Beverage b = beverages.get(beverageId);
 		if(b == null)
 			throw new BeverageException();
 		
+		/* update */
+		if (b.getAvailableCapsules() < numberOfCapsules)
+			throw new NotEnoughCapsules();
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		if (fromAccount)
 			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		else
 			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		
 		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		transactions.add(c);
+		System.out.println("Transaction completed: " + c);
 		
+		/* save */
 		saveObject(transactions, FILENAME_TRANSACTIONS);
 		saveObject(beverages, FILENAME_BEVERAGES);
 		if (fromAccount)
@@ -109,73 +113,78 @@ public class DataImpl implements DataInterface {
 		else
 			saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
 		
-		System.out.println("Transaction completed: " + c);
 		return e.getBalance();
 	}
 
 	@Override
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
+		/* retrieve */
 		Beverage b = beverages.get(beverageId);
 		if (b == null)
 			throw new BeverageException();
 		
+		/* update */
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		
 		Consumption c = new Consumption(b, numberOfCapsules);
 		transactions.add(c);
+		System.out.println("Transaction completed: " + c);
 		
+		/* save */
 		saveObject(transactions, FILENAME_TRANSACTIONS);
 		saveObject(beverages, FILENAME_BEVERAGES);
 		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
-		
-		System.out.println("Transaction completed: " + c);
 	}
 
 	@Override
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
+		/* retrieve */
 		Employee e = employees.get(id);
 		if (e == null)
 			throw new EmployeeException();
 		
+		/* update */
 		e.increaseBalance(amountInCents);
 		laTazzaAccount.increaseBalance(amountInCents);
-		
 		Recharge r = new Recharge(e, amountInCents);
 		transactions.add(r);
+		System.out.println("Transaction completed: " + r);
 		
+		/* save */
 		saveObject(transactions, FILENAME_TRANSACTIONS);
 		saveObject(employees, FILENAME_EMPLOYEES);
 		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
 		
-		System.out.println("Transaction completed: " + r);
 		return e.getBalance();
 	}
 
 	@Override
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
+		/* retrieve */
 		Beverage b = beverages.get(beverageId);
 		if (b == null)
 			throw new BeverageException();
 		
-		b.increaseAvailableCapsules(boxQuantity);
+		/* update */
 		laTazzaAccount.decreaseBalance(b.getBoxPrice() * boxQuantity);
-		
+		b.increaseAvailableCapsules(boxQuantity);
 		BoxPurchase bp = new BoxPurchase(b, boxQuantity);
 		transactions.add(bp);
+		System.out.println("Transaction completed: " + bp);
 		
+		/* save */
 		saveObject(transactions, FILENAME_TRANSACTIONS);
 		saveObject(beverages, FILENAME_BEVERAGES);
-		saveObject(beverages, FILENAME_LA_TAZZA_ACCOUNT);
-		
-		System.out.println("Transaction completed: " + bp);
+		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
 	}
 
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
-		//TODO: when to throw date exception???
+		// TODO: add check for valid dates (e.g. 31 february) 
+		if (startDate.after(endDate))
+			throw new DateException();
 		if(!employees.containsKey(employeeId))
 			throw new EmployeeException();
 		return transactions.stream().filter(l ->    (((l instanceof Consumption)
@@ -191,37 +200,47 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
+		// TODO: add check for valid dates (e.g. 31 february)
+		if (startDate.after(endDate))
+			throw new DateException();
         return transactions.stream().filter(l -> l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(Collectors.toList());
 	}
 
 	@Override
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
-		boolean found = beverages.values().stream().anyMatch(b -> b.getName().equals(name));
-		if (found)
+		/* check if already present */
+		if (beverages.values().stream().anyMatch(b -> b.getName().equals(name)))
 			throw new BeverageException();
 		
+		/* create */
 		Integer key = beverages.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
 		Beverage b = new Beverage(key, name, boxPrice, capsulesPerBox);
 		beverages.put(key, b);
+		System.out.println(b + " created");
+		
+		/* save */
 		saveObject(beverages, FILENAME_BEVERAGES);
 		
-		System.out.println(b + " created");
 		return key;
 	}
 
 	@Override
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
+		/* retrieve */
 		Beverage b = beverages.get(id);
 		if (b == null)
 			throw new BeverageException();
 		
+		/* update */
 		b.setBoxPrice(boxPrice);
 		b.setCapsulesPerBox(capsulesPerBox);
 		b.setName(name);
 		beverages.put(id, b);
-		saveObject(beverages, FILENAME_BEVERAGES);
 		System.out.println(b + " updated");
+		
+		/* save */
+		saveObject(beverages, FILENAME_BEVERAGES);
 	}
 
 	@Override
@@ -255,7 +274,7 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public Map<Integer, String> getBeverages() {
-		return beverages.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.getName()));
+		return beverages.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.toString()));
 	}
 
 	@Override
@@ -268,24 +287,37 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
+		/* check if already present */
+		if (employees.values().stream().anyMatch(e -> e.getName().equals(name) && e.getSurname().equals(surname)))
+			throw new EmployeeException();
+		
+		/* create */
 		Integer key = employees.keySet().stream().max(Integer::compareTo).orElse(-1) + 1;
 		Employee e = new Employee(key, name, surname, 0);
 		employees.put(key, e);
-		saveObject(employees, FILENAME_EMPLOYEES);
 		System.out.println(e + " created");
+		
+		/* save */
+		saveObject(employees, FILENAME_EMPLOYEES);
+		
 		return key;
 	}
 
 	@Override
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
+		/* retrieve */
 		Employee e = employees.get(id);
 		if (e == null)
 			throw new EmployeeException();
+		
+		/* update */
 		e.setName(name);
 		e.setSurname(surname);
 		employees.put(id, e);
-		saveObject(employees, FILENAME_EMPLOYEES);
 		System.out.println(e + " updated");
+		
+		/* save */
+		saveObject(employees, FILENAME_EMPLOYEES);
 	}
 
 	@Override
@@ -319,7 +351,7 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public Map<Integer, String> getEmployees() {
-		return employees.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.getName()));
+		return employees.values().stream().collect(Collectors.toMap(l -> l.getId(), l -> l.toString()));
 	}
 
 	@Override
@@ -329,11 +361,13 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public void reset() {
+		/* main memory */
         laTazzaAccount = new LaTazzaAccount();
 		employees.clear();
 		beverages.clear();
 		transactions.clear();
 		
+		/* disk */
 		saveObject(transactions, FILENAME_TRANSACTIONS);
 		saveObject(employees, FILENAME_EMPLOYEES);
 		saveObject(beverages, FILENAME_BEVERAGES);
