@@ -2,14 +2,16 @@ package it.polito.latazza.data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,7 +43,7 @@ public class DataImpl implements DataInterface {
 		File directory = new File(PATHNAME);
 		if (!directory.exists()) {
 			if (directory.mkdir()) {
-				System.out.println("Directory " + PATHNAME + "created");
+				System.out.println("Directory " + PATHNAME + " created");
 			} else {
 				System.err.println("Error creating the directory " + PATHNAME);
 				System.exit(-1);
@@ -50,16 +52,16 @@ public class DataImpl implements DataInterface {
 		
 		/* load/create transactions */
 		try {
-			transactions = (List<Transaction>) loadObject(FILENAME_TRANSACTIONS);
+			transactions = ((Collection<Transaction>) loadObjects(FILENAME_TRANSACTIONS)).stream().collect(Collectors.toCollection(LinkedList::new));
 			System.out.println("Transactions loaded");
 		} catch (Exception e) {
-			transactions = new ArrayList<>();
+			transactions = new LinkedList<>();
 			System.err.println("Error reading " + FILENAME_TRANSACTIONS + " (" + e.getClass() + ")... new transaction list used");
 		}
 		
 		/* load/create employees */
 		try {
-			employees = (Map<Integer,Employee>) loadObject(FILENAME_EMPLOYEES);
+			employees = ((Collection<Employee>) loadObjects(FILENAME_EMPLOYEES)).stream().collect(Collectors.toMap(Employee::getId, e -> e, (e1, e2) -> e1, HashMap::new));
 			nextEmployeeId = employees.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
 			System.out.println("Employees loaded");
 		} catch (Exception e) {
@@ -70,7 +72,7 @@ public class DataImpl implements DataInterface {
 		
 		/* load/create beverages */
 		try {
-			beverages = (Map<Integer,Beverage>) loadObject(FILENAME_BEVERAGES);
+			beverages = ((Collection<Beverage>) loadObjects(FILENAME_BEVERAGES)).stream().collect(Collectors.toMap(Beverage::getId, b -> b, (b1, b2) -> b1, HashMap::new));
 			nextBeverageId = beverages.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
 			System.out.println("Beverages loaded");
 		} catch (Exception e) {
@@ -112,13 +114,13 @@ public class DataImpl implements DataInterface {
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
-		/* save */
-		saveObject(transactions, FILENAME_TRANSACTIONS);
-		saveObject(beverages, FILENAME_BEVERAGES);
+		/* store */
+		storeObject(c, FILENAME_TRANSACTIONS, true);
+		storeObjects(beverages.values(), FILENAME_BEVERAGES);
 		if (fromAccount)
-			saveObject(employees, FILENAME_EMPLOYEES);
+			storeObjects(employees.values(), FILENAME_EMPLOYEES);
 		else
-			saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+			storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 		
 		return e.getBalance();
 	}
@@ -138,10 +140,10 @@ public class DataImpl implements DataInterface {
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
-		/* save */
-		saveObject(transactions, FILENAME_TRANSACTIONS);
-		saveObject(beverages, FILENAME_BEVERAGES);
-		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		/* store */
+		storeObject(c, FILENAME_TRANSACTIONS, true);
+		storeObjects(beverages.values(), FILENAME_BEVERAGES);
+		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 	}
 
 	@Override
@@ -158,10 +160,10 @@ public class DataImpl implements DataInterface {
 		transactions.add(r);
 		System.out.println("Transaction completed: " + r);
 		
-		/* save */
-		saveObject(transactions, FILENAME_TRANSACTIONS);
-		saveObject(employees, FILENAME_EMPLOYEES);
-		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		/* store */
+		storeObject(r, FILENAME_TRANSACTIONS, true);
+		storeObjects(employees.values(), FILENAME_EMPLOYEES);
+		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 		
 		return e.getBalance();
 	}
@@ -180,17 +182,16 @@ public class DataImpl implements DataInterface {
 		transactions.add(bp);
 		System.out.println("Transaction completed: " + bp);
 		
-		/* save */
-		saveObject(transactions, FILENAME_TRANSACTIONS);
-		saveObject(beverages, FILENAME_BEVERAGES);
-		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		/* store */
+		storeObject(bp, FILENAME_TRANSACTIONS, true);
+		storeObjects(beverages.values(), FILENAME_BEVERAGES);
+		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 	}
 
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
-			throws EmployeeException, DateException {
-		// TODO: add check for valid dates (e.g. 31 february) 
-		if (startDate.after(endDate))
+			throws EmployeeException, DateException { 
+		if (startDate==null || endDate==null || startDate.after(endDate))
 			throw new DateException();
 		if(!employees.containsKey(employeeId))
 			throw new EmployeeException();
@@ -207,8 +208,7 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
-		// TODO: add check for valid dates (e.g. 31 february)
-		if (startDate.after(endDate))
+		if (startDate==null || endDate==null | startDate.after(endDate))
 			throw new DateException();
         return transactions.stream().filter(l -> l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(Collectors.toList());
 	}
@@ -224,8 +224,8 @@ public class DataImpl implements DataInterface {
 		beverages.put(nextBeverageId, b);
 		System.out.println(b + " created");
 		
-		/* save */
-		saveObject(beverages, FILENAME_BEVERAGES);
+		/* store */
+		storeObject(b, FILENAME_BEVERAGES, true);
 		
 		return nextBeverageId++;
 	}
@@ -246,7 +246,7 @@ public class DataImpl implements DataInterface {
 		System.out.println(b + " updated");
 		
 		/* save */
-		saveObject(beverages, FILENAME_BEVERAGES);
+		storeObjects(beverages.values(), FILENAME_BEVERAGES);
 	}
 
 	@Override
@@ -303,7 +303,7 @@ public class DataImpl implements DataInterface {
 		System.out.println(e + " created");
 		
 		/* save */
-		saveObject(employees, FILENAME_EMPLOYEES);
+		storeObject(e, FILENAME_EMPLOYEES, true);
 		
 		return nextEmployeeId++;
 	}
@@ -322,7 +322,7 @@ public class DataImpl implements DataInterface {
 		System.out.println(e + " updated");
 		
 		/* save */
-		saveObject(employees, FILENAME_EMPLOYEES);
+		storeObjects(employees.values(), FILENAME_EMPLOYEES);
 	}
 
 	@Override
@@ -373,10 +373,10 @@ public class DataImpl implements DataInterface {
 		transactions.clear();
 		
 		/* disk */
-		saveObject(transactions, FILENAME_TRANSACTIONS);
-		saveObject(employees, FILENAME_EMPLOYEES);
-		saveObject(beverages, FILENAME_BEVERAGES);
-		saveObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT);
+		storeObjects(transactions, FILENAME_TRANSACTIONS);
+		storeObjects(employees.values(), FILENAME_EMPLOYEES);
+		storeObjects(beverages.values(), FILENAME_BEVERAGES);
+		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 		
 		System.out.println("Reset done");
 	}
@@ -390,9 +390,31 @@ public class DataImpl implements DataInterface {
 		}
 	}
 	
-	private void saveObject(Object object, String filename) {
-		try (ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream(filename))) {
+	private Collection<?> loadObjects(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+		Collection<Object> c = new LinkedList<>();
+		try (FileInputStream fis = new FileInputStream(filename)) {
+			while (fis.available() > 0) {
+				ObjectInputStream deserializer = new ObjectInputStream(fis);
+				c.add(deserializer.readObject());
+			}
+		}
+		return c;
+	}
+	
+	private void storeObject(Object object, String filename, boolean append) {
+		try (ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream(filename, append))) {
 			serializer.writeObject(object);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void storeObjects(Collection<?> collection, String filename) {
+		try (FileOutputStream fos = new FileOutputStream(filename)) {
+			for (Object o : collection) {
+				ObjectOutputStream serializer = new ObjectOutputStream(fos);
+				serializer.writeObject(o);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
