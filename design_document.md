@@ -57,7 +57,7 @@ class Beverage
 class LaTazzaAccount	
 class Employee
 together {
-	class Transaction
+	abstract class Transaction
 	class Recharge
 	class BoxPurchase
 	class Consumption
@@ -105,13 +105,18 @@ DataImpl : -transactions : List<Transaction>
 DataImpl : -employees : Map<Integer, Employee>
 DataImpl : -beverages : Map<Integer, Beverage> 
 DataImpl : -laTazzaAccount : LaTazzaAccount
+DataImpl : -nextEmployeeId : int
+DataImpl : -nextBeverageId : int
+DataImpl : -<u>PATHNAME : String
 DataImpl : -<u>FILENAME_TRANSACTIONS : String
 DataImpl : -<u>FILENAME_EMPLOYEES : String
 DataImpl : -<u>FILENAME_BEVERAGES : String
 DataImpl : -<u>FILENAME_LA_TAZZA_ACCOUNT : String
 DataImpl : +DataImpl()
-DataImpl : -loadData() : void
-DataImpl : -saveObject(object:Object, filename:String, append:boolean) : void
+DataImpl : -loadObject(filename:String) : Object
+DataImpl : -loadObjects(filename:String) : Collection<?>
+DataImpl : -storeObject(object:Object, filename:String, append:boolean) : void
+DataImpl : -storeObjects(collection:Collection<?> , filename:String) : void
 
 Beverage : -id : int
 Beverage : -name : String
@@ -133,7 +138,6 @@ Beverage : +decreaseAvailableCapsules(numberOfCapsules:int) : void
 Beverage : +toString() : String
 
 LaTazzaAccount : -balance : int
-LaTazzaAccount : +Account(balance:int)
 LaTazzaAccount : +getBalance() : int
 LaTazzaAccount : +increaseBalance(amount:int) : void
 LaTazzaAccount : +decreaseBalance(amount:int) : void
@@ -154,6 +158,7 @@ Employee : +decreaseBalance(amount:int) : void
 Employee : +toString() : String
 
 Transaction : -date : Date
+Transaction : +Transaction()
 Transaction : +getDate() : Date
 Transaction : +toString() : String
 
@@ -182,11 +187,12 @@ note "Implements Serializable" as N1
 Transaction . N1 
 N1 . Employee
 N1 .. Beverage
+N1 .. LaTazzaAccount
 ```
 
 A design pattern is used: *Facade*. The *DataImpl* class provides an easier usage of the package to the client, hiding the details of its composition. It is of course the unique public class in the package; all the others have package visibility.
 
-For the data persistence, *transactions*, *employees* and *beverages* are serialized by the *DataImpl* class after being created (appended to the respective file). Also *laTazzaAccount* is serialized after each modification, but it overwrites the respective file. At boot time, data are loaded from the *DataImpl* class (*loadData()* called by the constructor). This ensures also an easy portability from a PC to another one (NFR4).
+For the data persistency, *transactions*, *employees* and *beverages* are serialized by the *DataImpl* class after being created (appended to the respective file). Also *laTazzaAccount* is serialized after each modification, but it overwrites the respective file. At boot time, data are loaded from the *DataImpl* class (*loadData()* called by the constructor). This ensures also an easy portability from a PC to another one (NFR4).
 
 
 ## latazza.exceptions
