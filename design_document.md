@@ -190,9 +190,11 @@ N1 .. Beverage
 N1 .. LaTazzaAccount
 ```
 
-A design pattern is used: *Facade*. The *DataImpl* class provides an easier usage of the package to the client, hiding the details of its composition. It is of course the unique public class in the package; all the others have package visibility.
+A design pattern is used: *Facade*. The *DataImpl* class provides an easier usage of the package to the client, hiding the details of its composition.  
 
-For the data persistency, *transactions*, *employees* and *beverages* are serialized by the *DataImpl* class after being created (appended to the respective file). Also *laTazzaAccount* is serialized after each modification, but it overwrites the respective file. At boot time, data are loaded from the *DataImpl* class (*loadData()* called by the constructor). This ensures also an easy portability from a PC to another one (NFR4).
+*Class visibility*: even if only all the classes except for *DataImpl* could have package visibility, for testability it is better that they are public.  
+
+*Data persistency*: the *DataImpl* class includes the serialization/deserialization of *transactions*, *employees*, *beverages* and *laTazzaAccount*. After a creation the new object is appended to the relative file, while after an update the file is overwritten completely. At boot time (i.e. in the constructor of *DataImpl*), data are loaded if the files are present. This ensures also an easy portability from a PC to another one (NFR4).
 
 
 ## latazza.exceptions
