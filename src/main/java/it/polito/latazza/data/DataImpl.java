@@ -298,7 +298,7 @@ public class DataImpl implements DataInterface {
 			throw new EmployeeException();
 		
 		/* create */
-		Employee e = new Employee(nextEmployeeId, name, surname, 0);
+		Employee e = new Employee(nextEmployeeId, name, surname);
 		employees.put(nextEmployeeId, e);
 		System.out.println(e + " created");
 		
