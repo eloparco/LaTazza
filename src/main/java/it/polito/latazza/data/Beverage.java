@@ -1,6 +1,8 @@
 package it.polito.latazza.data;
 
 import java.io.Serializable;
+
+import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class Beverage implements Serializable {
@@ -54,13 +56,22 @@ public class Beverage implements Serializable {
 		return boxPrice / capsulesPerBox;
 	}
 	
-	public void increaseAvailableCapsules(int numberOfBoxes) {
+	public void increaseAvailableCapsules(int numberOfBoxes) throws BeverageException {
+		// handle negative value and overflow
+		if (numberOfBoxes < 0 || this.availableCapsules + numberOfBoxes * this.capsulesPerBox < 0)
+			throw new BeverageException();
+		
 		this.availableCapsules += numberOfBoxes * this.capsulesPerBox;
 	}
 	
-	public void decreaseAvailableCapsules(int numberOfCapsules) throws NotEnoughCapsules {
-		if (this.availableCapsules < numberOfCapsules)
+	public void decreaseAvailableCapsules(int numberOfCapsules) throws NotEnoughCapsules, BeverageException {
+		if (this.availableCapsules < numberOfCapsules )
 			throw new NotEnoughCapsules();
+		
+		// handle negative value and overflow
+		if (numberOfCapsules < 0 || this.availableCapsules - numberOfCapsules < 0)
+			throw new BeverageException();
+				
 		this.availableCapsules -= numberOfCapsules;
 	}
 
