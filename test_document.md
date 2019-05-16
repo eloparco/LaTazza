@@ -79,6 +79,100 @@ Version:
 | | no | no | / |
 | | | yes | / |
 
+
+### Class BoxPurchase
+
+**Criteria for constructor:**
+
+- Valid beverage
+- Sign of boxQuantity
+
+**Predicates for method constructor:**
+
+| Criteria            | Predicate                  |
+| ------------------- | -------------------------- |
+| Valid beverage  | yes |
+|                    | no  |
+| Sign of boxQuantity  | >= 0 |
+|                    | < 0  |
+
+**Boundaries**:
+
+| Criteria       | Boundary values   |
+| -------------- | ----------------- |
+| Sign of boxQuantity | MININT, 0, MAXINT |
+
+**Combination of predicates**:
+
+| Valid beverage | Sign of boxQuantity| Valid / Invalid | Description of the test case | JUnit test case                         |
+| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| yes     |>= 0    |V               |beverage b = new beverage(1, tea, 10, 10); new boxPurchase(b, 10);        | it.polito.latazza.data.BoxPurchase.tc1 |
+|     |< 0            | I               | beverage b = new beverage(1, tea, 10, 10); new boxPurchase(b, -1);  | it.polito.latazza.data.BoxPurchase.tc2 |
+| no    |>= 0    |I              |new boxPurchase(null, 10);        | it.polito.latazza.data.BoxPurchase.tc3 |
+|     |< 0            | I               | |
+
+### Class LaTazzaAccount
+
+**Criteria for increaseBalance:**
+
+- Sign of amount
+- Overflow of balance
+
+**Predicates for method increaseBalance:**
+
+| Criteria            | Predicate                  |
+| ------------------- | -------------------------- |
+| Sign of amount  | amount >= 0 |
+|                    | amount  < 0  |
+| Overflow of balance  | balance + amount > MAXINT |
+|                    | amount  <= MAXINT  |
+
+**Boundaries**:
+
+| Criteria       | Boundary values   |
+| -------------- | ----------------- |
+| Sign of amount | MININT, 0, MAXINT |
+
+**Combination of predicates**:
+
+| Sign of amount | Overflow of balance| Valid / Invalid | Description of the test case | JUnit test case                         |
+| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| >= 0      |no    |V               | increaseBalance(10)          | it.polito.latazza.data.TestLaTazzaAccount.tc1 |
+|     |yes            | I               | increaseBalance(2000000000); increaseBalance(2000000000);        | it.polito.latazza.data.TestLaTazzaAccount.tc2 |
+| < 0      |no    |I               | increaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc3 |
+|     |yes            | I               |        | |
+
+**Criteria for decreaseBalance:**
+
+- Enough balance
+- Sign of amount
+- Overflow of balance
+
+**Predicates for method decreaseBalance:**
+
+| Criteria            | Predicate                  |
+| ------------------- | -------------------------- |
+| Enough balance  | balance >= amount |
+|                    | balance >= amount   |
+| Sign of amount  | amount >= 0 |
+|                    | amount  < 0  |
+
+**Boundaries**:
+
+| Criteria       | Boundary values   |
+| -------------- | ----------------- |
+| Salue of amount | MININT, 0, MAXINT |
+
+**Combination of predicates**:
+
+| Sign of amount | Enough balance| Valid / Invalid | Description of the test case | JUnit test case                         |
+| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| >= 0      |yes    |V               | increaseBalance(10); decreaseBalance(10)          | it.polito.latazza.data.TestLaTazzaAccount.tc4 |
+|     |no            | I               | decreaseBalance(1);       | it.polito.latazza.data.TestLaTazzaAccount.tc5 |
+| < 0      |yes   |I               | decreaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc3 |
+|     |no            | I               |        | |
+
+
 ### Class Recharge
 
 **Criteria for constructor:**
@@ -118,4 +212,6 @@ Version:
 | Beverage | it.polito.latazza.data.<br />Beverage.tcConstructor |
 | Beverage | it.polito.latazza.data.<br />Beverage.tcGetters |
 | Beverage | it.polito.latazza.data.<br />Beverage.tcSetters |
+| BoxPurchase | it.polito.latazza.data.<br />BoxPurchase.tcToStringFormat |
+| LaTazzaAccount | it.polito.latazza.data.<br />LaTazzaAccount.tcGetBalance |
 | Recharge | it.polito.latazza.data.<br />Recharge.tcToStringFormat |
