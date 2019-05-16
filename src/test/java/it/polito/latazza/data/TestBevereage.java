@@ -23,6 +23,10 @@ class TestBevereage {
 	void tearDown() throws Exception {
 	}
 
+	/*
+	 *		BLACK BOX
+	 */
+	
 	@Test
 	void tc1() {
 		// initially -> box price: 5 euro, 20 capsules per box
@@ -118,6 +122,46 @@ class TestBevereage {
 		} catch (BeverageException e) {
 			
 		}
+	}
+	
+	/*
+	 *		WHITE BOX
+	 */
+	
+	@Test
+	// test constructor
+	void tcConstructor() {
+		try {
+			// negative values not allowed
+			new Beverage(-1, "Coffee", -500, -20);
+			fail();
+		} catch (BeverageException e) {
+			
+		}
+		
+	}
+	
+	@Test
+	// test getters
+	void tcGetters() {
+		// b = new Beverage(1, "Coffee", 500, 20);
+		assertEquals(1, b.getId());
+		assertEquals("Coffee", b.getName());
+		assertEquals(500, b.getBoxPrice());
+		assertEquals(20, b.getCapsulesPerBox());
+		assertEquals(25, b.getCapsulesPrice());
+		assertEquals("Coffee", b.toString());
+	}
+	
+	@Test
+	// test setters
+	void tcSetters() {
+		b.setName("Black Tea");
+		assertEquals("Black Tea", b.getName());
+		b.setBoxPrice(700);
+		assertEquals(700, b.getBoxPrice());
+		b.setCapsulesPerBox(25);
+		assertEquals(25, b.getCapsulesPerBox());
 	}
 
 }

@@ -12,7 +12,9 @@ public class Beverage implements Serializable {
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
 	
-	public Beverage(int id, String name, int boxPrice , int capsulePerBox) {
+	public Beverage(int id, String name, int boxPrice , int capsulePerBox) throws BeverageException {
+		if (id < 0 || boxPrice < 0 || capsulePerBox < 0)
+			throw new BeverageException();
 		this.name=name;
 		this.capsulesPerBox=capsulePerBox;
 		this.availableCapsules=0;

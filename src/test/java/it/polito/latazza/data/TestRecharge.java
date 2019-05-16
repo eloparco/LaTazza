@@ -29,6 +29,10 @@ class TestRecharge {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/*
+	 *		BLACK BOX
+	 */
 
 	@Test
 	void tc1() {
@@ -68,8 +72,12 @@ class TestRecharge {
 		}
 	}
 	
+	/*
+	 *		WHITE BOX
+	 */
+	
 	@Test
-	void testToStringFormat() {
+	void tcToStringFormat() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String expected = format.format(d) + " RECHARGE Mario Rossi 10.00€";
 		assertEquals(expected, r.toString());
