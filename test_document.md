@@ -109,6 +109,36 @@ Version:
 | < 0 | yes | V |Recharge(emp, -1000)|it.polito.latazza.data.TestRecharge.tc3|
 |  | no | I |Recharge(null, -1000)|it.polito.latazza.data.TestRecharge.tc4|
 
+### Class DataImpl
+
+**Criteria for method getBeverageName:**
+ - Sign of id
+ - Valid beverage (existing)
+
+**Predicates for method getBeverageName:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid beverage      |     yes      |
+|          |    no       |
+
+**Boundaries for method getBeverageName:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method getBeverageName:**
+
+| Sign of id | Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageName(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName1 |
+|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName2 |
+| < 0 | yes | / ||  |
+|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName3 |
+
 # White Box Unit Tests
 
 ### Test cases definition
