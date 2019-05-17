@@ -233,6 +233,23 @@ Version:
 | < 0 | yes | / ||  |
 |  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName3 |
 
+**Criteria for method getBeveragesId:**
+ - With history (at least one beverage exists)
+
+**Predicates for method getBeveragesId:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| With history |      yes     |
+|          |     no      |
+
+**Combination of predicates for method getBeveragesId:**
+
+| With history | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeveragesId() | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
+| no | V | data.reset();<br />data.getBeveragesId(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
+
 # White Box Unit Tests
 
 ### Test cases definition
