@@ -1,8 +1,14 @@
 # Unit Testing Documentation template
 
 Authors:
-Date:
-Version:
+* Bonelli Lorenzo 267563  
+* Ruggeri Franco 265682  
+* Rosso Alessandro 265485  
+* Loparco Enrico 261072  
+
+Date: 19/05/19
+
+Version: 1.0.0
 
 # Contents
 
@@ -139,7 +145,7 @@ Version:
 | -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
 | >= 0      |no    |V               | increaseBalance(10)          | it.polito.latazza.data.TestLaTazzaAccount.tc1 |
 |     |yes            | I               | increaseBalance(2000000000); increaseBalance(2000000000);        | it.polito.latazza.data.TestLaTazzaAccount.tc2 |
-| < 0      |no    |I               | increaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc3 |
+| < 0      |no    |I               | increaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc6 |
 |     |yes            | I               |        | |
 
 **Criteria for decreaseBalance:**
@@ -169,7 +175,7 @@ Version:
 | -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
 | >= 0      |yes    |V               | increaseBalance(10); decreaseBalance(10)          | it.polito.latazza.data.TestLaTazzaAccount.tc4 |
 |     |no            | I               | decreaseBalance(1);       | it.polito.latazza.data.TestLaTazzaAccount.tc5 |
-| < 0      |yes   |I               | decreaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc6 |
+| < 0      |yes   |I               | decreaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc3 |
 |     |no            | I               |        | |
 
 
@@ -329,15 +335,64 @@ Version:
 | yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeverages() | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
 | no | V | data.reset();<br />data.getBeverages(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 
+**Criteria for method getEmployeeBalance:**
+ - Sign of id
+ - Valid exmployee (existing)
+ - With history (employee account already recharged)
+
+**Predicates for method getEmployeeBalance:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid employee      |     yes      |
+|          |    no       |
+|    With history      |     yes      |
+|          |    no       |
+
+**Boundaries for method getEmployeeBalance:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method getEmployeeBalance:**
+
+| Sign of id | Valid employee | With history | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|
+| >= 0 | yes | no | V |employeeId = data.createEmployee("Mario", "Rossi");<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance1 |
+|  |  | yes | V | employeeId = data.createEmployee("Mario", "Rossi");<br />data.rechargeAccount(employeeId, 500);<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance2 |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(10); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance3 |
+|  |  | yes | / |  |  |
+| < 0 | yes | no | / ||  |
+|  |  | yes | / ||  |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance4 |
+|  |  | yes | / ||  |
+
 # White Box Unit Tests
 
 ### Test cases definition
 
 | Unit name | JUnit test case                              |
 | --------- | -------------------------------------------- |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcConstructor |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcGetters |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcSetters |
-| BoxPurchase | it.polito.latazza.data.<br />BoxPurchase.tcToStringFormat |
-| LaTazzaAccount | it.polito.latazza.data.<br />LaTazzaAccount.tcGetBalance |
-| Recharge | it.polito.latazza.data.<br />Recharge.tcToStringFormat |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcConstructor |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcGetters |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcSetters |
+| BoxPurchase | it.polito.latazza.data.<br />TestBoxPurchase.tcToStringFormat |
+| LaTazzaAccount | it.polito.latazza.data.<br />TestLaTazzaAccount.tcGetBalance |
+| Recharge | it.polito.latazza.data.<br />TestRecharge.tcToStringFormat |
+
+### Code coverage report
+
+### Loop coverage analysis
+
+| Unit name | Loop rows | Number of iterations | JUnit test case                              |
+| --------- | --------- | -------------------- | -------------------------------------------- |
+| DataImpl  |  278      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId3 |
+| DataImpl  |  282      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeverages3 |
+
