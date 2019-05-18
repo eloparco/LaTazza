@@ -1,8 +1,14 @@
 # Unit Testing Documentation template
 
 Authors:
-Date:
-Version:
+* Bonelli Lorenzo 267563  
+* Ruggeri Franco 265682  
+* Rosso Alessandro 265485  
+* Loparco Enrico 261072  
+
+Date: 19/05/19
+
+Version: 1.0.0
 
 # Contents
 
@@ -333,7 +339,7 @@ Version:
  - Sign of id
  - Valid exmployee (existing)
  - With history (employee account already recharged)
- - 
+
 **Predicates for method getEmployeeBalance:**
 
 | Criteria | Predicate |
@@ -370,9 +376,23 @@ Version:
 
 | Unit name | JUnit test case                              |
 | --------- | -------------------------------------------- |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcConstructor |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcGetters |
-| Beverage | it.polito.latazza.data.<br />Beverage.tcSetters |
-| BoxPurchase | it.polito.latazza.data.<br />BoxPurchase.tcToStringFormat |
-| LaTazzaAccount | it.polito.latazza.data.<br />LaTazzaAccount.tcGetBalance |
-| Recharge | it.polito.latazza.data.<br />Recharge.tcToStringFormat |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcConstructor |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcGetters |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcSetters |
+| BoxPurchase | it.polito.latazza.data.<br />TestBoxPurchase.tcToStringFormat |
+| LaTazzaAccount | it.polito.latazza.data.<br />TestLaTazzaAccount.tcGetBalance |
+| Recharge | it.polito.latazza.data.<br />TestRecharge.tcToStringFormat |
+
+### Code coverage report
+
+### Loop coverage analysis
+
+| Unit name | Loop rows | Number of iterations | JUnit test case                              |
+| --------- | --------- | -------------------- | -------------------------------------------- |
+| DataImpl  |  278      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId3 |
+| DataImpl  |  282      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeverages3 |
+
