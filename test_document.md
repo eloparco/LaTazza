@@ -329,6 +329,41 @@ Version:
 | yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeverages() | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
 | no | V | data.reset();<br />data.getBeverages(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 
+**Criteria for method getEmployeeBalance:**
+ - Sign of id
+ - Valid exmployee (existing)
+ - With history (employee account already recharged)
+ - 
+**Predicates for method getEmployeeBalance:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid employee      |     yes      |
+|          |    no       |
+|    With history      |     yes      |
+|          |    no       |
+
+**Boundaries for method getEmployeeBalance:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method getEmployeeBalance:**
+
+| Sign of id | Valid employee | With history | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|
+| >= 0 | yes | no | V |employeeId = data.createEmployee("Mario", "Rossi");<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance1 |
+|  |  | yes | V | employeeId = data.createEmployee("Mario", "Rossi");<br />data.rechargeAccount(employeeId, 500);<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance2 |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(10); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance3 |
+|  |  | yes | / |  |  |
+| < 0 | yes | no | / ||  |
+|  |  | yes | / ||  |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance4 |
+|  |  | yes | / ||  |
+
 # White Box Unit Tests
 
 ### Test cases definition

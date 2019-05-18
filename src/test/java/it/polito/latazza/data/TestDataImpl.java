@@ -212,4 +212,49 @@ public class TestDataImpl {
 		assertTrue(beverages.isEmpty());
 	}	
 	
+	/*
+	 * 	method: getEmployeeBalance
+	 */
+	
+	@Test
+	public void testGetEmployeeBalance1() {
+		try {
+			int employeeId = data.createEmployee("Mario", "Rossi");
+			int balance = data.getEmployeeBalance(employeeId);
+			assertEquals(0, balance);
+		} catch (EmployeeException e) {
+			fail();
+		}
+	}	
+	
+	@Test
+	public void testGetEmployeeBalance2() {
+		try {
+			int employeeId = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(employeeId, 500);
+			int balance = data.getEmployeeBalance(employeeId);
+			assertEquals(500, balance);
+		} catch (EmployeeException e) {
+			fail();
+		}
+	}	
+	
+	public void testGetEmployeeBalance3() {
+		try {
+			data.getEmployeeBalance(-10);
+			fail();
+		} catch (EmployeeException e) {
+			
+		}
+	}	
+	
+	public void testGetEmployeeBalance4() {
+		try {
+			data.getEmployeeBalance(-10);
+			fail();
+		} catch (EmployeeException e) {
+			
+		}
+	}	
+	
 }
