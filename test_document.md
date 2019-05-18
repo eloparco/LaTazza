@@ -233,6 +233,68 @@ Version:
 | < 0 | yes | / ||  |
 |  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName3 |
 
+**Criteria for method getBeverageCapsulesPerBox:**
+ - Sign of id
+ - Valid beverage (existing)
+
+**Predicates for method getBeverageCapsulesPerBox:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid beverage      |     yes      |
+|          |    no       |
+
+**Boundaries for method getBeverageCapsulesPerBox:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method getBeverageCapsulesPerBox:**
+
+| Sign of id | Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageCapsulesPerBox(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox1 |
+|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsulesPerBox(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox2 |
+| < 0 | yes | / ||  |
+|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsulesPerBox(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox3 |
+
+**Criteria for method getBeverageCapsules:**
+ - Sign of id
+ - Valid beverage (existing)
+ - With history (capsules already ordered)
+**Predicates for method getBeverageCapsules:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid beverage      |     yes      |
+|          |    no       |
+| With history | yes|
+|               | no |
+
+**Boundaries for method getBeverageCapsules:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method getBeverageCapsules:**
+
+| Sign of id | Valid beverage | With history | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|
+| >= 0 | yes | no | V | beverageId = beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageCapsules(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules1 |
+|  |  | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.buyBoxes(beverageId, 2);<br />data.getBeverageCapsules(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules2 |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsules(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules3 |
+|  |  | yes | / |  |  |
+| < 0 | yes | no | / |  |  |
+|  |  | yes | / |  |  |
+|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsules(-10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules4 |
+|  |  | yes | / |  |  |
+
 **Criteria for method getBeveragesId:**
  - With history (at least one beverage exists)
 
@@ -249,6 +311,23 @@ Version:
 |-------|-------|-------|-------|
 | yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeveragesId() | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
 | no | V | data.reset();<br />data.getBeveragesId(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
+
+**Criteria for method getBeverages:**
+ - With history (at least one beverage exists)
+
+**Predicates for method getBeverages:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| With history |      yes     |
+|          |     no      |
+
+**Combination of predicates for method getBeverages:**
+
+| With history | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeverages() | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
+| no | V | data.reset();<br />data.getBeverages(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 
 # White Box Unit Tests
 

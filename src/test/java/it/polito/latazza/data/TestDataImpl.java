@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.security.auth.login.FailedLoginException;
 
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.EmployeeException;
+import it.polito.latazza.exceptions.NotEnoughBalance;
 
 public class TestDataImpl {
 
@@ -37,7 +40,7 @@ public class TestDataImpl {
 			int beverageId = data.createBeverage("Coffee", 20, 500);
 			assertTrue(beverageId >= 0);
 			String beverageName = data.getBeverageName(beverageId);
-			assertEquals(beverageName, "Coffee");
+			assertEquals("Coffee", beverageName);
 		} catch (BeverageException e) {
 			fail();
 		}
@@ -57,6 +60,102 @@ public class TestDataImpl {
 	public void testGetBeverageName3() {
 		try {
 			data.getBeverageName(-10);
+			fail();
+		} catch (BeverageException e) {
+
+		}
+	}	
+	
+	/*
+	 * 	method: getBeverageCapsulesPerBox
+	 */
+	
+	@Test
+	public void testGetBeverageCapsulesPerBox1() {
+		try {
+			int beverageId = data.createBeverage("Coffee", 20, 500);
+			assertTrue(beverageId >= 0);
+			int capsulesPerBox = data.getBeverageCapsulesPerBox(beverageId);
+			assertEquals(20, capsulesPerBox);
+		} catch (BeverageException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetBeverageCapsulesPerBox2() {
+		try {
+			data.getBeverageCapsulesPerBox(10);
+			fail();
+		} catch (BeverageException e) {
+
+		}
+	}	
+	
+	@Test
+	public void testGetBeverageCapsulesPerBox3() {
+		try {
+			data.getBeverageCapsulesPerBox(-10);
+			fail();
+		} catch (BeverageException e) {
+
+		}
+	}	
+	
+	/*
+	 *  method: getBeverageCapsules
+	 */
+	
+	@Test
+	public void testGetBeverageCapsules1() {
+		try {
+			int beverageId = data.createBeverage("Coffee", 20, 500);
+			assertTrue(beverageId >= 0);
+			int capsules = data.getBeverageCapsules(beverageId);
+			assertEquals(0, capsules);
+		} catch (BeverageException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetBeverageCapsules2() {
+		try {
+			int beverageId = data.createBeverage("Coffee", 20, 500);
+			assertTrue(beverageId >= 0);
+			
+			// create new employee and recharge his account
+			// to increase laTazza balance, allowing to buy new boxes
+			int id = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(id, 10000);
+
+			// buy new boxes and check if capsule amount has been updated
+			data.buyBoxes(beverageId, 2);
+			int capsules = data.getBeverageCapsules(beverageId);
+			assertEquals(40, capsules);
+		} catch (BeverageException e) {
+			fail();
+		} catch (NotEnoughBalance e) {
+			fail();
+		} catch (EmployeeException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetBeverageCapsules3() {
+		try {
+			data.getBeverageCapsules(10);
+			fail();
+		} catch (BeverageException e) {
+
+		}
+	}	
+	
+	@Test
+	public void testGetBeverageCapsules4() {
+		try {
+			data.getBeverageCapsules(-10);
 			fail();
 		} catch (BeverageException e) {
 
@@ -84,6 +183,32 @@ public class TestDataImpl {
 	@Test
 	public void testGetBeveragesId2() {
 		List<Integer> beverages = data.getBeveragesId();
+		assertTrue(beverages.isEmpty());
+	}	
+	
+	/*
+	 * 	method: getBeverages
+	 */
+	
+	@Test
+	public void testGetBeverages1() {
+		try {
+			int id1 = data.createBeverage("Coffee", 20, 500);
+			int id2 = data.createBeverage("Tea", 25, 400);
+			Map<Integer, String> beverages = data.getBeverages();
+			assertTrue(beverages.size() == 2);
+			assertNotNull(beverages.get(id1));
+			assertNotNull(beverages.get(id2));
+			assertTrue(beverages.get(id1).equals("Coffee"));
+			assertTrue(beverages.get(id2).equals("Tea"));
+		} catch (BeverageException e) {
+			fail();
+		}
+	}	
+	
+	@Test
+	public void testGetBeverages2() {
+		Map<Integer, String> beverages = data.getBeverages();
 		assertTrue(beverages.isEmpty());
 	}	
 	
