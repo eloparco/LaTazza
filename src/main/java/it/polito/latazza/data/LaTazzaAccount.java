@@ -12,12 +12,12 @@ public class LaTazzaAccount implements Serializable {
 	}
 
 	public void increaseBalance(int amount) {
-		this.balance += amount;
+		if (amount > 0 && this.balance + amount >= 0)   //no exception to call
+			this.balance += amount;
 	}
 	
-	public void decreaseBalance(int amount) throws NotEnoughBalance {
-		if (this.balance < amount)
-			throw new NotEnoughBalance();
-		this.balance -= amount;
+	public void decreaseBalance(int amount) {
+		if (amount > 0 && this.balance >= amount)
+			this.balance -= amount;
 	}
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
-class TestBevereage {
+class TestBeverage {
 
 	Beverage b;
 	
