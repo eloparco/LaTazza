@@ -13,7 +13,6 @@ import it.polito.latazza.exceptions.EmployeeException;
 
 class TestRecharge {
 	
-	private Date d;
 	private Recharge r;
 	private Employee e;
 	private int rechargeAmount;
@@ -21,7 +20,6 @@ class TestRecharge {
 	@BeforeEach
 	void setUp() throws Exception {
 		rechargeAmount = 1000;
-		d = new Date();
 		e = new Employee(0, "Mario", "Rossi");
 		r = new Recharge(e, rechargeAmount);
 	}
@@ -79,7 +77,7 @@ class TestRecharge {
 	@Test
 	void tcToStringFormat() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String expected = format.format(d) + " RECHARGE Mario Rossi 10.00€";
+		String expected = format.format(r.getDate()) + " RECHARGE Mario Rossi 10.00€";
 		assertEquals(expected, r.toString());
 	}
 
