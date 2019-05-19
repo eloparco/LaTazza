@@ -109,7 +109,7 @@ Version: 1.0.0
 **Combination of predicates**:
 
 | Valid beverage | Valid employee | Sign of boxQuantity| Valid / Invalid | Description of the test case | JUnit test case                         |
-| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| -------------- | --------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
 | yes     | yes     |>= 0    |V               |Beverage b = new Beverage(1, "tea", 10, 10); Employee e = new Employee(1,"John", "Doe"); new Consumption(b, e, true, 10); new Consumption(e, b, false, 10); | it.polito.latazza.data.Consumption.tc1 |
 |      |      |< 0    |I               |Beverage b = new Beverage(1, "tea", 10, 10); Employee e = new Employee(1,"John", "Doe"); new Consumption(b, e, true, -10); new Consumption(e, b, false, -10); | it.polito.latazza.data.Consumption.tc2 |
 | no    | yes    |     |I              | Employee e = new Employee(1,"John", "Doe"); new Consumption(e, null, true, 10); new Consumption(e, null, false, 10); | it.polito.latazza.data.Consumption.tc3 |
