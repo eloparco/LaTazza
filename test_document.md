@@ -163,7 +163,7 @@ Version: 1.0.0
 
 | Criteria       | Boundary values   |
 | -------------- | ----------------- |
-| Salue of amount | MININT, 0, MAXINT |
+| Value of amount | MININT, 0, MAXINT |
 
 **Combination of predicates**:
 
@@ -463,6 +463,8 @@ Version: 1.0.0
 | BoxPurchase | it.polito.latazza.data.<br />TestBoxPurchase.tcToStringFormat |
 | LaTazzaAccount | it.polito.latazza.data.<br />TestLaTazzaAccount.tcGetBalance |
 | Recharge | it.polito.latazza.data.<br />TestRecharge.tcToStringFormat |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 
 ### Code coverage report
 
@@ -470,18 +472,21 @@ Version: 1.0.0
 
 | Unit name | Loop rows | Number of iterations | JUnit test case                              |
 | --------- | --------- | -------------------- | -------------------------------------------- |
-| DataImpl  |  282    	| 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
-|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId1 |
-|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId3 |
-| DataImpl  |  287      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
-|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages1 |
-|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeverages3 |
-| DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
-|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
-|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
-| DataImpl  |  200      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
-|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
-|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
+| DataImpl  |  282    	| 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
+| DataImpl  |  287e      | 0                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
+| DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
+| DataImpl  |  358      | 0                    | it.polito.latazza.data.<br />tcGetEmployeesId |
+|           |           | 1                    | it.polito.latazza.data.<br />tcGetEmployeesId |
+|           |           | 2+                   | it.polito.latazza.data.<br />tcGetEmployeesId |
+| DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />tcGetEmployees |
+|           |           | 1                    | it.polito.latazza.data.<br />tcGetEmployees |
+|           |           | 2+                   | it.polito.latazza.data.<br />tcGetEmployees |
 
 TODO fix loop rows when code is final
 

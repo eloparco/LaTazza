@@ -372,4 +372,44 @@ public class TestDataImpl {
 		catch (EmployeeException e) {
 		}
 	}
+	
+	/*
+	 * 	method: getEmployeesId
+	 */
+	
+	@Test
+	public void testGetEmployeesId() {
+		try {
+			assertEquals(data.getEmployeesId().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeesId().size(), 1);
+			int id2 = data.createEmployee("Marco", "Bianchi");
+			List<Integer> l = data.getEmployeesId();
+			assertEquals(l.size(), 2);
+			assertTrue(l.contains(id1));
+			assertTrue(l.contains(id2));
+		} catch (EmployeeException e){
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: getEmployees
+	 */
+	
+	@Test
+	public void testGetEmployees() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployees().size(), 1);
+			int id2 = data.createEmployee("Marco", "Bianchi");
+			Map<Integer, String> m = data.getEmployees();
+			assertEquals(m.size(), 2);
+			assertEquals(m.get(id1), "Mario Rossi");
+			assertEquals(m.get(id2), "Marco Bianchi");
+		} catch (EmployeeException e){
+			fail();
+		}
+	}
 }
