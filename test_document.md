@@ -416,7 +416,7 @@ Version: 1.0.0
 **Combination of predicates for method getReport:**
 
 | Valid dates | Order of dates| Valid / Invalid | Description of the test case | JUnit test case |
-|-------|-------|-------|-------|
+|-------|-------|-------|-------|-------|
 |yes |StartDate <= EndDate | V | Date d = new Date(); data.getReport(d, new Date()); int id = data.createEmployee("Mario", "Rossi"); data.rechargeAccount(id, 100);  data.getReport(d, new Date()); etc. | it.polito.latazza.data.TestDataImpl.testGetReport1
 | |StartDate > EndDate | I | data.getReport( new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date());| it.polito.latazza.data.TestDataImpl.testGetReport2
 | no |StartDate <= EndDate | I | data.getReport( null, new Date());| it.polito.latazza.data.TestDataImpl.testGetReport3
@@ -441,13 +441,13 @@ Version: 1.0.0
 **Combination of predicates for method getEmployeeReport:**
 
 |Valid employee | Valid dates | Order of dates| Valid / Invalid | Description of the test case | JUnit test case |
-|-------|-------|-------|-------|
+|-------|-------|-------|-------|-------|-------|
 | yes |yes |StartDate < EndDate | V | Date d = new Date(); int id = data.createEmployee("Mario" ,"Rossi"); data.rechargeAccount(id, 10000); data.getEmployeeReport(id, d, new Date()); etc.|  it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1
 || |StartDate > EndDate | I | data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date()); | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport2
 || no |StartDate < EndDate | I | data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(), null);| it.polito.latazza.data.TestDataImpl.testGetEmployeeReport3
 || |StartDate > EndDate | I | | 
 | no |yes |StartDate < EndDate | V | data.getEmployeeReport(null, new Date(), new Date()); | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport4
-|| |StartDate > EndDate | I | ;| 
+|| |StartDate > EndDate | I | | 
 || no |StartDate < EndDate | I |  | 
 || |StartDate > EndDate | I | | 
 
@@ -475,18 +475,18 @@ Version: 1.0.0
 | DataImpl  |  282    	| 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
-| DataImpl  |  287e      | 0                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
+| DataImpl  |  287      | 0                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
-| DataImpl  |  358      | 0                    | it.polito.latazza.data.<br />tcGetEmployeesId |
-|           |           | 1                    | it.polito.latazza.data.<br />tcGetEmployeesId |
-|           |           | 2+                   | it.polito.latazza.data.<br />tcGetEmployeesId |
-| DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />tcGetEmployees |
-|           |           | 1                    | it.polito.latazza.data.<br />tcGetEmployees |
-|           |           | 2+                   | it.polito.latazza.data.<br />tcGetEmployees |
+| DataImpl  |  358      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
+| DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 
 TODO fix loop rows when code is final
 
