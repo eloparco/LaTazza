@@ -2,6 +2,8 @@ package it.polito.latazza.data;
 
 import java.io.Serializable;
 
+import it.polito.latazza.exceptions.EmployeeException;
+
 public class Employee implements Serializable {
 	private static final long serialVersionUID = -8150828679021620453L;
 	
@@ -38,11 +40,15 @@ public class Employee implements Serializable {
 		return balance;
 	}
 	
-	public void increaseBalance(int amount) {
+	public void increaseBalance(int amount) throws EmployeeException {
+		if (amount < 0 || (balance > 0 && balance+amount < 0))
+			throw new EmployeeException();
 		this.balance += amount;
 	}
 	
-	public void decreaseBalance(int amount) {
+	public void decreaseBalance(int amount) throws EmployeeException {
+		if (amount < 0 || (balance < 0 && balance-amount > 0))
+			throw new EmployeeException();
 		this.balance -= amount;
 	}
 
