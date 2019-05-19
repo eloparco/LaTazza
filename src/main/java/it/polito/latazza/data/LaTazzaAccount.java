@@ -16,8 +16,10 @@ public class LaTazzaAccount implements Serializable {
 			this.balance += amount;
 	}
 	
-	public void decreaseBalance(int amount) {
-		if (amount > 0 && this.balance >= amount)
+	public void decreaseBalance(int amount) throws NotEnoughBalance {
+		if (amount <= 0) return;
+		if (amount > balance)
+			throw new NotEnoughBalance();
 			this.balance -= amount;
 	}
 }

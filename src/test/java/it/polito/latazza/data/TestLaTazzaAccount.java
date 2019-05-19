@@ -44,21 +44,32 @@ class TestLaTazzaAccount {
 	
 	@Test
 	void tc4() {
+		try {
 		t.increaseBalance(10);
 		t.decreaseBalance(10);
 		assertEquals(t.getBalance(), 0);
+		} catch (NotEnoughBalance e) {
+			fail();
+		}
 	}
 	
 	@Test
 	void tc5()  {
-		t.decreaseBalance(1);
-		assertEquals(t.getBalance(), 0);
+		try {
+			t.decreaseBalance(1);
+			fail();
+		} catch (NotEnoughBalance e) {
+		}
 }
 	
 	@Test
 	void tc6() {
-		t.decreaseBalance(-10);
-		assertEquals(t.getBalance(), 0);
+		try {
+			t.decreaseBalance(-10);
+			assertEquals(t.getBalance(), 0);
+		} catch (NotEnoughBalance e) {
+			fail();
+		}
 	}
 
 	/*

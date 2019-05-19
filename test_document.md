@@ -52,7 +52,6 @@ Version: 1.0.0
 **Criteria for method decreaseAvailableCapsules:**
  - Sign of numberOfCapsules
  - Enough availableCapsules
- - Overflow of availableCapsules
 
 **Predicates for method decreaseAvailableCapsules:**
 
@@ -62,8 +61,6 @@ Version: 1.0.0
 |          |     < 0      |
 | Enough availableCapsules | availableCapsules >= numberOfCapsules |
 |   | availableCapsules < numberOfCapsules |
-|    Overflow of availableCapsules      |     availableCapsules - numberOfCapsules > MAXINT      |
-|          |    availableCapsules - numberOfCapsules <= MAXINT        |
 
 **Boundaries for method decreaseAvailableCapsules:**:
 
@@ -152,7 +149,6 @@ Version: 1.0.0
 
 - Enough balance
 - Sign of amount
-- Overflow of balance
 
 **Predicates for method decreaseBalance:**
 
@@ -370,6 +366,62 @@ Version: 1.0.0
 |  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance4 |
 |  |  | yes | / ||  |
 
+**Criteria for method getEmployeeName:**
+ - Valid employee
+
+**Predicates for method getEmployeeName:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Valid employee |      yes     |
+|          |     no      |
+
+**Combination of predicates for method getEmployeeName:**
+
+| Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+|yes| V | int id = CreateEmployee("Mario", "Rossi"); getEmployeeName(id);| it.polito.latazza.data.TestDataImpl.testGetEmployeeName1
+|no| I | getEmployeeName(10);| it.polito.latazza.data.TestDataImpl.testGetEmployeeName2
+
+**Criteria for method getEmployeeSurname:**
+ - Valid employee
+
+**Predicates for method getEmployeeSurname:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Valid employee |      yes     |
+|          |     no      |
+
+**Combination of predicates for method getEmployeeSurname:**
+
+| Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+|yes| V | int id = CreateEmployee("Mario", "Rossi"); getEmployeeSurname(id);| it.polito.latazza.data.TestDataImpl.testGetEmployeeSurname1
+|no| I | getEmployeeName(10);| it.polito.latazza.data.TestDataImpl.testGetEmployeeSurname2
+
+**Criteria for method getReport:**
+ - Valid dates
+- Order of dates
+
+**Predicates for method getReport:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Valid dates |      yes     |
+|          |     no      |
+|Order of dates | StartDate <= EndDate| 
+| | EndDate > StartDate|
+
+**Combination of predicates for method getReport:**
+
+| Valid dates | Order of dates| Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+|yes |StartDate <= EndDate | V | Date d = new Date(); data.getReport(d, new Date()); int id = data.createEmployee("Mario", "Rossi"); data.rechargeAccount(id, 100);  data.getReport(d, new Date()); etc. | it.polito.latazza.data.TestDataImpl.testGetReport1
+| |StartDate > EndDate | I | data.getReport( new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date());| it.polito.latazza.data.TestDataImpl.testGetReport2
+| no |StartDate <= EndDate | I | data.getReport( null, new Date());| it.polito.latazza.data.TestDataImpl.testGetReport3
+| |StartDate > EndDate | I | | 
+
 # White Box Unit Tests
 
 ### Test cases definition
@@ -385,14 +437,19 @@ Version: 1.0.0
 
 ### Code coverage report
 
-### Loop coverage analysis
+### Loop coverage analysis  
 
 | Unit name | Loop rows | Number of iterations | JUnit test case                              |
 | --------- | --------- | -------------------- | -------------------------------------------- |
-| DataImpl  |  278      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
+| DataImpl  |  281     	| 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId3 |
-| DataImpl  |  282      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
+| DataImpl  |  286      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeverages3 |
+| DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
+
+TODO fix loop rows when code is final
 

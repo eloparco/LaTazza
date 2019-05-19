@@ -1,6 +1,7 @@
 package it.polito.latazza.data;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -208,9 +210,10 @@ public class DataImpl implements DataInterface {
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
+		
 		if (startDate==null || endDate==null | startDate.after(endDate))
 			throw new DateException();
-        return transactions.stream().filter(l -> l.getDate().after(startDate) && l.getDate().before(endDate)).map(l -> l.toString()).collect(Collectors.toList());
+        return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(endDate) || l.getDate().equals(endDate)))).map(l -> l.toString()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -420,4 +423,13 @@ public class DataImpl implements DataInterface {
 		}
 	}
 
+	public static Date SetTimeToMidnight(Date date) {    
+        Calendar cal = Calendar.getInstance();  
+        cal.setTime(date);  
+        cal.set(Calendar.HOUR_OF_DAY, 23);  
+        cal.set(Calendar.MINUTE, 59);  
+        cal.set(Calendar.SECOND, 59);  
+        cal.set(Calendar.MILLISECOND, 0);  
+        return cal.getTime(); 
+    }
 }

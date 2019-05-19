@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import java.util.ArrayList;
 import javax.security.auth.login.FailedLoginException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
+import it.polito.latazza.exceptions.DateException;
 
 public class TestDataImpl {
 
@@ -169,10 +170,12 @@ public class TestDataImpl {
 	@Test
 	public void testGetBeveragesId1() {
 		try {
-			int id = data.createBeverage("Coffee", 20, 500);
+			int id1 = data.createBeverage("Coffee", 20, 500);
+			int id2 = data.createBeverage("Tea", 25, 400);
 			List<Integer> beverages = data.getBeveragesId();
-			assertTrue(beverages.size() == 1);
-			assertTrue(beverages.contains(id));
+			assertTrue(beverages.size() == 2);
+			assertTrue(beverages.contains(id1));
+			assertTrue(beverages.contains(id2));
 		} catch (BeverageException e) {
 			fail();
 		}
@@ -184,47 +187,12 @@ public class TestDataImpl {
 		assertTrue(beverages.isEmpty());
 	}	
 	
-	@Test
-	// to obtain loop coverage 2+
-	public void testGetBeveragesId3() {
-		try {
-			int id1 = data.createBeverage("Coffee", 20, 500);
-			int id2 = data.createBeverage("Tea", 25, 400);
-			List<Integer> beverages = data.getBeveragesId();
-			assertTrue(beverages.size() == 2);
-			assertTrue(beverages.contains(id1));
-			assertTrue(beverages.contains(id2));
-		} catch (BeverageException e) {
-			fail();
-		}
-	}
-	
 	/*
 	 * 	method: getBeverages
 	 */
 	
 	@Test
 	public void testGetBeverages1() {
-		try {
-			int id = data.createBeverage("Coffee", 20, 500);
-			Map<Integer, String> beverages = data.getBeverages();
-			assertTrue(beverages.size() == 1);
-			assertNotNull(beverages.get(id));
-			assertTrue(beverages.get(id).equals("Coffee"));
-		} catch (BeverageException e) {
-			fail();
-		}
-	}	
-	
-	@Test
-	public void testGetBeverages2() {
-		Map<Integer, String> beverages = data.getBeverages();
-		assertTrue(beverages.isEmpty());
-	}	
-	
-	@Test
-	// to obtain loop coverage 2+
-	public void testGetBeverages3() {
 		try {
 			int id1 = data.createBeverage("Coffee", 20, 500);
 			int id2 = data.createBeverage("Tea", 25, 400);
@@ -237,53 +205,106 @@ public class TestDataImpl {
 		} catch (BeverageException e) {
 			fail();
 		}
-	}
+	}	
+	
+	@Test
+	public void testGetBeverages2() {
+		Map<Integer, String> beverages = data.getBeverages();
+		assertTrue(beverages.isEmpty());
+	}	
 	
 	/*
-	 * 	method: getEmployeeBalance
+	 * 	method: getEmployeeName
 	 */
 	
 	@Test
-	public void testGetEmployeeBalance1() {
+	public void testGetEmployeeName1() {
 		try {
-			int employeeId = data.createEmployee("Mario", "Rossi");
-			int balance = data.getEmployeeBalance(employeeId);
-			assertEquals(0, balance);
-		} catch (EmployeeException e) {
+			int id = data.createEmployee("Mario", "Rossi");
+			assertEquals(data.getEmployeeName(id), "Mario");
+		}
+		catch (EmployeeException e) {
 			fail();
 		}
-	}	
+	}
 	
 	@Test
-	public void testGetEmployeeBalance2() {
+	public void testGetEmployeeName2() {
 		try {
-			int employeeId = data.createEmployee("Mario", "Rossi");
-			data.rechargeAccount(employeeId, 500);
-			int balance = data.getEmployeeBalance(employeeId);
-			assertEquals(500, balance);
-		} catch (EmployeeException e) {
+			data.getEmployeeName(10);
 			fail();
 		}
-	}	
+		catch (EmployeeException e) {
+		}
+	}
+	
+	/*
+	 * 	method: getEmployeeSurname
+	 */
 	
 	@Test
-	public void testGetEmployeeBalance3() {
+	public void testGetEmployeeSurname1() {
 		try {
-			data.getEmployeeBalance(-10);
+			int id = data.createEmployee("Mario", "Rossi");
+			assertEquals(data.getEmployeeSurname(id), "Rossi");
+		}
+		catch (EmployeeException e) {
 			fail();
-		} catch (EmployeeException e) {
+		}
+	}
+	
+	@Test
+	public void testGetEmployeeSurname2() {
+		try {
+			data.getEmployeeSurname(10);
+			fail();
+		}
+		catch (EmployeeException e) {
+		}
+	}
+	
+	/*
+	 * 	method: getReport
+	 */
+	
+	@Test
+	public void testGetReport1() {
+		try {
+			Date d = new Date(); 
+			assertEquals(data.getReport(d, new Date()).size(), 0);
 			
+			int id = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(id, 10000);
+			assertEquals(data.getReport(d, new Date()).size(), 1);
+			String s = data.getReport(d, new Date()).get(0);
+			assertEquals(s.substring(19, s.length()), " RECHARGE Mario Rossi 100.00€");  
+			
+			int b = data.createBeverage("tea", 10, 1);
+			data.buyBoxes(b, 1);
+			assertEquals(data.getReport(d, new Date()).size(), 2);
+			s = data.getReport(d, new Date()).get(1);
+			assertEquals(s.substring(19, s.length()), " BUY tea 1");
+			
+		} catch (Exception e) {
+			fail();
 		}
-	}	
+	}
 	
 	@Test
-	public void testGetEmployeeBalance4() {
+	public void testGetReport2() {
 		try {
-			data.getEmployeeBalance(-10);
+			data.getReport( new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date());
 			fail();
-		} catch (EmployeeException e) {
-			
+		} catch (DateException e) {
 		}
-	}	
+	}
 	
+	@Test
+	public void testGetReport3() {
+		try {
+			data.getReport( null, new Date());
+			fail();
+		} catch (DateException e) {
+		}
+	}
 }
