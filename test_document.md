@@ -82,6 +82,65 @@ Version: 1.0.0
 | | no | no | / |
 | | | yes | / |
 
+### Class Consumption
+
+**Criteria for constructor 1:**
+ - Valid beverage
+ - Valid employee
+ - Sign of numberOfCapsules
+
+**Predicates for method constructor 1:**
+
+| Criteria            | Predicate                  |
+| ------------------- | -------------------------- |
+| Valid beverage  | yes |
+|                    | no  |
+| Valid employee  | yes |
+|                    | no  |
+| Sign of numberOfCapsules  | >= 0 |
+|                    | < 0  |
+
+**Boundaries**:
+
+| Criteria       | Boundary values   |
+| -------------- | ----------------- |
+| Sign of numberOfCapsules | MININT, 0, MAXINT |
+
+**Combination of predicates**:
+
+| Valid beverage | Valid employee | Sign of boxQuantity| Valid / Invalid | Description of the test case | JUnit test case                         |
+| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| yes     | yes     |>= 0    |V               |Beverage b = new Beverage(1, "tea", 10, 10); Employee e = new Employee(1,"John", "Doe"); new Consumption(b, e, true, 10); new Consumption(e, b, false, 10); | it.polito.latazza.data.Consumption.tc1 |
+|      |      |< 0    |I               |Beverage b = new Beverage(1, "tea", 10, 10); Employee e = new Employee(1,"John", "Doe"); new Consumption(b, e, true, -10); new Consumption(e, b, false, -10); | it.polito.latazza.data.Consumption.tc2 |
+| no    | yes    |     |I              | Employee e = new Employee(1,"John", "Doe"); new Consumption(e, null, true, 10); new Consumption(e, null, false, 10); | it.polito.latazza.data.Consumption.tc3 |
+| yes     | no     |     |I               |Beverage b = new Beverage(1, "tea", 10, 10); new Consumption(null, b, true, 10); new Consumption(null, b, false, 10); | it.polito.latazza.data.Consumption.tc4 |
+
+**Criteria for constructor 2:**
+ - Valid beverage
+ - Sign of numberOfCapsules
+
+**Predicates for method constructor 2:**
+
+| Criteria            | Predicate                  |
+| ------------------- | -------------------------- |
+| Valid beverage  | yes |
+|                    | no  |
+| Sign of numberOfCapsules  | >= 0 |
+|                    | < 0  |
+
+**Boundaries**:
+
+| Criteria       | Boundary values   |
+| -------------- | ----------------- |
+| Sign of numberOfCapsules | MININT, 0, MAXINT |
+
+**Combination of predicates**:
+
+| Valid beverage | Sign of boxQuantity| Valid / Invalid | Description of the test case | JUnit test case                         |
+| -------------- | --------------- | ---------------------------- | --------------------------------------- | ---|
+| yes     |>= 0    |V               |Beverage b = new Beverage(1, "tea", 10, 10); new Consumption(b, 10); | it.polito.latazza.data.Consumption.tc5 |
+| yes     |< 0    |I               |Beverage b = new Beverage(1, "tea", 10, 10); new Consumption(b, -10); | it.polito.latazza.data.Consumption.tc6 |
+| no     |     |I               | new Consumption(null, 10); | it.polito.latazza.data.Consumption.tc7 |
 
 ### Class BoxPurchase
 
@@ -173,7 +232,6 @@ Version: 1.0.0
 |     |no            | I               | decreaseBalance(1);       | it.polito.latazza.data.TestLaTazzaAccount.tc5 |
 | < 0      |yes   |I               | decreaseBalance(-10)          | it.polito.latazza.data.TestLaTazzaAccount.tc3 |
 |     |no            | I               |        | |
-
 
 ### Class Recharge
 
@@ -463,6 +521,8 @@ Version: 1.0.0
 | BoxPurchase | it.polito.latazza.data.<br />TestBoxPurchase.tcToStringFormat |
 | LaTazzaAccount | it.polito.latazza.data.<br />TestLaTazzaAccount.tcGetBalance |
 | Recharge | it.polito.latazza.data.<br />TestRecharge.tcToStringFormat |
+| Consumption | it.polito.latazza.data.<br />TestConsumption.tcGetEmployee |
+| Consumption | it.polito.latazza.data.<br />TestConsumption.tcToStringFormat |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 
