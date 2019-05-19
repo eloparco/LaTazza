@@ -18,6 +18,69 @@ Version: 1.0.0
 
 # Black Box Unit Tests
 
+*Note*: the pruning in the combination of predicates is represented with ~~barred rows~~.
+
+### Class Employee
+
+**Criteria for method *increaseBalance*:**
+ - Sign of amount
+ - Overflow of balance
+
+**Predicates for method *increaseBalance*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of amount | >= 0 |
+|            | < 0 |
+| Overflow of balance | balance + amount  > MAXINT |
+|            | balance + amount <= MAXINT |
+
+**Boundaries for method *increaseBalance*:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of amount       |    MININT, 0, MAXINT             |
+|     Overflow of balance      |     balance + amount = MAXINT      |   
+
+**Combination of predicates for method *increaseBalance*:**
+
+| Sign of amount | Overflow of balance | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | no | V | increaseBalance(10)<br />getBalance() -> 10 |  |
+|  | yes | I | increaseBalance(10)<br />increaseBalance(MAXINT) -> EmployeeException | |
+| < 0 | no | I | increaseBalance(-10) -> EmployeeException | |
+|  | ~~yes~~ | ~~I~~ | |  |
+
+**Criteria for method *decreaseBalance*:**
+ - Sign of amount
+ - Overflow of balance
+
+**Predicates for method *decreaseBalance*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of amount |      >= 0     |
+|          |     < 0      |
+| Overflow of balance | balance - amount < MININT |
+|   | balance - amount >= MININT |
+
+**Boundaries for method *decreaseBalance*:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of amount   |    MININT, 0, MAXINT             |
+|     Overflow of balance      |     balance - amount = MININT      |   
+
+**Combination of predicates for method *decreaseBalance*:**
+
+| Sign of amount | Overflow of balance |  Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | no | V | decreaseBalance(10)<br />getBalance() -> -10 |  |
+| | yes | I | decreaseBalance(10)<br />decreaseBalance(MAXINT) -> EmployeeException |  |
+| < 0 | no | I | decreaseBalance(-10) -> EmployeeException |  |
+| | ~~yes~~ | ~~I~~ |  |  |
+
+
 ### Class Beverage
 
 **Criteria for method increaseAvailableCapsules:**
@@ -541,13 +604,12 @@ Version: 1.0.0
 | DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
-| DataImpl  |  200      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
-|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
-|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
 | DataImpl  |  358      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
+
+TODO fix loop rows when code is final
 
