@@ -202,8 +202,8 @@ public class DataImpl implements DataInterface {
 													&& (((Consumption)l).getEmployee().getId() == employeeId))
 													|| ((l instanceof Recharge)
 													&& (((Recharge)l).getEmployee().getId() == employeeId)))
-													&& l.getDate().after(startDate)
-													&& l.getDate().before(endDate))
+													&& (l.getDate().after(startDate) || l.getDate().equals(startDate)) 
+													&& (l.getDate().before(endDate) || l.getDate().equals(endDate)))
 									.map(l -> l.toString())
 									.collect(Collectors.toList());
 	}
@@ -213,7 +213,8 @@ public class DataImpl implements DataInterface {
 		
 		if (startDate==null || endDate==null | startDate.after(endDate))
 			throw new DateException();
-        return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(endDate) || l.getDate().equals(endDate)))).map(l -> l.toString()).collect(Collectors.toList());
+        return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(endDate) || l.getDate().equals(endDate))))
+        							.map(l -> l.toString()).collect(Collectors.toList());
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
 import javax.security.auth.login.FailedLoginException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -275,8 +274,9 @@ public class TestDataImpl {
 			
 			int id = data.createEmployee("Mario", "Rossi");
 			data.rechargeAccount(id, 10000);
-			assertEquals(data.getReport(d, new Date()).size(), 1);
-			String s = data.getReport(d, new Date()).get(0);
+			List<String> l = data.getReport(d, new Date());
+			assertEquals(l.size(), 1);
+			String s = (String) l.get(0);
 			assertEquals(s.substring(19, s.length()), " RECHARGE Mario Rossi 100.00€");  
 			
 			int b = data.createBeverage("tea", 10, 1);
@@ -305,6 +305,71 @@ public class TestDataImpl {
 			data.getReport( null, new Date());
 			fail();
 		} catch (DateException e) {
+		}
+	}
+	
+	/*
+	 * 	method: getEmployeeReport
+	 */
+	
+	@Test
+	public void testGetEmployeeReport1() {
+		try {
+			Date d = new Date();
+			int id = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeReport(id, d, new Date()).size(), 0);
+
+			data.rechargeAccount(id, 10000);
+			List<String> l = data.getEmployeeReport(id, d, new Date());
+			assertEquals(l.size(), 1);
+			String s = (String) l.get(0);
+			assertEquals(s.substring(19, s.length()), " RECHARGE Mario Rossi 100.00€");  
+			
+			int b = data.createBeverage("tea", 10, 1);
+			data.buyBoxes(b, 1);
+			data.sellCapsules(id, b, 10, true);
+			assertEquals(data.getEmployeeReport(id, d, new Date()).size(), 2);
+			s = data.getEmployeeReport(id, d, new Date()).get(1);
+			assertEquals(s.substring(19, s.length()), " BALANCE Mario Rossi tea 10");
+			
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetEmployeeReport2() {
+		try {
+			data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date());
+			fail();
+		} catch (DateException e) {
+		}
+		catch (EmployeeException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetEmployeeReport3() {
+		try {
+			data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(), null);
+			fail();
+		} catch (DateException e) {
+		}
+		catch (EmployeeException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetEmployeeReport4() {
+		try {
+			data.getEmployeeReport(null, new Date(), new Date());
+			fail();
+		} catch (DateException e) {
+			fail();
+		}
+		catch (EmployeeException e) {
 		}
 	}
 }

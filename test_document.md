@@ -422,6 +422,35 @@ Version: 1.0.0
 | no |StartDate <= EndDate | I | data.getReport( null, new Date());| it.polito.latazza.data.TestDataImpl.testGetReport3
 | |StartDate > EndDate | I | | 
 
+
+**Criteria for method getEmployeeReport:**
+ - Valid dates
+ - Order of dates
+
+**Predicates for method getEmployeeReport:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Valid employee |      yes     |
+|          |     no      |
+| Valid dates |      yes     |
+|          |     no      |
+|Order of dates | StartDate < EndDate| 
+| | EndDate > StartDate|
+
+**Combination of predicates for method getEmployeeReport:**
+
+|Valid employee | Valid dates | Order of dates| Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|
+| yes |yes |StartDate < EndDate | V | Date d = new Date(); int id = data.createEmployee("Mario" ,"Rossi"); data.rechargeAccount(id, 10000); data.getEmployeeReport(id, d, new Date()); etc.|  it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1
+|| |StartDate > EndDate | I | data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(new Date().getTime() + (1000 * 60 * 60 * 48)), new Date()); | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport2
+|| no |StartDate < EndDate | I | data.getEmployeeReport(data.createEmployee("Mario" ,"Rossi"), new Date(), null);| it.polito.latazza.data.TestDataImpl.testGetEmployeeReport3
+|| |StartDate > EndDate | I | | 
+| no |yes |StartDate < EndDate | V | data.getEmployeeReport(null, new Date(), new Date()); | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport4
+|| |StartDate > EndDate | I | ;| 
+|| no |StartDate < EndDate | I |  | 
+|| |StartDate > EndDate | I | | 
+
 # White Box Unit Tests
 
 ### Test cases definition
@@ -441,15 +470,18 @@ Version: 1.0.0
 
 | Unit name | Loop rows | Number of iterations | JUnit test case                              |
 | --------- | --------- | -------------------- | -------------------------------------------- |
-| DataImpl  |  281     	| 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
+| DataImpl  |  282    	| 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeveragesId3 |
-| DataImpl  |  286      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
+| DataImpl  |  287      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetBeverages1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetBeverages3 |
 | DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetReport1 |
+| DataImpl  |  200      | 0                    | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImp.testGetEmployeeReport1 |
 
 TODO fix loop rows when code is final
 
