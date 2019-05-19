@@ -541,12 +541,13 @@ Version: 1.0.0
 | DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |
+| DataImpl  |  200      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
+|           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
+|           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeReport1 |
 | DataImpl  |  358      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
-
-TODO fix loop rows when code is final
 
