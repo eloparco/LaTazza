@@ -203,7 +203,7 @@ public class DataImpl implements DataInterface {
 													|| ((l instanceof Recharge)
 													&& (((Recharge)l).getEmployee().getId() == employeeId)))
 													&& (l.getDate().after(startDate) || l.getDate().equals(startDate)) 
-													&& (l.getDate().before(endDate) || l.getDate().equals(endDate)))
+													&& (l.getDate().before(setTimeToMidnight(endDate)) || l.getDate().equals(setTimeToMidnight(endDate))))
 									.map(l -> l.toString())
 									.collect(Collectors.toList());
 	}
@@ -213,7 +213,8 @@ public class DataImpl implements DataInterface {
 		
 		if (startDate==null || endDate==null | startDate.after(endDate))
 			throw new DateException();
-        return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(endDate) || l.getDate().equals(endDate))))
+		
+        return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(setTimeToMidnight(endDate)) || l.getDate().equals(setTimeToMidnight(endDate)))))
         							.map(l -> l.toString()).collect(Collectors.toList());
 	}
 
@@ -424,7 +425,7 @@ public class DataImpl implements DataInterface {
 		}
 	}
 
-	public static Date SetTimeToMidnight(Date date) {    
+	public static Date setTimeToMidnight(Date date) {    
         Calendar cal = Calendar.getInstance();  
         cal.setTime(date);  
         cal.set(Calendar.HOUR_OF_DAY, 23);  
