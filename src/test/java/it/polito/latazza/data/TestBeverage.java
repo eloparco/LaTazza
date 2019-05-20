@@ -163,11 +163,21 @@ class TestBeverage {
 		} catch (Exception e) {
 			fail();
 		}
+		try {
+			b.setBoxPrice(-5);
+			fail();
+		} catch (Exception e) {
+		}
 		assertEquals(700, b.getBoxPrice());
 		try {
 			b.setCapsulesPerBox(25);
 		} catch (Exception e) {
 			fail();
+		}
+		try {
+			b.setCapsulesPerBox(-25);
+			fail();
+		} catch (Exception e) {
 		}
 		assertEquals(25, b.getCapsulesPerBox());
 	}
