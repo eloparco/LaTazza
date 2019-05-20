@@ -896,12 +896,18 @@ Version: 1.0.0
 
 
 ### Code coverage report
+<br />**Employee:**  <br />
+![Coverage Employee](figures/Coverage_Employee.png)
 <br />**Beverage:**  <br />
 ![Coverage Beverage](figures/Coverage_Beverage.jpg)
 <br />**Recharge:**  <br />
 ![Coverage Recharge](figures/Coverage_Recharge.jpg)
 <br />**Consumption:**  <br />
 ![Coverage Consumption](figures/Coverage_Consumption.png)
+<br />**BoxPurchase:**  <br />
+![Coverage Consumption](figures/Coverage_BoxPurchase.png)
+<br />**LaTazzaAccount:**  <br />
+![Coverage Consumption](figures/Coverage_LaTazzaAccount.png)
 <br />**DataImpl:**  <br />
 ![Coverage DataImpl](figures/Coverage_DataImpl.png)
 
@@ -924,6 +930,4 @@ Version: 1.0.0
 | DataImpl  |  363      | 0                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
-
-TODO fix loop rows when code is final
 
