@@ -3,7 +3,6 @@ package it.polito.latazza.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

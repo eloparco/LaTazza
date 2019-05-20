@@ -21,7 +21,7 @@ class TestEmployee {
 	}
 
 	@Test
-	void tc1() {
+	void testIncreaseBalance1() {
 		try {
 			e.increaseBalance(10);
 			assertEquals(10, e.getBalance());
@@ -31,7 +31,7 @@ class TestEmployee {
 	}
 
 	@Test
-	void tc2() {
+	void testIncreaseBalance2() {
 		try {
 			e.increaseBalance(10);
 			e.increaseBalance(Integer.MAX_VALUE);
@@ -42,7 +42,7 @@ class TestEmployee {
 	}
 	
 	@Test
-	void tc3() {
+	void testIncreaseBalance3() {
 		try {
 			e.increaseBalance(-10);
 			fail("Exception not generated");
@@ -52,7 +52,7 @@ class TestEmployee {
 	}
 	
 	@Test
-	void tc4() {
+	void testDecreaseBalance1() {
 		try {
 			e.decreaseBalance(10);
 			assertEquals(-10, e.getBalance());
@@ -62,7 +62,7 @@ class TestEmployee {
 	}
 	
 	@Test
-	void tc5() {
+	void testDecreaseBalance2() {
 		try {
 			e.decreaseBalance(10);
 			e.decreaseBalance(Integer.MAX_VALUE);
@@ -73,7 +73,7 @@ class TestEmployee {
 	}
 	
 	@Test
-	void tc6() {
+	void testDecreaseBalance3() {
 		try {
 			e.decreaseBalance(-10);
 			fail("Exception not generated");

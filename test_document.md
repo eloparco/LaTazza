@@ -46,9 +46,9 @@ Version: 1.0.0
 
 | Sign of amount | Overflow of balance | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | no | V | increaseBalance(10)<br />getBalance() -> 10 |  |
-|  | yes | I | increaseBalance(10)<br />increaseBalance(MAXINT) -> EmployeeException | |
-| < 0 | no | I | increaseBalance(-10) -> EmployeeException | |
+| >= 0 | no | V | increaseBalance(10)<br />getBalance() -> 10 | it.polito.latazza.data.TestEmployee.testIncreaseBalance1 |
+|  | yes | I | increaseBalance(10)<br />increaseBalance(MAXINT) -> EmployeeException | it.polito.latazza.data.TestEmployee.testIncreaseBalance2 |
+| < 0 | no | I | increaseBalance(-10) -> EmployeeException | it.polito.latazza.data.TestEmployee.testIncreaseBalance3 |
 |  | ~~yes~~ | ~~I~~ | |  |
 
 **Criteria for method *decreaseBalance*:**
@@ -75,9 +75,9 @@ Version: 1.0.0
 
 | Sign of amount | Overflow of balance |  Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | no | V | decreaseBalance(10)<br />getBalance() -> -10 |  |
-| | yes | I | decreaseBalance(10)<br />decreaseBalance(MAXINT) -> EmployeeException |  |
-| < 0 | no | I | decreaseBalance(-10) -> EmployeeException |  |
+| >= 0 | no | V | decreaseBalance(10)<br />getBalance() -> -10 | it.polito.latazza.data.TestEmployee.testDecreaseBalance1 |
+| | yes | I | decreaseBalance(10)<br />decreaseBalance(MAXINT) -> EmployeeException |  it.polito.latazza.data.TestEmployee.testDecreaseBalance2 |
+| < 0 | no | I | decreaseBalance(-10) -> EmployeeException | it.polito.latazza.data.TestEmployee.testDecreaseBalance3 |
 | | ~~yes~~ | ~~I~~ |  |  |
 
 
