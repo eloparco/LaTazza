@@ -892,6 +892,7 @@ Version: 1.0.0
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcReset |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testDataPersistency |
 
 
 ### Code coverage report

@@ -33,6 +33,12 @@ public class TestDataImpl {
 	}
 	
 	/*
+	 *****************
+	 *** Black box ***
+	 *****************
+	 */
+	
+	/*
 	 * 	method: getBeverageName 
 	 */
 	
@@ -1345,5 +1351,34 @@ public class TestDataImpl {
 	}
 	
 	
+	/*
+	 *****************
+	 *** White box ***
+	 *****************
+	 */
+	
+	public void testDataPersistency() {
+		int idB=-1, idE=-1;
+		try {
+			idB = data.createBeverage("Coffee", 20, 500);
+			idE = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(idE, 700);
+			data.buyBoxes(idB, 1);
+			data.sellCapsules(idE, idB, 4, true);
+		} catch (Exception e) {
+			fail("Exception while creating the environment");
+		}
+		
+		try {
+			data = new DataImpl();	// simulate restart of the application
+			assertEquals(new Integer(200), data.getBalance());
+			assertEquals(new Integer(600), data.getEmployeeBalance(idE));
+			assertEquals(new Integer(15), data.getBeverageCapsules(idB));
+			assertEquals("Mario Rossi", data.getEmployeeName(idE) + " " + data.getEmployeeSurname(idE));
+			assertEquals("Coffee", data.getBeverageName(idB));
+		} catch (Exception e) {
+			fail();
+		}
+	}
 	
 }
