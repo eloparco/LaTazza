@@ -418,6 +418,98 @@ Version: 1.0.0
 |  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsules(-10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules4 |
 |  |  | yes | / |  |  |
 
+**Criteria for method *getBeverageBoxPrice*:**
+- Valid beverage (existing)
+
+**Predicates for method *getBalance*:**
+
+| Criteria 		| Predicate |
+| ---------------------	| --------- |
+| Valid beverage 	| yes |
+| 		    	| no |
+
+**Boundaries for method *getBeverageBoxPrice*:**
+
+*Nothing*
+
+**Combination of predicates for method *getBeverageBoxPrice*:**
+
+| Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
+| ----------------- | --------------- | ---------------------------- | --------------- |
+| yes	| V | reset()<br />id=createBeverage("Coffee", 20, 500)<br />getBeverageBoxPrice(id) -> 500 | |
+| no	| I | reset()<br />getBeverageBoxPrice(1) -> BeverageException | |
+
+
+**Criteria for method *createBeverage*:**
+- Existing beverage (already present)
+- Sign of capsulePerBox
+- Sign of boxPrice
+
+**Predicates for method *createBeverage*:**
+
+| Criteria 		| Predicate |
+| ---------------------	| --------- |
+| Existing beverage	| yes	|
+| 		    	| no	|
+| Sign of capsulePerBox | >= 0 	|
+| 			| < 0	|
+| Sign of boxPrice	| >= 0	|
+| 			| < 0	|
+
+**Boundaries for method *createBeverage*:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+| Sign of capsulePerBox | MININT, 0, MAXINT |   
+| Sign of boxPrice	| MININT, 0, MAXINT |
+
+**Combination of predicates for method *createBeverage*:**
+
+| Existing beverage | Sign of capsulePerBox | Sign of boxPrice | Valid / Invalid | Description of the test case | JUnit test case |
+| ----------------- | --------------------- | ---------------- | --------------- | ---------------------------- | --------------- |
+| no	| >= 0	| >= 0 	| V | reset()<br />id = createBeverage("Coffee", 20, 500)<br />getBeverageName(id) -> "Coffee"<br />getBeverageCapsulesPerBox(id) -> 20<br />getBeverageBoxPrice(id) -> 500 | |
+| 	| 	| < 0 	| I | reset()<br />createBeverage("Coffee", 20, 500) -> BeverageException | |
+| 	| < 0 	| >= 0 	| I | reset()<br />createBeverage("Coffee", 20, 500) -> BeverageException | |
+|  	|  	| ~~< 0~~ 	| ~~I~~ | | |
+| yes	| >= 0	| >= 0 	| I | reset()<br />createBeverage("Coffee", 20, 500)<br />createBeverage("Coffee", 25, 600) -> BeverageException | |
+| 	| 	| ~~< 0~~ 	| ~~I~~ | | |
+| 	| ~~< 0~~	| ~~>= 0~~ 	| ~~I~~ | | |
+| 	| 	| ~~< 0~~ 	| ~~I~~ | | |
+
+**Criteria for method *buyBoxes*:**
+- Valid beverage (existing)
+- Sign of boxQuantity
+
+**Predicates for method *buyBoxes*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Valid beverage |  yes |
+|            | no |
+| Sign of boxQuantity | >= 0 |
+|            | < 0 |
+| Enough balance | yes |
+|            | no |
+
+**Boundaries for method *buyBoxes*:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|      Sign of boxQuantity     |     MININT, 0, MAXINT     |   
+
+**Combination of predicates for method *buyBoxes*:**
+
+| Valid beverage | Sign of boxQuantity | Enough balance | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|
+| yes 	| >= 0 	| yes 	| V 	| reset()<br />rechargeAccount(1, 500)<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1)<br />getBeverageCapsules(id) -> 20 |  |
+| 	| 	| no 	| I	| reset()<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1) -> NotEnoughBalance |
+| 	| < 0	| yes 	| I 	| reset()<br />rechargeAccount(1, 500)<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, -1) -> BeverageException |
+| 	|  	| ~~no~~ | ~~I~~ | |
+| no	| >= 0 	| yes	| I 	| reset()<br />rechargeAccount(1, 500)<br />buyBoxes(1, 1) -> BeverageException |
+| 	|  	| ~~no~~	| ~~I~~ 	| |
+| 	| ~~< 0~~ | ~~yes~~	| ~~I~~ 	| |
+| 	| 	| ~~no~~	| ~~I~~ 	| |
+
 **Criteria for method getBeveragesId:**
  - With history (at least one beverage exists)
 
@@ -521,6 +613,27 @@ Version: 1.0.0
 |yes| V | int id = CreateEmployee("Mario", "Rossi"); getEmployeeSurname(id);| it.polito.latazza.data.TestDataImpl.testGetEmployeeSurname1
 |no| I | getEmployeeName(10);| it.polito.latazza.data.TestDataImpl.testGetEmployeeSurname2
 
+**Criteria for method *createEmployee*:**
+- Existing employee (already present)
+
+**Predicates for method *createEmployee*:**
+
+| Criteria 		| Predicate |
+| ---------------------	| --------- |
+| Existing employee 	| yes	|
+| 		    	| no	|
+
+**Boundaries for method *createEmployee*:**
+
+*Nothing*
+
+**Combination of predicates for method *createEmployee*:**
+
+| Existing employee | Valid / Invalid | Description of the test case | JUnit test case |
+| ----------------- | --------------- | ---------------------------- | --------------- |
+| no	| V | reset()<br />id=createEmployee("Mario", "Rossi")<br />getEmployeeName(id) -> "Mario"<br />getEmployeeSurname(id) -> "Rossi" | |
+| yes	| I | reset()<br />createEmployee("Mario", "Rossi")<br />createEmployee("Mario", "Rossi") -> EmployeeException | |
+
 **Criteria for method getReport:**
  - Valid dates
 - Order of dates
@@ -571,6 +684,29 @@ Version: 1.0.0
 || |StartDate > EndDate | I | | 
 || no |StartDate < EndDate | I |  | 
 || |StartDate > EndDate | I | | 
+
+**Criteria for method *getBalance*:**
+- With history (at least one recharge/consumption/boxPurchase)
+
+**Predicates for method *getBalance*:**
+
+| Criteria 		| Predicate |
+| ---------------------	| --------- |
+| With history 		| yes |
+| 		    	| no |
+
+**Boundaries for method *getBalance*:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+| With history | 0 (operations) |
+
+**Combination of predicates for method *getBalance*:**
+
+| With history | Valid / Invalid | Description of the test case | JUnit test case |
+| ----------------- | --------------- | ---------------------------- | --------------- |
+| yes	| V | reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB=createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />getBalance() -> 500<br />buyBoxes(idB, 1)<br />getBalance() -> 0<br />sellCapsulesToVisitor(idB, 4)<br />getBalance() -> 100 | |
+| no	| V | reset()<br />getBalance() -> 0 | |
 
 # White Box Unit Tests
 
