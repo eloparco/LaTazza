@@ -150,10 +150,10 @@ class TestConsumption {
 			assertEquals(s.substring(19, s.length())," VISITOR tea 10");
 			c = new Consumption(e, b, true, 10);
 			s = c.toString();
-			assertEquals(s.substring(19, s.length())," John Doe BALANCE tea 10");
+			assertEquals(s.substring(19, s.length())," BALANCE John Doe tea 10");
 			c = new Consumption(e, b, false, 10);
 			s = c.toString();
-			assertEquals(s.substring(19, s.length())," John Doe CASH tea 10");
+			assertEquals(s.substring(19, s.length())," CASH John Doe tea 10");
 		} catch (Exception e) {
 			fail();
 		}
