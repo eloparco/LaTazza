@@ -146,7 +146,7 @@ Employee : -id : int
 Employee : -name : String
 Employee : -surname : String
 Employee : -balance : int
-Employee : +Employee(id:int, name:String, surname:String, balance:int)
+Employee : +Employee(id:int, name:String, surname:String)
 Employee : +getId() : int
 Employee : +getName() : String
 Employee : +setName(name:String) : void
@@ -166,6 +166,7 @@ Recharge : -employee : Employee
 Recharge : -amount : int
 Recharge : +Recharge(employee:Employee, amount:int)
 Recharge : +getEmployee() : Employee
+Recharge : +getAmount() : int
 Recharge : +toString() : String
 
 BoxPurchase : -beverage : Beverage
