@@ -38,7 +38,9 @@ public class Beverage implements Serializable {
 		return boxPrice;
 	}
 	
-	public void setBoxPrice(int boxPrice) {
+	public void setBoxPrice(int boxPrice) throws BeverageException {
+		if(boxPrice < 0)
+			throw new BeverageException();
 		this.boxPrice = boxPrice;
 	}
 	
@@ -46,7 +48,9 @@ public class Beverage implements Serializable {
 		return capsulesPerBox;
 	}
 	
-	public void setCapsulesPerBox(int capsulesPerBox) {
+	public void setCapsulesPerBox(int capsulesPerBox) throws BeverageException {
+		if(capsulesPerBox < 0)
+			throw new BeverageException();
 		this.capsulesPerBox = capsulesPerBox;
 	}
 	

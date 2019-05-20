@@ -158,9 +158,17 @@ class TestBeverage {
 	void tcSetters() {
 		b.setName("Black Tea");
 		assertEquals("Black Tea", b.getName());
-		b.setBoxPrice(700);
+		try {
+			b.setBoxPrice(700);
+		} catch (Exception e) {
+			fail();
+		}
 		assertEquals(700, b.getBoxPrice());
-		b.setCapsulesPerBox(25);
+		try {
+			b.setCapsulesPerBox(25);
+		} catch (Exception e) {
+			fail();
+		}
 		assertEquals(25, b.getCapsulesPerBox());
 	}
 

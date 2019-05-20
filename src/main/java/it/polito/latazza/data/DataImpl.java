@@ -243,15 +243,27 @@ public class DataImpl implements DataInterface {
 		if (b == null)
 			throw new BeverageException();
 		
+		/* keep for restore */
+		int bp = b.getBoxPrice();
+		int cpb = b.getCapsulesPerBox();
+		String n = b.getName();
+		
 		/* update */
-		b.setBoxPrice(boxPrice);
-		b.setCapsulesPerBox(capsulesPerBox);
-		b.setName(name);
-		beverages.put(id, b);
-		System.out.println(b + " updated");
+		try {
+			b.setBoxPrice(boxPrice);
+			b.setCapsulesPerBox(capsulesPerBox);
+			b.setName(name);
+			System.out.println(b + " updated");
+		} catch (Exception e) {
+			b.setBoxPrice(bp);
+			b.setCapsulesPerBox(cpb);
+			b.setName(n);
+			throw e;
+		}
 		
 		/* save */
 		storeObjects(beverages.values(), FILENAME_BEVERAGES);
+
 	}
 
 	@Override
