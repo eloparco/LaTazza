@@ -895,9 +895,13 @@ Version: 1.0.0
 
 
 ### Code coverage report
-![Coverage Beverage](figures/Coverage_Beverage.png)
-![Coverage Recharge](figures/Coverage_Recharge.png)
+<br />**Beverage:**  <br />
+![Coverage Beverage](figures/Coverage_Beverage.jpg)
+<br />**Recharge:**  <br />
+![Coverage Recharge](figures/Coverage_Recharge.jpg)
+<br />**Consumption:**  <br />
 ![Coverage Consumption](figures/Coverage_Consumption.png)
+<br />**DataImpl:**  <br />
 ![Coverage DataImpl](figures/Coverage_DataImpl.png)
 
 ### Loop coverage analysis  
