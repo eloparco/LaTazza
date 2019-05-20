@@ -61,7 +61,7 @@ class TestBoxPurchase {
 		try {
 			p = new BoxPurchase(b, 10);
 			s = p.toString();
-			assertEquals(s.substring(19, s.length())," BUY tea 10");
+			assertEquals(" BUY tea 10", s.substring(19, s.length()));
 		} catch (BeverageException e) {
 			fail();
 		}
