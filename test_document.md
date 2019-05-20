@@ -18,7 +18,7 @@ Version: 1.0.0
 
 # Black Box Unit Tests
 
-*Note*: the pruning in the combination of predicates is represented with ~~barred rows~~.
+*Note*: the pruning in the combination of predicates is represented with ~~strikethrough rows~~.
 
 ### Class Employee
 
@@ -714,6 +714,7 @@ Version: 1.0.0
 
 | Unit name | JUnit test case                              |
 | --------- | -------------------------------------------- |
+| Employee | it.polito.latazza.data.<br />TestEmployee.testGettersAndSetters |
 | Beverage | it.polito.latazza.data.<br />TestBeverage.tcConstructor |
 | Beverage | it.polito.latazza.data.<br />TestBeverage.tcGetters |
 | Beverage | it.polito.latazza.data.<br />TestBeverage.tcSetters |

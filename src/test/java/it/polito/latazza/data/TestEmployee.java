@@ -19,6 +19,10 @@ class TestEmployee {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/*
+	 * Black box
+	 */
 
 	@Test
 	void testIncreaseBalance1() {
@@ -80,6 +84,20 @@ class TestEmployee {
 		} catch (EmployeeException e) {
 			assertTrue(true);
 		}
+	}
+	
+	/*
+	 * White box
+	 */
+	
+	@Test
+	void testGettersAndSetters() {
+		e.setName("Andrea");
+		e.setSurname("Bianchi");
+		assertEquals(1, e.getId());
+		assertEquals("Andrea", e.getName());
+		assertEquals("Bianchi", e.getSurname());
+		assertEquals("Andrea Bianchi", e.toString());
 	}
 
 }
