@@ -105,8 +105,7 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		
 		/* update */
-		if (b.getAvailableCapsules() < numberOfCapsules)
-			throw new NotEnoughCapsules();
+				
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		if (fromAccount)
 			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
@@ -125,6 +124,7 @@ public class DataImpl implements DataInterface {
 			storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
 		
 		return e.getBalance();
+
 	}
 
 	@Override
@@ -134,6 +134,8 @@ public class DataImpl implements DataInterface {
 		Beverage b = beverages.get(beverageId);
 		if (b == null)
 			throw new BeverageException();
+		
+		
 		
 		/* update */
 		b.decreaseAvailableCapsules(numberOfCapsules);
@@ -146,6 +148,7 @@ public class DataImpl implements DataInterface {
 		storeObject(c, FILENAME_TRANSACTIONS, true);
 		storeObjects(beverages.values(), FILENAME_BEVERAGES);
 		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
+
 	}
 
 	@Override

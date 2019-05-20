@@ -697,6 +697,351 @@ public class TestDataImpl {
 	}
 	
 	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules1() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1, b1, 50, true);
+			assertEquals(data.getEmployeeBalance(id1),new Integer(1000));
+			assertEquals(data.getBeverageCapsules(b1), new Integer(50));
+			assertEquals(data.getBalance(), new Integer(0));
+			data.sellCapsules(id1, b1, 50, false);
+			assertEquals(data.getEmployeeBalance(id1),new Integer(1000));
+			assertEquals(data.getBeverageCapsules(b1), new Integer(0));
+			assertEquals(data.getBalance(), new Integer(1000));
+		} catch (Exception e){
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules2() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1+1, b1, 50, true);
+			fail();
+		} catch (EmployeeException e){
+			try {
+				data.sellCapsules(id1+1, b1, 50, false);
+				fail();
+			} catch (EmployeeException e1) {
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules3() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(-1, b1, 50, true);
+			fail();
+		} catch (EmployeeException e){
+			try {
+				data.sellCapsules(-1, b1, 50, false);
+				fail();
+			} catch (EmployeeException e1) {
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules4() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1, b1+1, 50, true);
+			fail();
+		} catch (BeverageException e){
+			try {
+				data.sellCapsules(id1, b1+1, 50, false);
+				fail();
+			} catch (BeverageException e1) {
+				
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules5() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1, -1, 50, true);
+			fail();
+		} catch (BeverageException e){
+			try {
+				data.sellCapsules(id1, -1, 50, false);
+				fail();
+			} catch (BeverageException e1) {
+				
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules6() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1, b1, 115, true);
+			fail();
+		} catch (NotEnoughCapsules e){
+			try {
+				data.sellCapsules(id1, b1, 115, false);
+				fail();
+			} catch (NotEnoughCapsules e1) {
+				
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsules
+	 */
+	
+	@Test
+	public void testSellCapsules7() {
+		int id1 = 0, b1 = 0; 
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsules(id1, b1, -5, true);
+			fail();
+		} catch (BeverageException e){
+			try {
+				data.sellCapsules(id1, b1, -5, false);
+				fail();
+			} catch (BeverageException e1) {
+				
+			} catch (Exception e2) {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsulesToVisitor
+	 */
+	
+	@Test
+	public void testSellCapsulesToVisitor1() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsulesToVisitor(b1, 50);
+			assertEquals(data.getBalance(), new Integer(1000));
+			assertEquals(data.getBeverageCapsules(b1), new Integer(50));
+		} catch (Exception e){
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsulesToVisitor
+	 */
+	
+	@Test
+	public void testSellCapsulesToVisitor2() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsulesToVisitor(b1+1, 50);
+			fail();
+		} catch (BeverageException e){
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsulesToVisitor
+	 */
+	
+	@Test
+	public void testSellCapsulesToVisitor3() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsulesToVisitor(-1, 50);
+			fail();
+		} catch (BeverageException e){
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsulesToVisitor
+	 */
+	
+	@Test
+	public void testSellCapsulesToVisitor4() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsulesToVisitor(b1, 115);
+			fail();
+		} catch (NotEnoughCapsules e){
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: sellCapsulesToVisitor
+	 */
+	
+	@Test
+	public void testSellCapsulesToVisitor5() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 2000);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(2000));
+			int b1 = data.createBeverage("tea", 50, 1000);
+			assertEquals(data.getBeverages().size(), 1);
+			data.buyBoxes(b1, 2);
+			assertEquals(data.getBeverageCapsules(b1), new Integer(100));
+			data.sellCapsulesToVisitor(b1, -5);
+			fail();
+		} catch (BeverageException e){
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
 	 * 	method: updateBeverage
 	 */
 	

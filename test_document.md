@@ -708,6 +708,87 @@ Version: 1.0.0
 | yes	| V | reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB=createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />getBalance() -> 500<br />buyBoxes(idB, 1)<br />getBalance() -> 0<br />sellCapsulesToVisitor(idB, 4)<br />getBalance() -> 100 | it.polito.latazza.data.TestDataImpl.testGetBalance1 |
 | no	| V | reset()<br />getBalance() -> 0 | it.polito.latazza.data.TestDataImpl.testGetBalance2 |
 
+
+**Criteria for method sellCapsules:**
+ - Sign of employeeId
+ - Valid employee (existing)
+ - Sign of beverageId
+ - Valid beverage (existing)
+ - Sign of numberOfCapsules
+ - Valid number of capsules (enough in storage)
+
+**Predicates for method sellCapsules:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of employeeId |      >= 0     |
+|          |     < 0      |
+|    Valid employee      |     yes      |
+|          |    no       |
+| Sign of beverageId |      >= 0     |
+|          |     < 0      |
+|    Valid beverage      |     yes      |
+|          |    no       |
+| Sign of numberOfCapsules |      >= 0     |
+|          |     < 0      |
+|    Valid number of capsules      |     yes      |
+|          |    no       |
+
+**Boundaries for method sellCapsules:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfCapsules       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method sellCapsules:**
+
+| Sign of employeeId | Valid employee | Sign of beverageId | Valid beverage | Sign of numberOfCapsules | Valid number of capsules | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|-------|-------|-------|
+| >= 0 | yes | >= 0 | yes | >= 0 | yes | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1, b1, 50, true);<br />data.getEmployeeBalance(id1) -> 1000<br />data.getBeverageCapsules(b1) -> 50<br />data.getBalance() -> 0<br />data.sellCapsules(id1, b1, 50, false);<br />data.getEmployeeBalance(id1) -> 1000<br />data.getBeverageCapsules(b1) -> 0<br />data.getBalance() -> 1000<br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules1 |
+| >= 0 | no | >= 0 | yes | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1+1, b1, 50, true); -> EmployeeException <br /> data.sellCapsules(id1+1, b1, 50, false); -> EmployeeException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules2 |
+| < 0 | no | >= 0 | yes | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(-1, b1, 50, true); -> EmployeeException <br /> data.sellCapsules(-1, b1, 50, false); -> EmployeeException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules3 |
+| >= 0 | yes | >= 0 | no | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1, b1+1, 50, true); -> BeverageException <br /> data.sellCapsules(id1, b1+1, 50, false); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules4 |
+| >= 0 | yes | < 0 | no | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1, -1, 50, true); -> BeverageException <br /> data.sellCapsules(id1, -1, 50, false); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules5 |
+| >= 0 | yes | >= 0 | yes | >= 0 | no | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1, b1, 115, true); -> NotEnoughCapsules <br /> data.sellCapsules(id1, b1, 115, false); -> NotEnoughCapsules <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules6 |
+| >= 0 | yes | >= 0 | yes | < 0 | no | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(id1, b1, -5, true); -> BeverageException <br /> data.sellCapsules(id1, b1, -5, false); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsules7 |
+
+**Criteria for method sellCapsulesToVisitor:**
+ - Sign of employeeId
+ - Valid employee (existing)
+ - Sign of beverageId
+ - Valid beverage (existing)
+ - Sign of numberOfCapsules
+ - Valid number of capsules (enough in storage)
+
+**Predicates for method sellCapsulesToVisitor:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of beverageId |      >= 0     |
+|          |     < 0      |
+|    Valid beverage      |     yes      |
+|          |    no       |
+| Sign of numberOfCapsules |      >= 0     |
+|          |     < 0      |
+|    Valid number of capsules      |     yes      |
+|          |    no       |
+
+**Boundaries for method sellCapsulesToVisitor:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of numberOfCapsules       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method sellCapsulesToVisitor:**
+
+| Sign of beverageId | Valid beverage | Sign of numberOfCapsules | Valid number of capsules | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|-------|-------|
+| >= 0 | yes | >= 0 | yes | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsules(b1, 50);<br />data.getBeverageCapsules(b1) -> 50<br />data.getBalance() -> 1000<br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsulesToVisitor1 |
+| >= 0 | no | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsulesToVisitor(b1+1, 50); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsulesToVisitor2 |
+| < 0 | no | >= 0 | yes | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsulesToVisitor(-1, 50); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsulesToVisitor3 |
+| >= 0 | yes | >= 0 | no | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsulesToVisitor(b1, 115); -> NotEnoughCapsules <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsulesToVisitor4 |
+| >= 0 | yes | < 0 | no | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />int b1 = data.createBeverage("tea", 50, 1000);<br />data.buyBoxes(b1, 2);<br />data.sellCapsulesToVisitor(b1, -5); -> BeverageException <br /> | it.polito.latazza.data.<br />TestDataImpl.testSellCapsulesToVisitor5 |
+
 **Criteria for method updateBeverage:**
  - Sign of id
  - Valid beverage (existing)
