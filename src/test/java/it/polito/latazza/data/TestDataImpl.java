@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +23,7 @@ public class TestDataImpl {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		Locale.setDefault(Locale.US);
 		data = new DataImpl();
 		data.reset();
 	}
@@ -351,7 +353,7 @@ public class TestDataImpl {
 			List<String> l = data.getReport(d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi 100,00€", s.substring(19, s.length()));  
+			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
 			
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
@@ -397,7 +399,7 @@ public class TestDataImpl {
 			List<String> l = data.getEmployeeReport(id, d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi 100,00€", s.substring(19, s.length()));  
+			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
 			
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);

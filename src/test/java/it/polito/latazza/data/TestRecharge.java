@@ -3,6 +3,7 @@ package it.polito.latazza.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ class TestRecharge {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		Locale.setDefault(Locale.US);
 		rechargeAmount = 1000;
 		e = new Employee(0, "Mario", "Rossi");
 		r = new Recharge(e, rechargeAmount);
@@ -76,7 +78,7 @@ class TestRecharge {
 	@Test
 	void tcToStringFormat() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String expected = format.format(r.getDate()) + " RECHARGE Mario Rossi 10,00€";
+		String expected = format.format(r.getDate()) + " RECHARGE Mario Rossi 10.00€";
 		assertEquals(expected, r.toString());
 	}
 

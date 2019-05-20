@@ -2,6 +2,8 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Locale;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ class TestConsumption {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		Locale.setDefault(Locale.US);
 		b = new Beverage(1, "tea", 10, 10);
 		e = new Employee(1, "John", "Doe");
 	}

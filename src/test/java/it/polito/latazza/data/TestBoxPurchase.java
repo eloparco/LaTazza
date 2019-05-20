@@ -2,6 +2,8 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Locale;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ class TestBoxPurchase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		Locale.setDefault(Locale.US);
 		b = new Beverage(1, "tea", 10, 10); 
 	}
 
