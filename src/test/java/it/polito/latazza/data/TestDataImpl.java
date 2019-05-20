@@ -319,7 +319,7 @@ public class TestDataImpl {
 	public void testGetEmployeeSurname1() {
 		try {
 			int id = data.createEmployee("Mario", "Rossi");
-			assertEquals(data.getEmployeeSurname(id), "Rossi");
+			assertEquals("Rossi", data.getEmployeeSurname(id));
 		}
 		catch (EmployeeException e) {
 			fail();
@@ -344,20 +344,20 @@ public class TestDataImpl {
 	public void testGetReport1() {
 		try {
 			Date d = new Date(); 
-			assertEquals(data.getReport(d, new Date()).size(), 0);
+			assertEquals(0, data.getReport(d, new Date()).size());
 			
 			int id = data.createEmployee("Mario", "Rossi");
 			data.rechargeAccount(id, 10000);
 			List<String> l = data.getReport(d, new Date());
-			assertEquals(l.size(), 1);
+			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(s.substring(19, s.length()), " RECHARGE Mario Rossi 100.00€");  
+			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
 			
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
-			assertEquals(data.getReport(d, new Date()).size(), 2);
+			assertEquals(2, data.getReport(d, new Date()).size());
 			s = data.getReport(d, new Date()).get(1);
-			assertEquals(s.substring(19, s.length()), " BUY tea 1");
+			assertEquals(" BUY tea 1", s.substring(19, s.length()));
 			
 		} catch (Exception e) {
 			fail();
@@ -391,20 +391,20 @@ public class TestDataImpl {
 		try {
 			Date d = new Date();
 			int id = data.createEmployee("Mario" ,"Rossi");
-			assertEquals(data.getEmployeeReport(id, d, new Date()).size(), 0);
+			assertEquals(0, data.getEmployeeReport(id, d, new Date()).size());
 
 			data.rechargeAccount(id, 10000);
 			List<String> l = data.getEmployeeReport(id, d, new Date());
-			assertEquals(l.size(), 1);
+			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(s.substring(19, s.length()), " RECHARGE Mario Rossi 100.00€");  
+			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
 			
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
 			data.sellCapsules(id, b, 10, true);
 			assertEquals(data.getEmployeeReport(id, d, new Date()).size(), 2);
 			s = data.getEmployeeReport(id, d, new Date()).get(1);
-			assertEquals(s.substring(19, s.length()), " BALANCE Mario Rossi tea 10");
+			assertEquals(" BALANCE Mario Rossi tea 10", s.substring(19, s.length()));
 			
 		} catch (Exception e) {
 			fail();
@@ -454,12 +454,12 @@ public class TestDataImpl {
 	@Test
 	public void testGetEmployeesId() {
 		try {
-			assertEquals(data.getEmployeesId().size(), 0);
+			assertEquals(0, data.getEmployeesId().size());
 			int id1 = data.createEmployee("Mario" ,"Rossi");
-			assertEquals(data.getEmployeesId().size(), 1);
+			assertEquals(1, data.getEmployeesId().size());
 			int id2 = data.createEmployee("Marco", "Bianchi");
 			List<Integer> l = data.getEmployeesId();
-			assertEquals(l.size(), 2);
+			assertEquals(2, l.size());
 			assertTrue(l.contains(id1));
 			assertTrue(l.contains(id2));
 		} catch (EmployeeException e){
@@ -474,14 +474,14 @@ public class TestDataImpl {
 	@Test
 	public void testGetEmployees() {
 		try {
-			assertEquals(data.getEmployees().size(), 0);
+			assertEquals(0, data.getEmployees().size());
 			int id1 = data.createEmployee("Mario" ,"Rossi");
 			assertEquals(data.getEmployees().size(), 1);
 			int id2 = data.createEmployee("Marco", "Bianchi");
 			Map<Integer, String> m = data.getEmployees();
-			assertEquals(m.size(), 2);
-			assertEquals(m.get(id1), "Mario Rossi");
-			assertEquals(m.get(id2), "Marco Bianchi");
+			assertEquals(2, m.size());
+			assertEquals("Mario Rossi", m.get(id1));
+			assertEquals("Marco Bianchi", m.get(id2));
 		} catch (EmployeeException e){
 			fail();
 		}

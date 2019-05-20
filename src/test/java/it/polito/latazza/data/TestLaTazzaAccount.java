@@ -33,13 +33,13 @@ class TestLaTazzaAccount {
 	void tc2() {
 		t.increaseBalance(2000000000);
 		t.increaseBalance(2000000000);
-		assertEquals(t.getBalance(), 2000000000);
+		assertEquals(2000000000, t.getBalance());
 	}
 	
 	@Test
 	void tc3() {
 		t.increaseBalance(-10);
-		assertEquals(t.getBalance(), 0);
+		assertEquals(0, t.getBalance());
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ class TestLaTazzaAccount {
 		try {
 		t.increaseBalance(10);
 		t.decreaseBalance(10);
-		assertEquals(t.getBalance(), 0);
+		assertEquals(0, t.getBalance());
 		} catch (NotEnoughBalance e) {
 			fail();
 		}
@@ -66,7 +66,7 @@ class TestLaTazzaAccount {
 	void tc6() {
 		try {
 			t.decreaseBalance(-10);
-			assertEquals(t.getBalance(), 0);
+			assertEquals(0, t.getBalance());
 		} catch (NotEnoughBalance e) {
 			fail();
 		}
@@ -78,7 +78,7 @@ class TestLaTazzaAccount {
 	
 	@Test
 	void tcGetBalance() {
-		assertEquals(t.getBalance(), 0);
+		assertEquals(0, t.getBalance());
 	}
 
 }
