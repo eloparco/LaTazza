@@ -726,7 +726,6 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of id       |    MININT, 0, MAXINT             |
 |   Sign of amountInCents       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method rechargeAccount:**
@@ -847,7 +846,7 @@ Version: 1.0.0
 **Combination of predicates for method updateBeverage:**
 
 | Sign of id | Valid beverage | Sign of capsulesPerBox  | Sign of boxPrice | Valid / Invalid | Description of the test case | JUnit test case |
-|-------|-------|-------|-------|-------|
+|-------|-------|-------|-------|-------|-------|-------|
 | >= 0 | yes | >= 0 | >= 0 | V | int b1 = data.createBeverage("tea", 50, 1000);<br />int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />data.buyBoxes(b1, 1);<br />data.updateBeverage(b1, "lemon tea", 60, 1250);<br />data.getBeverageName(b1); -> "lemon tea"<br />data.getBeverageBoxPrice(b1); -> 1250<br />data.getBeverageCapsulesPerBox(b1); -> 60<br />data.getBeverageCapsules(b1); -> 50 | it.polito.latazza.data.<br />TestDataImpl.testUpdateBeverage1 |
 | >= 0 | no | >= 0 | >= 0 | I | int b1 = data.createBeverage("tea", 50, 1000);<br />int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />data.buyBoxes(b1, 1);<br />data.updateBeverage(b1+1, "lemon tea", 60, 1250); -> BeverageException | it.polito.latazza.data.<br />TestDataImpl.testUpdateBeverage2 |
 | < 0 | no | >= 0 | >= 0 | I | int b1 = data.createBeverage("tea", 50, 1000);<br />int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 2000);<br />data.buyBoxes(b1, 1);<br />data.updateBeverage(-1, "lemon tea", 60, 1250); -> BeverageException | it.polito.latazza.data.<br />TestDataImpl.testUpdateBeverage3 |
