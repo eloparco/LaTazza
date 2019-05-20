@@ -436,8 +436,8 @@ Version: 1.0.0
 
 | Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
 | ----------------- | --------------- | ---------------------------- | --------------- |
-| yes	| V | reset()<br />id=createBeverage("Coffee", 20, 500)<br />getBeverageBoxPrice(id) -> 500 | |
-| no	| I | reset()<br />getBeverageBoxPrice(1) -> BeverageException | |
+| yes	| V | reset()<br />id=createBeverage("Coffee", 20, 500)<br />getBeverageBoxPrice(id) -> 500 | it.polito.latazza.data.TestDataImpl.testGetBeverageBoxPrice1 |
+| no	| I | reset()<br />getBeverageBoxPrice(1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testGetBeverageBoxPrice2 |
 
 
 **Criteria for method *createBeverage*:**
@@ -467,11 +467,11 @@ Version: 1.0.0
 
 | Existing beverage | Sign of capsulePerBox | Sign of boxPrice | Valid / Invalid | Description of the test case | JUnit test case |
 | ----------------- | --------------------- | ---------------- | --------------- | ---------------------------- | --------------- |
-| no	| >= 0	| >= 0 	| V | reset()<br />id = createBeverage("Coffee", 20, 500)<br />getBeverageName(id) -> "Coffee"<br />getBeverageCapsulesPerBox(id) -> 20<br />getBeverageBoxPrice(id) -> 500 | |
-| 	| 	| < 0 	| I | reset()<br />createBeverage("Coffee", 20, 500) -> BeverageException | |
-| 	| < 0 	| >= 0 	| I | reset()<br />createBeverage("Coffee", 20, 500) -> BeverageException | |
+| no	| >= 0	| >= 0 	| V | reset()<br />id = createBeverage("Coffee", 20, 500)<br />getBeverageName(id) -> "Coffee"<br />getBeverageCapsulesPerBox(id) -> 20<br />getBeverageBoxPrice(id) -> 500 | it.polito.latazza.data.TestDataImpl.testCreateBeverage1 |
+| 	| 	| < 0 	| I | reset()<br />createBeverage("Coffee", 20, -500) -> BeverageException | it.polito.latazza.data.TestDataImpl.testCreateBeverage2 |
+| 	| < 0 	| >= 0 	| I | reset()<br />createBeverage("Coffee", -20, 500) -> BeverageException | it.polito.latazza.data.TestDataImpl.testCreateBeverage3 |
 |  	|  	| ~~< 0~~ 	| ~~I~~ | | |
-| yes	| >= 0	| >= 0 	| I | reset()<br />createBeverage("Coffee", 20, 500)<br />createBeverage("Coffee", 25, 600) -> BeverageException | |
+| yes	| >= 0	| >= 0 	| I | reset()<br />createBeverage("Coffee", 20, 500)<br />createBeverage("Coffee", 25, 600) -> BeverageException | it.polito.latazza.data.TestDataImpl.testCreateBeverage4 |
 | 	| 	| ~~< 0~~ 	| ~~I~~ | | |
 | 	| ~~< 0~~	| ~~>= 0~~ 	| ~~I~~ | | |
 | 	| 	| ~~< 0~~ 	| ~~I~~ | | |
@@ -501,11 +501,11 @@ Version: 1.0.0
 
 | Valid beverage | Sign of boxQuantity | Enough balance | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|-------|
-| yes 	| >= 0 	| yes 	| V 	| reset()<br />rechargeAccount(1, 500)<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1)<br />getBeverageCapsules(id) -> 20 |  |
-| 	| 	| no 	| I	| reset()<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1) -> NotEnoughBalance |
-| 	| < 0	| yes 	| I 	| reset()<br />rechargeAccount(1, 500)<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, -1) -> BeverageException |
+| yes 	| >= 0 	| yes 	| V 	| reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB = createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />buyBoxes(idB, 1)<br />getBeverageCapsules(idB) -> 20 |  it.polito.latazza.data.TestDataImpl.testBuyBoxes1 |
+| 	| 	| no 	| I	| reset()<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1) -> NotEnoughBalance | it.polito.latazza.data.TestDataImpl.testBuyBoxes2 |
+| 	| < 0	| yes 	| I 	| reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB = createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />buyBoxes(idB, -1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes3
 | 	|  	| ~~no~~ | ~~I~~ | |
-| no	| >= 0 	| yes	| I 	| reset()<br />rechargeAccount(1, 500)<br />buyBoxes(1, 1) -> BeverageException |
+| no	| >= 0 	| yes	| I 	| reset()<br />id=createEmployee("Mario","Rossi")<br />rechargeAccount(id, 500)<br />buyBoxes(1, 1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes4 |
 | 	|  	| ~~no~~	| ~~I~~ 	| |
 | 	| ~~< 0~~ | ~~yes~~	| ~~I~~ 	| |
 | 	| 	| ~~no~~	| ~~I~~ 	| |
@@ -631,8 +631,8 @@ Version: 1.0.0
 
 | Existing employee | Valid / Invalid | Description of the test case | JUnit test case |
 | ----------------- | --------------- | ---------------------------- | --------------- |
-| no	| V | reset()<br />id=createEmployee("Mario", "Rossi")<br />getEmployeeName(id) -> "Mario"<br />getEmployeeSurname(id) -> "Rossi" | |
-| yes	| I | reset()<br />createEmployee("Mario", "Rossi")<br />createEmployee("Mario", "Rossi") -> EmployeeException | |
+| no	| V | reset()<br />id=createEmployee("Mario", "Rossi")<br />getEmployeeName(id) -> "Mario"<br />getEmployeeSurname(id) -> "Rossi" | it.polito.latazza.data.TestDataImpl.testCreateEmployee1 |
+| yes	| I | reset()<br />createEmployee("Mario", "Rossi")<br />createEmployee("Mario", "Rossi") -> EmployeeException | it.polito.latazza.data.TestDataImpl.testCreateEmployee2 |
 
 **Criteria for method getReport:**
  - Valid dates
@@ -705,8 +705,8 @@ Version: 1.0.0
 
 | With history | Valid / Invalid | Description of the test case | JUnit test case |
 | ----------------- | --------------- | ---------------------------- | --------------- |
-| yes	| V | reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB=createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />getBalance() -> 500<br />buyBoxes(idB, 1)<br />getBalance() -> 0<br />sellCapsulesToVisitor(idB, 4)<br />getBalance() -> 100 | |
-| no	| V | reset()<br />getBalance() -> 0 | |
+| yes	| V | reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB=createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />getBalance() -> 500<br />buyBoxes(idB, 1)<br />getBalance() -> 0<br />sellCapsulesToVisitor(idB, 4)<br />getBalance() -> 100 | it.polito.latazza.data.TestDataImpl.testGetBalance1 |
+| no	| V | reset()<br />getBalance() -> 0 | it.polito.latazza.data.TestDataImpl.testGetBalance2 |
 
 # White Box Unit Tests
 

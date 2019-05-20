@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
+import it.polito.latazza.exceptions.NotEnoughCapsules;
 import it.polito.latazza.exceptions.DateException;
 
 public class TestDataImpl {
@@ -484,5 +485,214 @@ public class TestDataImpl {
 		} catch (EmployeeException e){
 			fail();
 		}
+	}
+	
+	/*
+	 * method: createBeverage
+	 */
+	
+	@Test
+	public void testCreateBeverage1() {
+		int id = -1;
+		try {
+			id = data.createBeverage("Coffee", 20, 500);
+		} catch (BeverageException e) {
+			fail();
+		}
+		
+		try {
+			assertEquals("Coffee", data.getBeverageName(id));
+			assertEquals(new Integer(20), data.getBeverageCapsulesPerBox(id));
+			assertEquals(new Integer(500), data.getBeverageBoxPrice(id));
+		} catch (BeverageException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testCreateBeverage2() {
+		try {
+			data.createBeverage("Coffee", 20, -500);
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testCreateBeverage3() {
+		try {
+			data.createBeverage("Coffee", -20, 500);
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testCreateBeverage4() {
+		try {
+			data.createBeverage("Coffee", 20, 500);
+			data.createBeverage("Coffee", 25, 600);
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	/*
+	 * method: getBeverageBoxPrice
+	 */
+	
+	public void testGetBeverageBoxPrice1() {
+		try {
+			int id = data.createBeverage("Coffee", 20, 500);
+			assertEquals(new Integer(500), data.getBeverageBoxPrice(id));
+		} catch (BeverageException e) {
+			fail();
+		}
+	}
+	
+	public void testGetBeverageBoxPrice2() {
+		try {
+			data.getBeverageBoxPrice(1);
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	/*
+	 * method: createEmployee
+	 */
+	
+	@Test
+	public void testCreateEmployee1() {
+		try {
+			int id = data.createEmployee("Mario", "Rossi");
+			assertEquals("Mario", data.getEmployeeName(id));
+			assertEquals("Rossi", data.getEmployeeSurname(id));
+		} catch (EmployeeException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testCreateEmployee2() {
+		try {
+			data.createEmployee("Mario", "Rossi");
+			data.createEmployee("Mario", "Rossi");
+			fail();
+		} catch (EmployeeException e) {
+			assertTrue(true);
+		}
+	}
+	
+	
+	/*
+	 * method: buyBoxes
+	 */
+	
+	@Test
+	public void testBuyBoxes1() {
+		int idB=-1;
+		try {
+			int idE = data.createEmployee("Mario", "Rossi");
+			idB = data.createBeverage("Coffee", 20, 500);
+			data.rechargeAccount(idE, 500);
+		} catch (Exception e) {
+			fail("Exception while creating the environment");
+		}
+		
+		try {
+			data.buyBoxes(idB, 1);
+			assertEquals(new Integer(20), data.getBeverageCapsules(idB));
+		} catch (BeverageException | NotEnoughBalance e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testBuyBoxes2() {
+		int idB=-1;
+		try {
+			idB = data.createBeverage("Coffee", 20, 500);
+		} catch (Exception e) {
+			fail("Exception while creating the environment");
+		}
+		
+		try {
+			data.buyBoxes(idB, 1);
+			fail();
+		} catch (NotEnoughBalance e) {
+			assertTrue(true);
+		} catch (BeverageException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testBuyBoxes3() {
+		int idB=-1;
+		try {
+			int idE = data.createEmployee("Mario", "Rossi");
+			idB = data.createBeverage("Coffee", 20, 500);
+			data.rechargeAccount(idE, 500);
+		} catch (Exception e) {
+			fail("Exception while creating the environment");
+		}
+		
+		try {
+			data.buyBoxes(idB, -1);
+			fail();
+		} catch (NotEnoughBalance e) {
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testBuyBoxes4() {
+		try {
+			int idE = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(idE, 500);
+		} catch (Exception e) {
+			fail("Exception while creating the environment");
+		}
+		
+		try {
+			data.buyBoxes(1, 1);
+			fail();
+		} catch (NotEnoughBalance e) {
+			fail();
+		} catch (BeverageException e) {
+			assertTrue(true);
+		}
+	}
+	
+	/*
+	 * method: getBalance
+	 */
+	
+	@Test
+	public void testGetBalance1() {
+		try {
+			int idE = data.createEmployee("Mario", "Rossi");
+			int idB = data.createBeverage("Coffee", 20, 500);
+			data.rechargeAccount(idE, 500);
+			assertEquals(new Integer(500), data.getBalance());
+			data.buyBoxes(idB, 1);
+			assertEquals(new Integer(0), data.getBalance());
+			data.sellCapsulesToVisitor(idB, 4);
+			assertEquals(new Integer(100), data.getBalance());
+		} catch (BeverageException | EmployeeException | NotEnoughBalance | NotEnoughCapsules e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testGetBalance2() {
+		assertEquals(new Integer(0), data.getBalance());
 	}
 }
