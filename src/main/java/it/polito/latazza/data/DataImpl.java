@@ -323,7 +323,6 @@ public class DataImpl implements DataInterface {
 		/* update */
 		e.setName(name);
 		e.setSurname(surname);
-		employees.put(id, e);
 		System.out.println(e + " updated");
 		
 		/* save */

@@ -708,6 +708,27 @@ Version: 1.0.0
 | yes	| V | reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB=createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />getBalance() -> 500<br />buyBoxes(idB, 1)<br />getBalance() -> 0<br />sellCapsulesToVisitor(idB, 4)<br />getBalance() -> 100 | it.polito.latazza.data.TestDataImpl.testGetBalance1 |
 | no	| V | reset()<br />getBalance() -> 0 | it.polito.latazza.data.TestDataImpl.testGetBalance2 |
 
+**Criteria for method updateEmployee:**
+ - Sign of id
+ - Valid employee (existing)
+
+**Predicates for method updateEmployee:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+|    Valid employee      |     yes      |
+|          |    no       |
+
+**Combination of predicates for method updateEmployee:**
+
+| Sign of id | Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | yes | V | data.createEmployee("Mario", "Rossi");<br />data.updateEmployee(id1, "Michele", "Suria"); -> name, surname updated (others unchanged) | it.polito.latazza.data.<br />TestDataImpl.testUpdateEmployee1 |
+| >= 0 | no | I | data.createEmployee("Mario", "Rossi");<br />data.updateEmployee(id1+1, "Michele", "Suria"); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testUpdateEmployee2 |
+| < 0 | no | I | data.createEmployee("Mario", "Rossi");<br />data.updateEmployee(-1, "Michele", "Suria"); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testUpdateEmployee3 |
+
 # White Box Unit Tests
 
 ### Test cases definition
