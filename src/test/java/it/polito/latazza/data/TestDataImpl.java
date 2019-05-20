@@ -552,6 +552,7 @@ public class TestDataImpl {
 	 * method: getBeverageBoxPrice
 	 */
 	
+	@Test
 	public void testGetBeverageBoxPrice1() {
 		try {
 			int id = data.createBeverage("Coffee", 20, 500);
@@ -561,6 +562,7 @@ public class TestDataImpl {
 		}
 	}
 	
+	@Test
 	public void testGetBeverageBoxPrice2() {
 		try {
 			data.getBeverageBoxPrice(1);
@@ -1357,6 +1359,7 @@ public class TestDataImpl {
 	 *****************
 	 */
 	
+	@Test
 	public void testDataPersistency() {
 		int idB=-1, idE=-1;
 		try {
@@ -1373,7 +1376,7 @@ public class TestDataImpl {
 			data = new DataImpl();	// simulate restart of the application
 			assertEquals(new Integer(200), data.getBalance());
 			assertEquals(new Integer(600), data.getEmployeeBalance(idE));
-			assertEquals(new Integer(15), data.getBeverageCapsules(idB));
+			assertEquals(new Integer(16), data.getBeverageCapsules(idB));
 			assertEquals("Mario Rossi", data.getEmployeeName(idE) + " " + data.getEmployeeSurname(idE));
 			assertEquals("Coffee", data.getBeverageName(idB));
 		} catch (Exception e) {
