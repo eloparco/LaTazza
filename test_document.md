@@ -108,8 +108,8 @@ Version: 1.0.0
 | Sign of numberOfBoxes | Overflow of availableCapsules | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
 | >= 0 | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); | it.polito.latazza.data.TestBeverage.tc1 |
-|  | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(10); b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20);| it.polito.latazza.data.TestBeverage.tc2 |
-| < 0 | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(-10);| it.polito.latazza.data.TestBeverage.tc3 |
+|  | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(10); b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20); -> BeverageException| it.polito.latazza.data.TestBeverage.tc2 |
+| < 0 | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(-10); -> BeverageException| it.polito.latazza.data.TestBeverage.tc3 |
 |  | yes | / ||  |
 
 **Criteria for method decreaseAvailableCapsules:**
@@ -138,10 +138,10 @@ Version: 1.0.0
 |-------|-------|-------|-------|-------|-------|
 | >= 0 | yes | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(10);| it.polito.latazza.data.TestBeverage.tc4 |
 | |  | yes | / || |
-| | no | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(50);| it.polito.latazza.data.TestBeverage.tc5 |
+| | no | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(50); -> NotEnoughCapsules| it.polito.latazza.data.TestBeverage.tc5 |
 | | | yes | / || |
-| < 0 | yes | no | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(-5);| it.polito.latazza.data.TestBeverage.tc6 |
-| | | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(- (Integer.MAX_VALUE - 20));| it.polito.latazza.data.TestBeverage.tc7 |
+| < 0 | yes | no | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(-5); -> BeverageException| it.polito.latazza.data.TestBeverage.tc6 |
+| | | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); b.decreaseAvailableCapsules(- (Integer.MAX_VALUE - 20)); -> BeverageException| it.polito.latazza.data.TestBeverage.tc7 |
 | | no | no | / |
 | | | yes | / |
 
@@ -322,9 +322,9 @@ Version: 1.0.0
 | Sign of amount | Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
 | >= 0 | yes | V |Recharge(emp, 1000)|it.polito.latazza.data.TestRecharge.tc1|
-|  | no | I |Recharge(null, 1000)|it.polito.latazza.data.TestRecharge.tc2|
+|  | no | I |Recharge(null, 1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc2|
 | < 0 | yes | V |Recharge(emp, -1000)|it.polito.latazza.data.TestRecharge.tc3|
-|  | no | I |Recharge(null, -1000)|it.polito.latazza.data.TestRecharge.tc4|
+|  | no | I |Recharge(null, -1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc4|
 
 ### Class DataImpl
 
@@ -352,9 +352,9 @@ Version: 1.0.0
 | Sign of id | Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
 | >= 0 | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageName(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName1 |
-|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName2 |
+|  | no | I | data.reset();<br />data.getBeverageName(10); -> BeverageException | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName2 |
 | < 0 | yes | / ||  |
-|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageName(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName3 |
+|  | no | I | data.reset();<br />data.getBeverageName(-10); -> BeverageException| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageName3 |
 
 **Criteria for method getBeverageCapsulesPerBox:**
  - Sign of id
@@ -380,9 +380,9 @@ Version: 1.0.0
 | Sign of id | Valid beverage | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
 | >= 0 | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageCapsulesPerBox(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox1 |
-|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsulesPerBox(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox2 |
+|  | no | I | data.reset();<br />data.getBeverageCapsulesPerBox(10); -> BeverageException| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox2 |
 | < 0 | yes | / ||  |
-|  | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsulesPerBox(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox3 |
+|  | no | I | data.reset();<br />data.getBeverageCapsulesPerBox(-10); -> BeverageException| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsulesPerBox3 |
 
 **Criteria for method getBeverageCapsules:**
  - Sign of id
@@ -411,11 +411,11 @@ Version: 1.0.0
 |-------|-------|-------|-------|-------|-------|
 | >= 0 | yes | no | V | beverageId = beverageId = data.createBeverage("Coffee", 20, 500);<br />data.getBeverageCapsules(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules1 |
 |  |  | yes | V | beverageId = data.createBeverage("Coffee", 20, 500);<br />data.buyBoxes(beverageId, 2);<br />data.getBeverageCapsules(beverageId); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules2 |
-|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsules(10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules3 |
+|  | no | no | I | data.reset();<br />data.getBeverageCapsules(10); -> BeverageException| it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules3 |
 |  |  | yes | / |  |  |
 | < 0 | yes | no | / |  |  |
 |  |  | yes | / |  |  |
-|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getBeverageCapsules(-10); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules4 |
+|  | no | no | I | data.reset();<br />data.getBeverageCapsules(-10); -> BeverageException | it.polito.latazza.data.<br />TestDataImpl.testGetBeverageCapsules4 |
 |  |  | yes | / |  |  |
 
 **Criteria for method *getBeverageBoxPrice*:**
@@ -524,7 +524,7 @@ Version: 1.0.0
 
 | With history | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|
-| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeveragesId() | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
+| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeveragesId(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
 | no | V | data.reset();<br />data.getBeveragesId(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
 
 **Criteria for method getBeverages:**
@@ -541,7 +541,7 @@ Version: 1.0.0
 
 | With history | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|
-| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeverages() | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
+| yes | V | id1 = data.createBeverage("Coffee", 20, 500);<br />id2 = data.createBeverage("Tea", 25, 400);<br />beverages = data.getBeverages(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
 | no | V | data.reset();<br />data.getBeverages(); | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 
 **Criteria for method getEmployeeBalance:**
@@ -572,11 +572,11 @@ Version: 1.0.0
 |-------|-------|-------|-------|-------|-------|
 | >= 0 | yes | no | V |employeeId = data.createEmployee("Mario", "Rossi");<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance1 |
 |  |  | yes | V | employeeId = data.createEmployee("Mario", "Rossi");<br />data.rechargeAccount(employeeId, 500);<br />data.getEmployeeBalance(employeeId); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance2 |
-|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(10); | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance3 |
+|  | no | no | I | data.reset();<br />data.getEmployeeBalance(10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance3 |
 |  |  | yes | / |  |  |
 | < 0 | yes | no | / ||  |
 |  |  | yes | / ||  |
-|  | no | no | I | DataInterface data = new DataImpl();<br />data.reset();<br />data.getEmployeeBalance(-10);| it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance4 |
+|  | no | no | I | data.reset();<br />data.getEmployeeBalance(-10); -> EmployeeException| it.polito.latazza.data.<br />TestDataImpl.testGetEmployeeBalance4 |
 |  |  | yes | / ||  |
 
 **Criteria for method getEmployeeName:**
