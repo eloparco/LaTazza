@@ -709,6 +709,35 @@ Version: 1.0.0
 | no	| V | reset()<br />getBalance() -> 0 | it.polito.latazza.data.TestDataImpl.testGetBalance2 |
 
 
+**Criteria for method rechargeAccount:**
+ - Sign of id
+ - Sign of amountInCents
+
+**Predicates for method rechargeAccount:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+| Sign of id |      >= 0     |
+|          |     < 0      |
+| Sign of amountInCents |      >= 0     |
+|          |     < 0      |
+
+**Boundaries for method rechargeAccount:**
+
+| Criteria | Boundary values |
+| -------- | --------------- |
+|   Sign of id       |    MININT, 0, MAXINT             |
+|   Sign of amountInCents       |    MININT, 0, MAXINT             |
+
+**Combination of predicates for method rechargeAccount:**
+
+| Sign of id | Sign of amountInCents | Valid / Invalid | Description of the test case | JUnit test case |
+|-------|-------|-------|-------|-------|
+| >= 0 | >= 0 | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 10);<br /> data.getEmployeeBalance(id1) -> 10 | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount2 |
+| < 0 |  | I | data.rechargeAccount(-1, 10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount1 |
+|  | < 0 | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, -10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount3 |
+
+
 **Criteria for method sellCapsules:**
  - Sign of employeeId
  - Valid employee (existing)
@@ -863,6 +892,8 @@ Version: 1.0.0
 | Consumption | it.polito.latazza.data.<br />TestConsumption.tcToStringFormat |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcReset |
+
 
 ### Code coverage report
 

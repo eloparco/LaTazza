@@ -697,6 +697,73 @@ public class TestDataImpl {
 	}
 	
 	/*
+	 * 	method: rechargeAccount
+	 */
+	
+	@Test
+	public void testRechargeAccount1() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, 10);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(10));
+		} catch (Exception e){
+			fail();
+		}
+	}
+	
+	/*
+	 * 	method: rechargeAccount
+	 */
+	
+	@Test
+	public void testRechargeAccount2() {
+		try {
+			data.rechargeAccount(-1, 10);
+			fail();
+		} catch (Exception e){
+		}
+	}
+	
+	/*
+	 * 	method: rechargeAccount
+	 */
+	
+	@Test
+	public void testRechargeAccount3() {
+		try {
+			assertEquals(data.getEmployees().size(), 0);
+			int id1 = data.createEmployee("Mario" ,"Rossi");
+			assertEquals(data.getEmployeeBalance(id1), new Integer(0));
+			data.rechargeAccount(id1, -10);
+			fail();
+		} catch (EmployeeException e) {
+		} catch (Exception e){
+			fail();
+		}
+	}
+	
+	@Test
+	public void tcReset() {
+		try {
+			int id1 = data.createEmployee("Mario", "Rossi");
+			data.createEmployee("Luca", "Sassi");
+			int b1 = data.createBeverage("tea", 50, 1000);
+			data.rechargeAccount(id1, 2000);
+			data.buyBoxes(b1, 2);
+			data.sellCapsules(id1, b1, 50, true);
+			assertEquals(data.getEmployeeBalance(id1), new Integer(1000));
+			data.reset();
+			assertEquals(data.getEmployees().size(), 0);
+			assertEquals(data.getBeverages().size(), 0);
+			assertEquals(data.getBalance(), new Integer(0));
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	/*
 	 * 	method: sellCapsules
 	 */
 	
