@@ -769,6 +769,7 @@ public class TestDataImpl {
 			assertEquals(data.getBeverages().size(), 0);
 			assertEquals(data.getBalance(), new Integer(0));
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail();
 		}
 	}
