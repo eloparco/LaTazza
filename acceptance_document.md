@@ -53,6 +53,18 @@ Version:
 | 1                | ...                |
 |                  |                    |
 
+| Scenario ID: SC4 | Corresponds to UC4 |
+| ---------------- | ------------------ |
+| Description      | A new employee wants to be registered in the system and wants to recharge his account so that he could then buy capsules when he'll need them                |
+| Precondition     | ...                |
+| Postcondition    | The new employee is registered in the system and his account is updated with the recharged amount                |
+| Step#            | ...                |
+| 1                 | Administrator inputs employee Name and Surname                   |
+| 2                 | The new employee is registered in the system with an account balance of 0  |
+| 3                 | Administrator selects the employee  |
+| 4                 | Administrator inserts the amount A to recharge  |
+| 5                 | Increase of A the employee account balance |
+
 
 
 # Coverage of Scenarios
