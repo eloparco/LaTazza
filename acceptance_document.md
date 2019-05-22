@@ -65,7 +65,17 @@ Version:
 | 4                 | Administrator inserts the amount A to recharge  |
 | 5                 | Increase of A the employee account balance |
 
-
+| Scenario ID: SC6 | Corresponds to UC3                                   |
+| ---------------- | ------------------------------------------------------ |
+| Description      | Colleague wants to be registered in the system and wants to recharge his account so that he could then buy capsules when he will need them |
+| Precondition     | Colleague works in the company     |
+| Postcondition    | Account of C created and updated with the recharged amount               |
+| Step#            | Step description                                       |
+| 1                | Administrator enters name and surname of the colleague                   |
+| 2                | The colleague is registered in the system with an account balance of 0                      |
+| 3                | Administrator selects the employee                  |
+| 4                | Administrator enters the amount A to recharge                   |
+| 5                | Increase of A in the colleague account balance                |
 
 # Coverage of Scenarios
 
@@ -78,13 +88,13 @@ In the API Tests column, report the name of the method of the API Test JUnit cla
 
 | Scenario ID | Functional Requirements covered | API Test(s) | GUI Test(s) |
 | ----------- | ------------------------------- | ----------- | ----------- |
-| 1           | FR1                             |             |             |
-| 2           | FR1                             |             |             |
-| ...         |                                 |             |             |
-| ...         |                                 |             |             |
-| ...         |                                 |             |             |
-| ...         |                                 |             |             |
-
+| 1           | FR1                             | it.polito.latazza.data.TestDataImpl.testSellCapsules1			|             	|
+| 2           | FR1                             | it.polito.latazza.data.TestDataImpl.testScenario2            		|             	|
+| 3	      | FR2                             | it.polito.latazza.data.TestDataImpl.testSellCapsulesToVisitor1        |             	|
+| 4           | FR5                             | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1            |             	|
+| 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	|             	|
+| 6	      | FR8+FR3				| it.polito.latazza.data.TestDataImpl.testScenario6 			|		|
+| 7	      | FR7+FR4				| it.polito.latazza.data.TestDataImpl.testScenario7 			| 		|
 
 
 # Coverage of Non Functional Requirements
@@ -97,5 +107,5 @@ In the API Tests column, report the name of the method of the API Test JUnit cla
 
 | Non Functional Requirement | Test name |
 | -------------------------- | --------- |
-|                            |           |
+| Performance                |           |
 
