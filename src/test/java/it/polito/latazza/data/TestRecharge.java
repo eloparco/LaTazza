@@ -78,7 +78,7 @@ class TestRecharge {
 	@Test
 	void tcToStringFormat() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String expected = format.format(r.getDate()) + " RECHARGE Mario Rossi 10.00€";
+		String expected = format.format(r.getDate()) + " RECHARGE Mario Rossi " + String.format("%.2f", 10.0) + "€";
 		assertEquals(expected, r.toString());
 	}
 

@@ -23,7 +23,7 @@ public class TestDataImpl {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
+		Locale.setDefault(Locale.ITALY);
 		data = new DataImpl();
 		data.reset();
 	}
@@ -359,8 +359,8 @@ public class TestDataImpl {
 			List<String> l = data.getReport(d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
-			
+			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + "€", s.substring(19, s.length()));  
+
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
 			assertEquals(2, data.getReport(d, new Date()).size());
@@ -405,8 +405,8 @@ public class TestDataImpl {
 			List<String> l = data.getEmployeeReport(id, d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi 100.00€", s.substring(19, s.length()));  
-			
+			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + "€", s.substring(19, s.length()));  
+
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
 			data.sellCapsules(id, b, 10, true);
