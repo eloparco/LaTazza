@@ -2,6 +2,7 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -10,6 +11,7 @@ import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.omg.CORBA.IdentifierHelper;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
@@ -1381,6 +1383,66 @@ public class TestDataImpl {
 			assertEquals("Mario Rossi", data.getEmployeeName(idE) + " " + data.getEmployeeSurname(idE));
 			assertEquals("Coffee", data.getBeverageName(idB));
 		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testScenario2() {
+		try {
+			int employeeId = data.createEmployee("Mario", "Rossi");
+			int beverageId = data.createBeverage("Coffee", 20, 500);
+			
+			// recharge balance of another employee to increase the amount of LaTazza, allowing to buy new boxes
+			int id = data.createEmployee("John", "Doe");
+			data.rechargeAccount(id, 10000);
+			data.buyBoxes(beverageId, 1);
+			
+			data.sellCapsules(employeeId, beverageId, 1, true);
+			int balance = data.getEmployeeBalance(employeeId);
+			// employee balance (previously 0) is now negative
+			assertEquals(-25, balance);
+		} catch (EmployeeException e) {
+			fail();
+		} catch (BeverageException e) {
+			fail();
+		} catch (NotEnoughCapsules e) {
+			fail();
+		} catch (NotEnoughBalance e) {
+			fail();
+		}
+	}
+	
+	/*
+	 *		FR8 + FR3
+	 */
+	
+	@Test
+	public void testScenario6() {
+		try {
+			int employeeId = data.createEmployee("Mario", "Rossi");
+			
+			assertEquals("Mario", data.getEmployeeName(employeeId));
+			assertEquals("Rossi", data.getEmployeeSurname(employeeId));
+			assertEquals(Integer.valueOf(0), data.getEmployeeBalance(employeeId));
+			assertEquals(1, data.getEmployees().size());
+			assertTrue(data.getEmployees().containsKey(employeeId));
+			assertTrue(data.getEmployees().containsValue("Mario Rossi"));
+			assertEquals(1, data.getEmployeesId().size());
+			assertTrue(data.getEmployeesId().contains(employeeId));
+	
+			Date d = new Date();
+			data.rechargeAccount(employeeId, 500);
+			List<String> rechargeReport = data.getEmployeeReport(employeeId, d, new Date());
+			assertEquals(1, rechargeReport.size());
+			
+				
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String expected = format.format(d) + " RECHARGE Mario Rossi " + String.format("%.2f", 5.0) + "€";
+			assertEquals(expected, rechargeReport.get(0));
+		} catch (EmployeeException e) {
+			fail();
+		} catch (DateException e) {
 			fail();
 		}
 	}
