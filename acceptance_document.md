@@ -22,7 +22,7 @@ Version: 1.0.0
 
 | Scenario ID: SC1 | Corresponds to UC1                             |
 | ---------------- | ---------------------------------------------- |
-| Description      | Colleague uses one capsule of type 1           |
+| Description      | Colleague uses one capsule of type T           |
 | Precondition     | account of C has enough money to buy capsule T |
 | Postcondition    | account of C updated, count of T updated       |
 | Step#            | Step description                               |
@@ -43,14 +43,16 @@ Version: 1.0.0
 | 4                | Deduce price of T from account of C                    |
 | 5                | Account of C is negative, issue warning                |
 
-| Scenario ID: SC3 | Corresponds to UC3 |
-| ---------------- | ------------------ |
-| Description      | ...                |
-| Precondition     | ...                |
-| Postcondition    | ...                |
-| Step#            | ...                |
-| 1                | ...                |
-|                  |                    |
+| Scenario ID: SC3	| Corresponds to UC3 				|
+| --------------------	| --------------------------------------------- |
+| Description     	| Visitor uses one capsule of type T 		|
+| Precondition     	| Quantity of capsule type T greater than 0 	|
+| Postcondition    	| Balance updated, count of T updated		|
+| Step#            	| Step description      			|
+| 1             	| Administrator selects capsule type T 		|
+| 2                	| Administrator selects Visitor 		|
+| 3                	| Reduce one for quantity of capsule T		|
+| 4                	| Add price of T to balance 			|
 
 | Scenario ID: SC4 | Corresponds to UC4 |
 | ---------------- | ------------------ |
@@ -94,8 +96,6 @@ Version: 1.0.0
 
 # Coverage of Non Functional Requirements
 
-### 
-
-| Non Functional Requirement | Test name |
-| -------------------------- | --------- |
-| Performance                |           |
+| Non Functional Requirement	| Test name	|
+| ----------------------------	| ------------- |
+| NFR2 (Performance)      		| it.polito.latazza.data.TestDataImpl.testPerformance |
