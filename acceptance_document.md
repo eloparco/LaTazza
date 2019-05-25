@@ -1,25 +1,24 @@
 # Acceptance Testing Documentation template
 
 Authors:
+* Bonelli Lorenzo 267563  
+* Ruggeri Franco 265682  
+* Rosso Alessandro 265485  
+* Loparco Enrico 261072  
 
-Date:
+Date: 26/05/19
 
-Version:
+Version: 1.0.0
+
 
 # Contents
 
 - [Scenarios](#scenarios)
-
 - [Coverage of scenarios](#scenario-coverage)
 - [Coverage of non-functional requirements](#nfr-coverage)
 
 
-
 # Scenarios
-
-```
-<Define here additional scenarios for the application. The two original scenarios in the Requirements Document are reported here.>
-```
 
 | Scenario ID: SC1 | Corresponds to UC1                             |
 | ---------------- | ---------------------------------------------- |
@@ -77,12 +76,8 @@ Version:
 | 4                | Administrator enters the amount A to recharge                   |
 | 5                | Increase of A in the colleague account balance                |
 
-# Coverage of Scenarios
 
-```
-<Report in the following table the coverage of the scenarios listed above. Report at least an API test (defined on the functions of DataImpl only) and a GUI test (created with EyeAutomate) for each of the scenarios. For each scenario, report the functional requirements it covers.
-In the API Tests column, report the name of the method of the API Test JUnit class you created. In the GUI Test column, report the name of the .txt file with the test case you created.>
-```
+# Coverage of Scenarios
 
 ### 
 
@@ -99,13 +94,8 @@ In the API Tests column, report the name of the method of the API Test JUnit cla
 
 # Coverage of Non Functional Requirements
 
-```
-<Report in the following table the coverage of the Non Functional Requirements of the application - only those that can be tested with automated testing frameworks.>
-```
-
 ### 
 
 | Non Functional Requirement | Test name |
 | -------------------------- | --------- |
 | Performance                |           |
-
