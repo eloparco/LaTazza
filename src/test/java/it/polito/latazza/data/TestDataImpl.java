@@ -1468,6 +1468,20 @@ public class TestDataImpl {
 		}
 	}
 	
+	@Test
+	public void testScenario7() {
+		try {
+			int id = data.createEmployee("Mario", "Rossi");
+			data.rechargeAccount(id, 1);
+			int b = data.createBeverage("Coffee", 1, 1);
+			assertEquals("Coffee", data.getBeverageName(b));
+			data.buyBoxes(b, 1);
+			assertEquals(new Integer(0), data.getBalance());
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
 	/*
 	 * NFR2
 	 */
