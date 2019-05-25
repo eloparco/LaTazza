@@ -78,7 +78,16 @@ Version: 1.0.0
 | 4                | Administrator enters the amount A to recharge                   |
 | 5                | Increase of A in the colleague account balance                |
 
-
+| Scenario ID: SC7 | Corresponds to UC4                                   |
+| ---------------- | ------------------------------------------------------ |
+| Description      | Add a new beverage of type T and order one box |
+| Precondition     | Shared balance sufficient     |
+| Postcondition    | Beverage registered, shared account decreased, capsules amount added |
+| Step#            | Step description                                       |
+| 1                | Administrator enters name, capsules and price of the beverage type T                |
+| 2                | Administrator selects to buy one box of  T                  |
+| 3                | Deduce price of T from shared balance              |
+| 4                | Add capsules of T to avaliable capsules                  |
 # Coverage of Scenarios
 
 ### 
