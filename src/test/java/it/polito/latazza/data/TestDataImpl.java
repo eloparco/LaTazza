@@ -11,7 +11,6 @@ import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.omg.CORBA.IdentifierHelper;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
@@ -1414,6 +1413,28 @@ public class TestDataImpl {
 	}
 	
 	/*
+	 * FR2
+	 */
+	@Test
+	public void testScenario3() {
+		try {
+			int beverageId = data.createBeverage("Coffee", 20, 500);
+			int employeeId = data.createEmployee("John", "Doe");
+			data.rechargeAccount(employeeId, 500);	// to have enough money to buy a box
+			data.buyBoxes(beverageId, 1);			// to have enough capsules for selling
+			
+			data.sellCapsulesToVisitor(beverageId, 1);
+			assertEquals(new Integer(19), data.getBeverageCapsules(beverageId));
+			assertEquals(new Integer(25), data.getBalance());
+		} catch (EmployeeException | NotEnoughBalance e) {
+			fail("Exception while creating the environment");
+		} catch (BeverageException | NotEnoughCapsules e) {
+			fail();
+		}
+	}
+	
+	
+	/*
 	 *		FR8 + FR3
 	 */
 	
@@ -1443,6 +1464,88 @@ public class TestDataImpl {
 		} catch (EmployeeException e) {
 			fail();
 		} catch (DateException e) {
+			fail();
+		}
+	}
+	
+	/*
+	 * NFR2
+	 */
+	@Test
+	public void testPerformance() {
+		try {
+			long begin, end;
+			int idE, idB;
+			Date startDate=new Date(), endDate;
+			
+			/* FR7 - create */
+			begin = System.currentTimeMillis();  
+			idB = data.createBeverage("Coffe", 2, 50);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR7 - update */
+			begin = System.currentTimeMillis();  
+			data.updateBeverage(idB, "Coffee", 20, 500);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR8 - create */
+			begin = System.currentTimeMillis();  
+			idE = data.createEmployee("Mari", "Rosi");
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR8 - update */
+			begin = System.currentTimeMillis();  
+			data.updateEmployee(idE, "Mario", "Rossi");
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR3 */
+			begin = System.currentTimeMillis();
+			data.rechargeAccount(idE, 10000);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR4 */
+			begin = System.currentTimeMillis();
+			data.buyBoxes(idB, 20);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR1 */
+			begin = System.currentTimeMillis();
+			data.sellCapsules(idE, idB, 2, true);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR2 */
+			begin = System.currentTimeMillis();
+			data.sellCapsulesToVisitor(idB, 2);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			// increase transactions for more realistic report production test
+			for (int i=0; i<100; i++) {
+				data.sellCapsules(idE, idB, 1, true);
+				data.sellCapsulesToVisitor(idB, 1);
+			}
+			endDate = new Date();
+			
+			/* FR5 */
+			begin = System.currentTimeMillis();
+			data.getEmployeeReport(idE, startDate, endDate);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			/* FR6 */
+			begin = System.currentTimeMillis();
+			data.getReport(startDate, endDate);
+			end = System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+		} catch (EmployeeException | BeverageException | NotEnoughCapsules | NotEnoughBalance | DateException e) {
 			fail();
 		}
 	}
