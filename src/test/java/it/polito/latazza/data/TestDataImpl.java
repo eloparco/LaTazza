@@ -24,7 +24,6 @@ public class TestDataImpl {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.ITALY);
 		data = new DataImpl();
 		data.reset();
 	}

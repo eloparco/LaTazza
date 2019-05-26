@@ -71,6 +71,43 @@ class TestRecharge {
 		}
 	}
 	
+	// boundary: amount = 0
+	@Test
+	void tc5() {
+		Recharge r;
+		try {
+			r = new Recharge(e, 0);
+			assertSame(e, r.getEmployee());
+			assertEquals(0, r.getAmount());
+		} catch (EmployeeException e1) {
+			fail();
+		}
+	}
+	
+	// boundary: amount = MAXINT
+	@Test
+	void tc6() {
+		Recharge r;
+		try {
+			r = new Recharge(e, Integer.MAX_VALUE);
+			assertSame(e, r.getEmployee());
+			assertEquals(Integer.MAX_VALUE, r.getAmount());
+		} catch (EmployeeException e1) {
+			fail();
+		}
+	}
+	
+	// boundary: amount = MININT
+	@Test
+	void tc7() {
+		try {
+			new Recharge(null, Integer.MIN_VALUE);
+			fail();
+		} catch (EmployeeException e) {
+
+		}
+	}
+	
 	/*
 	 *		WHITE BOX
 	 */
