@@ -1,9 +1,7 @@
-
 Click "{ImageFolder}/1558685816334.png"
 Click "{ImageFolder}/1558686073725.png"
 Click "{ImageFolder}/1558686190066.png" 39 83
 Click "{ImageFolder}/1558686236324.png" 62 33
-
 Type "John"
 Click "{ImageFolder}/1558686333070.png" 70 55
 Type "Doe"
