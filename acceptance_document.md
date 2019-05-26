@@ -31,7 +31,7 @@ Version: 1.0.0
 | 3                | Deduce one for quantity of capsule T           |
 | 4                | Deduce price of T from account of C            |
 
-| Scenario ID: SC2 | Corresponds to UC2                                     |
+| Scenario ID: SC2 | Corresponds to UC1                                     |
 | ---------------- | ------------------------------------------------------ |
 | Description      | Colleague uses one capsule of type T, account negative |
 | Precondition     | account of C has not enough money to buy capsule T     |
@@ -43,7 +43,7 @@ Version: 1.0.0
 | 4                | Deduce price of T from account of C                    |
 | 5                | Account of C is negative, issue warning                |
 
-| Scenario ID: SC3	| Corresponds to UC3 				|
+| Scenario ID: SC3	| Corresponds to UC2 				|
 | --------------------	| --------------------------------------------- |
 | Description     	| Visitor uses one capsule of type T 		|
 | Precondition     	| Quantity of capsule type T greater than 0 	|
