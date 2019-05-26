@@ -321,7 +321,7 @@ Version: 1.0.0
 
 | Sign of amount | Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | yes | V |Recharge(emp, 1000)<br />*boundary:*<br />Recharge(emp, 0)<br />*boundary:*<br /> Recharge(emp, MAXINT)|it.polito.latazza.data.TestRecharge.tc1<br /><br />it.polito.latazza.data.TestRecharge.tc5<br /><br />it.polito.latazza.data.TestRecharge.tc6|
+| >= 0 | yes | V |Recharge(emp, 1000)<br />*boundary:*<br />Recharge(emp, 0)<br /> Recharge(emp, MAXINT)|it.polito.latazza.data.TestRecharge.tc1<br /><br />it.polito.latazza.data.TestRecharge.tc5<br />it.polito.latazza.data.TestRecharge.tc6|
 |  | no | I |Recharge(null, 1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc2|
 | < 0 | yes | V |Recharge(emp, -1000)<br />*boundary:*<br />Recharge(emp, MININT)|it.polito.latazza.data.TestRecharge.tc3<br /><br />it.polito.latazza.data.TestRecharge.tc7|
 |  | no | I |Recharge(null, -1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc4|
