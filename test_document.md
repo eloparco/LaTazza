@@ -345,7 +345,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageName:**
 
@@ -373,7 +373,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageCapsulesPerBox:**
 
@@ -403,7 +403,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageCapsules:**
 
@@ -564,7 +564,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getEmployeeBalance:**
 
