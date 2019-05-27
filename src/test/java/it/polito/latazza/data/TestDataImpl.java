@@ -399,7 +399,7 @@ public class TestDataImpl {
 	@Test
 	public void testGetEmployees() {
 		try {
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			int idE = data.createEmployee("Marco", "Bianchi");
 			Map<Integer, String> m = data.getEmployees();
 			assertEquals(2, m.size());
@@ -610,9 +610,9 @@ public class TestDataImpl {
 			data.sellCapsules(employeeId, b1, 50, true);
 			assertEquals(Integer.valueOf(2000), data.getEmployeeBalance(employeeId));
 			data.reset();
-			assertEquals(data.getEmployees().size(), 0);
-			assertEquals(data.getBeverages().size(), 0);
-			assertEquals(data.getBalance(), Integer.valueOf(0));
+			assertEquals(0, data.getEmployees().size());
+			assertEquals(0, data.getBeverages().size());
+			assertEquals(Integer.valueOf(0), data.getBalance());
 		} catch (EmployeeException | BeverageException | NotEnoughBalance | NotEnoughCapsules e) {
 			fail();
 		}
@@ -1016,16 +1016,16 @@ public class TestDataImpl {
 	public void testUpdateEmployee1() {
 		data.reset();
 		try {
-			assertEquals(data.getEmployees().size(), 0);
+			assertEquals(0, data.getEmployees().size());
 			int id1 = data.createEmployee("Mario", "Rossi");
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			data.rechargeAccount(id1, 1000);
-			assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+			assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 			data.updateEmployee(id1, "Michele", "Suria");
-			assertEquals(data.getEmployees().size(), 1);
-			assertEquals(data.getEmployeeName(id1), "Michele");
-			assertEquals(data.getEmployeeSurname(id1), "Suria");
-			assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+			assertEquals(1, data.getEmployees().size());
+			assertEquals("Michele", data.getEmployeeName(id1));
+			assertEquals("Suria", data.getEmployeeSurname(id1));
+			assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 		} catch (Exception e) {
 			fail();
 		}
@@ -1036,19 +1036,19 @@ public class TestDataImpl {
 		data.reset();
 		int id1 = 0;
 		try {
-			assertEquals(data.getEmployees().size(), 0);
+			assertEquals(0, data.getEmployees().size());
 			id1 = data.createEmployee("Mario", "Rossi");
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			data.rechargeAccount(id1, 1000);
-			assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+			assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 			data.updateEmployee(id1+1, "Michele", "Suria");
 			fail();
 		} catch (EmployeeException e) {
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			try {
-				assertEquals(data.getEmployeeName(id1), "Mario");
-				assertEquals(data.getEmployeeSurname(id1), "Rossi");
-				assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+				assertEquals("Mario", data.getEmployeeName(id1));
+				assertEquals("Rossi", data.getEmployeeSurname(id1));
+				assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 			} catch (EmployeeException e1) {
 				fail();
 			}
@@ -1062,19 +1062,19 @@ public class TestDataImpl {
 		data.reset();
 		int id1 = 0;
 		try {
-			assertEquals(data.getEmployees().size(), 0);
+			assertEquals(0, data.getEmployees().size());
 			id1 = data.createEmployee("Mario", "Rossi");
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			data.rechargeAccount(id1, 1000);
-			assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+			assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 			data.updateEmployee(-1, "Michele", "Suria");
 			fail();
 		} catch (EmployeeException e) {
-			assertEquals(data.getEmployees().size(), 1);
+			assertEquals(1, data.getEmployees().size());
 			try {
-				assertEquals(data.getEmployeeName(id1), "Mario");
-				assertEquals(data.getEmployeeSurname(id1), "Rossi");
-				assertEquals(data.getEmployeeBalance(id1), Integer.valueOf(1000));
+				assertEquals("Mario", data.getEmployeeName(id1));
+				assertEquals("Rossi", data.getEmployeeSurname(id1));
+				assertEquals(Integer.valueOf(1000), data.getEmployeeBalance(id1));
 			} catch (EmployeeException e1) {
 				fail();
 			}
