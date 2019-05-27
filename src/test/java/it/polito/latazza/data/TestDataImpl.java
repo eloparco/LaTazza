@@ -17,6 +17,21 @@ import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 import it.polito.latazza.exceptions.DateException;
 
+/**
+ * This class includes:
+ * - Integration testing
+ * - Acceptance testing
+ * 
+ * Since the used technique for integration is incremental bottom up
+ * (i.e. unit tests have been done previously on units this class depends on),
+ * no stubs are used.
+ * 
+ * @author s267563
+ * @author s265682
+ * @author s265485 
+ * @author s261072
+ * 
+ */
 public class TestDataImpl {
 
 	DataInterface data;
@@ -31,14 +46,9 @@ public class TestDataImpl {
 	void tearDown() throws Exception {
 	}
 	
-	/*
-	 *****************
-	 *** Black box ***
-	 *****************
-	 */
 	
 	/*
-	 * 	method: getBeverageName 
+	 * Black box
 	 */
 	
 	@Test
@@ -73,10 +83,6 @@ public class TestDataImpl {
 		}
 	}	
 	
-	/*
-	 * 	method: getBeverageCapsulesPerBox
-	 */
-	
 	@Test
 	public void testGetBeverageCapsulesPerBox1() {
 		try {
@@ -107,11 +113,7 @@ public class TestDataImpl {
 		} catch (BeverageException e) {
 
 		}
-	}	
-	
-	/*
-	 *  method: getBeverageCapsules
-	 */
+	}
 	
 	@Test
 	public void testGetBeverageCapsules1() {
@@ -169,10 +171,6 @@ public class TestDataImpl {
 		}
 	}	
 	
-	/*
-	 * 	method: getBeveragesId 
-	 */
-	
 	@Test
 	public void testGetBeveragesId1() {
 		try {
@@ -205,10 +203,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: getBeverages
-	 */
 	
 	@Test
 	public void testGetBeverages1() {
@@ -245,10 +239,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: getEmployeeBalance
-	 */
 	
 	@Test
 	public void testGetEmployeeBalance1() {
@@ -293,10 +283,6 @@ public class TestDataImpl {
 		}
 	}	
 	
-	/*
-	 * 	method: getEmployeeName
-	 */
-	
 	@Test
 	public void testGetEmployeeName1() {
 		try {
@@ -318,10 +304,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: getEmployeeSurname
-	 */
-	
 	@Test
 	public void testGetEmployeeSurname1() {
 		try {
@@ -342,10 +324,6 @@ public class TestDataImpl {
 		catch (EmployeeException e) {
 		}
 	}
-	
-	/*
-	 * 	method: getReport
-	 */
 	
 	@Test
 	public void testGetReport1() {
@@ -388,10 +366,6 @@ public class TestDataImpl {
 		} catch (DateException e) {
 		}
 	}
-	
-	/*
-	 * 	method: getEmployeeReport
-	 */
 	
 	@Test
 	public void testGetEmployeeReport1() {
@@ -454,10 +428,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: getEmployeesId
-	 */
-	
 	@Test
 	public void testGetEmployeesId() {
 		try {
@@ -474,10 +444,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: getEmployees
-	 */
-	
 	@Test
 	public void testGetEmployees() {
 		try {
@@ -493,10 +459,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * method: createBeverage
-	 */
 	
 	@Test
 	public void testCreateBeverage1() {
@@ -547,10 +509,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * method: getBeverageBoxPrice
-	 */
-	
 	@Test
 	public void testGetBeverageBoxPrice1() {
 		try {
@@ -570,10 +528,6 @@ public class TestDataImpl {
 			assertTrue(true);
 		}
 	}
-	
-	/*
-	 * method: createEmployee
-	 */
 	
 	@Test
 	public void testCreateEmployee1() {
@@ -596,11 +550,6 @@ public class TestDataImpl {
 			assertTrue(true);
 		}
 	}
-	
-	
-	/*
-	 * method: buyBoxes
-	 */
 	
 	@Test
 	public void testBuyBoxes1() {
@@ -680,10 +629,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * method: getBalance
-	 */
-	
 	@Test
 	public void testGetBalance1() {
 		try {
@@ -705,10 +650,6 @@ public class TestDataImpl {
 		assertEquals(new Integer(0), data.getBalance());
 	}
 	
-	/*
-	 * 	method: rechargeAccount
-	 */
-	
 	@Test
 	public void testRechargeAccount1() {
 		try {
@@ -722,10 +663,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: rechargeAccount
-	 */
-	
 	@Test
 	public void testRechargeAccount2() {
 		try {
@@ -734,10 +671,6 @@ public class TestDataImpl {
 		} catch (Exception e){
 		}
 	}
-	
-	/*
-	 * 	method: rechargeAccount
-	 */
 	
 	@Test
 	public void testRechargeAccount3() {
@@ -773,10 +706,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsules
-	 */
-	
 	@Test
 	public void testSellCapsules1() {
 		try {
@@ -801,10 +730,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: sellCapsules
-	 */
 	
 	@Test
 	public void testSellCapsules2() {
@@ -834,10 +759,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsules
-	 */
-	
 	@Test
 	public void testSellCapsules3() {
 		int id1 = 0, b1 = 0; 
@@ -865,10 +786,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: sellCapsules
-	 */
 	
 	@Test
 	public void testSellCapsules4() {
@@ -899,10 +816,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsules
-	 */
-	
 	@Test
 	public void testSellCapsules5() {
 		int id1 = 0, b1 = 0; 
@@ -931,10 +844,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: sellCapsules
-	 */
 	
 	@Test
 	public void testSellCapsules6() {
@@ -965,10 +874,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsules
-	 */
-	
 	@Test
 	public void testSellCapsules7() {
 		int id1 = 0, b1 = 0; 
@@ -998,10 +903,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsulesToVisitor
-	 */
-	
 	@Test
 	public void testSellCapsulesToVisitor1() {
 		try {
@@ -1021,10 +922,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: sellCapsulesToVisitor
-	 */
 	
 	@Test
 	public void testSellCapsulesToVisitor2() {
@@ -1046,10 +943,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsulesToVisitor
-	 */
-	
 	@Test
 	public void testSellCapsulesToVisitor3() {
 		try {
@@ -1069,10 +962,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: sellCapsulesToVisitor
-	 */
 	
 	@Test
 	public void testSellCapsulesToVisitor4() {
@@ -1094,10 +983,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: sellCapsulesToVisitor
-	 */
-	
 	@Test
 	public void testSellCapsulesToVisitor5() {
 		try {
@@ -1117,10 +1002,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: updateBeverage
-	 */
 	
 	@Test
 	public void testUpdateBeverage1() {
@@ -1142,10 +1023,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: updateBeverage
-	 */
 	
 	@Test
 	public void testUpdateBeverage2() {
@@ -1175,10 +1052,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: updateBeverage
-	 */
-	
 	@Test
 	public void testUpdateBeverage3() {
 		int b1 = 0;
@@ -1206,10 +1079,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: updateBeverage
-	 */
 	
 	@Test
 	public void testUpdateBeverage4() {
@@ -1239,10 +1108,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * 	method: updateBeverage
-	 */
-	
 	@Test
 	public void testUpdateBeverage5() {
 		int b1 = 0;
@@ -1270,11 +1135,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-
-	
-	/*
-	 * 	method: updateEmployee
-	 */
 	
 	@Test
 	public void testUpdateEmployee1() {
@@ -1293,10 +1153,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: updateEmployee
-	 */
 	
 	@Test
 	public void testUpdateEmployee2() {
@@ -1322,10 +1178,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	/*
-	 * 	method: updateEmployee
-	 */
 	
 	@Test
 	public void testUpdateEmployee3() {
@@ -1354,9 +1206,7 @@ public class TestDataImpl {
 	
 	
 	/*
-	 *****************
-	 *** White box ***
-	 *****************
+	 * White box
 	 */
 	
 	@Test
@@ -1384,6 +1234,15 @@ public class TestDataImpl {
 		}
 	}
 	
+	
+	/*
+	 * Acceptance testing
+	 * 
+	 * Some of the previous ones are also acceptance test cases.
+	 * The following ones are added to cover all functional and non-functional requirements.
+	 * See acceptance_test_document.md for more info.
+	 */
+	
 	@Test
 	public void testScenario2() {
 		try {
@@ -1409,11 +1268,6 @@ public class TestDataImpl {
 			fail();
 		}
 	}
-	
-	
-	/*
-	 *		FR8 + FR3
-	 */
 	
 	@Test
 	public void testScenario6() {
@@ -1459,9 +1313,6 @@ public class TestDataImpl {
 		}
 	}
 	
-	/*
-	 * NFR2
-	 */
 	@Test
 	public void testPerformance() {
 		try {

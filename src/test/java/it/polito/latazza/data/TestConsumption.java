@@ -11,6 +11,16 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
 
+/**
+ * Integration tests for class Consumption + Beverage and Employee
+ * 
+ * Since the used technique for integration is incremental bottom up
+ * (i.e. unit tests have been done previously on units this class depends on),
+ * no stubs are used.
+ * 
+ * @author s265485
+ *
+ */
 class TestConsumption {
 	Beverage b;
 	Employee e;

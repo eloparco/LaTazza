@@ -11,6 +11,12 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
+/**
+ * Unit tests for class Beverage
+ * 
+ * @author s261072
+ *
+ */
 class TestBeverage {
 
 	Beverage b;
