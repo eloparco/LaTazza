@@ -107,7 +107,7 @@ Version: 1.0.0
 
 | Sign of numberOfBoxes | Overflow of availableCapsules | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); | it.polito.latazza.data.TestBeverage.tc1 |
+| >= 0 | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20);<br /> b.increaseAvailableCapsules(2); <br />*boundary:*<br />Beverage b = new Beverage(1, "Coffee", 5000, Integer.MAX_VALUE); <br />b.increaseAvailableCapsules(1);| it.polito.latazza.data.TestBeverage.tc1<br /><br /> <br />it.polito.latazza.data.TestBeverage.tc8<br />|
 |  | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(10); b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20); -> BeverageException| it.polito.latazza.data.TestBeverage.tc2 |
 | < 0 | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(-10); -> BeverageException| it.polito.latazza.data.TestBeverage.tc3 |
 |  | yes | / ||  |
