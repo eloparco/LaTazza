@@ -21,7 +21,6 @@ class TestLaTazzaAccount {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		t = new LaTazzaAccount();
 	}
 

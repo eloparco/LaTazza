@@ -23,7 +23,6 @@ class TestBeverage {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		// box price: 5 euro, 20 capsules per box
 		b = new Beverage(1, "Coffee", 500, 20);
 	}

@@ -29,7 +29,6 @@ class TestConsumption {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		b = new Beverage(1, "tea", 10, 10);
 		e = new Employee(1, "John", "Doe");
 	}

@@ -29,7 +29,6 @@ class TestRecharge {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		rechargeAmount = 1000;
 		e = new Employee(0, "Mario", "Rossi");
 		r = new Recharge(e, rechargeAmount);
