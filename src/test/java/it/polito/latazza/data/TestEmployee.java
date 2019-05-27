@@ -2,48 +2,47 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Locale;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.EmployeeException;
 
+/**
+ * Unit tests for class Employee
+ * 
+ * @author s265682
+ * 
+ */
 class TestEmployee {
-	Employee e;
+	Employee employee;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
-		e = new Employee(1, "Mario", "Rossi");
+		employee = new Employee(1, "Mario", "Rossi");
 	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
+	
 	
 	/*
 	 * Black box
 	 */
-
+	
 	@Test
 	void testIncreaseBalance1() {
 		try {
-			e.increaseBalance(10);
-			assertEquals(10, e.getBalance());
-		} catch (EmployeeException e1) {
-			fail("Exception generated");
+			employee.increaseBalance(10);
+			assertEquals(10, employee.getBalance());
+		} catch (EmployeeException e) {
+			fail();
 		}
 	}
 
 	@Test
 	void testIncreaseBalance2() {
 		try {
-			e.increaseBalance(10);
-			e.increaseBalance(Integer.MAX_VALUE);
-			fail("Exception not generated");
-		} catch (EmployeeException e1) {
+			employee.increaseBalance(10);
+			employee.increaseBalance(Integer.MAX_VALUE);
+			fail();
+		} catch (EmployeeException e) {
 			assertTrue(true);
 		}
 	}
@@ -51,8 +50,8 @@ class TestEmployee {
 	@Test
 	void testIncreaseBalance3() {
 		try {
-			e.increaseBalance(-10);
-			fail("Exception not generated");
+			employee.increaseBalance(-10);
+			fail();
 		} catch (EmployeeException e) {
 			assertTrue(true);
 		}
@@ -61,20 +60,20 @@ class TestEmployee {
 	@Test
 	void testDecreaseBalance1() {
 		try {
-			e.decreaseBalance(10);
-			assertEquals(-10, e.getBalance());
-		} catch (EmployeeException e1) {
-			fail("Exception generated");
+			employee.decreaseBalance(10);
+			assertEquals(-10, employee.getBalance());
+		} catch (EmployeeException e) {
+			fail();
 		}
 	}
 	
 	@Test
 	void testDecreaseBalance2() {
 		try {
-			e.decreaseBalance(10);
-			e.decreaseBalance(Integer.MAX_VALUE);
-			fail("Exception not generated");
-		} catch (EmployeeException e1) {
+			employee.decreaseBalance(10);
+			employee.decreaseBalance(Integer.MAX_VALUE);
+			fail();
+		} catch (EmployeeException e) {
 			assertTrue(true);
 		}
 	}
@@ -82,12 +81,13 @@ class TestEmployee {
 	@Test
 	void testDecreaseBalance3() {
 		try {
-			e.decreaseBalance(-10);
-			fail("Exception not generated");
+			employee.decreaseBalance(-10);
+			fail();
 		} catch (EmployeeException e) {
 			assertTrue(true);
 		}
 	}
+	
 	
 	/*
 	 * White box
@@ -95,12 +95,12 @@ class TestEmployee {
 	
 	@Test
 	void testGettersAndSetters() {
-		e.setName("Andrea");
-		e.setSurname("Bianchi");
-		assertEquals(1, e.getId());
-		assertEquals("Andrea", e.getName());
-		assertEquals("Bianchi", e.getSurname());
-		assertEquals("Andrea Bianchi", e.toString());
+		employee.setName("Andrea");
+		employee.setSurname("Bianchi");
+		assertEquals(1, employee.getId());
+		assertEquals("Andrea", employee.getName());
+		assertEquals("Bianchi", employee.getSurname());
+		assertEquals("Andrea Bianchi", employee.toString());
 	}
 
 }

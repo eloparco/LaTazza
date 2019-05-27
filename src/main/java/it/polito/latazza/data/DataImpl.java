@@ -39,58 +39,8 @@ public class DataImpl implements DataInterface {
 	private int nextEmployeeId;
 	private int nextBeverageId;
     
-	@SuppressWarnings("unchecked")
 	public DataImpl() {
-		/* create directory */
-		File directory = new File(PATHNAME);
-		if (!directory.exists()) {
-			if (directory.mkdir()) {
-				System.out.println("Directory " + PATHNAME + " created");
-			} else {
-				System.err.println("Error creating the directory " + PATHNAME);
-				System.exit(-1);
-			}
-		}
-		
-		/* load/create transactions */
-		try {
-			transactions = ((Collection<Transaction>) loadObjects(FILENAME_TRANSACTIONS)).stream().collect(Collectors.toCollection(LinkedList::new));
-			System.out.println("Transactions loaded");
-		} catch (Exception e) {
-			transactions = new LinkedList<>();
-			System.err.println("Error reading " + FILENAME_TRANSACTIONS + " (" + e.getClass() + ")... new transaction list used");
-		}
-		
-		/* load/create employees */
-		try {
-			employees = ((Collection<Employee>) loadObjects(FILENAME_EMPLOYEES)).stream().collect(Collectors.toMap(Employee::getId, e -> e, (e1, e2) -> e1, HashMap::new));
-			nextEmployeeId = employees.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
-			System.out.println("Employees loaded");
-		} catch (Exception e) {
-			employees = new HashMap<>();
-			nextEmployeeId = 0;
-			System.err.println("Error reading " + FILENAME_EMPLOYEES + " (" + e.getClass() + ")... new employee map used");
-		}
-		
-		/* load/create beverages */
-		try {
-			beverages = ((Collection<Beverage>) loadObjects(FILENAME_BEVERAGES)).stream().collect(Collectors.toMap(Beverage::getId, b -> b, (b1, b2) -> b1, HashMap::new));
-			nextBeverageId = beverages.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
-			System.out.println("Beverages loaded");
-		} catch (Exception e) {
-			beverages = new HashMap<>();
-			nextBeverageId = 0;
-			System.err.println("Error reading " + FILENAME_BEVERAGES + " (" + e.getClass() + ")... new beverage map used");
-		}
-		
-		/* load/create LaTazza account */
-		try {
-			laTazzaAccount = (LaTazzaAccount) loadObject(FILENAME_LA_TAZZA_ACCOUNT);
-			System.out.println("LaTazza account loaded");
-		} catch (Exception e) {
-			laTazzaAccount = new LaTazzaAccount();
-			System.err.println("Error reading " + FILENAME_LA_TAZZA_ACCOUNT + " (" + e.getClass() + ")... new LaTazza account used");
-		}
+		loadData();
 	}
 	
 	@Override
@@ -392,10 +342,14 @@ public class DataImpl implements DataInterface {
 		transactions.clear();
 		
 		/* disk */
-		storeObjects(transactions, FILENAME_TRANSACTIONS);
-		storeObjects(employees.values(), FILENAME_EMPLOYEES);
-		storeObjects(beverages.values(), FILENAME_BEVERAGES);
-		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
+		File directory = new File(PATHNAME);
+		
+		if (directory.exists()) {
+			for (File f : directory.listFiles())
+			      f.delete();
+			directory.delete();
+			this.loadData();
+		}
 		
 		System.out.println("Reset done");
 	}
@@ -439,6 +393,60 @@ public class DataImpl implements DataInterface {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	private void loadData() {
+		/* create directory */
+		File directory = new File(PATHNAME);
+		if (!directory.exists()) {
+			if (directory.mkdir()) {
+				System.out.println("Directory " + PATHNAME + " created");
+			} else {
+				System.err.println("Error creating the directory " + PATHNAME);
+				System.exit(-1);
+			}
+		}
+		
+		/* load/create transactions */
+		try {
+			transactions = ((Collection<Transaction>) loadObjects(FILENAME_TRANSACTIONS)).stream().collect(Collectors.toCollection(LinkedList::new));
+			System.out.println("Transactions loaded");
+		} catch (Exception e) {
+			transactions = new LinkedList<>();
+			System.err.println("Error reading " + FILENAME_TRANSACTIONS + " (" + e.getClass() + ")... new transaction list used");
+		}
+		
+		/* load/create employees */
+		try {
+			employees = ((Collection<Employee>) loadObjects(FILENAME_EMPLOYEES)).stream().collect(Collectors.toMap(Employee::getId, e -> e, (e1, e2) -> e1, HashMap::new));
+			nextEmployeeId = employees.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
+			System.out.println("Employees loaded");
+		} catch (Exception e) {
+			employees = new HashMap<>();
+			nextEmployeeId = 0;
+			System.err.println("Error reading " + FILENAME_EMPLOYEES + " (" + e.getClass() + ")... new employee map used");
+		}
+		
+		/* load/create beverages */
+		try {
+			beverages = ((Collection<Beverage>) loadObjects(FILENAME_BEVERAGES)).stream().collect(Collectors.toMap(Beverage::getId, b -> b, (b1, b2) -> b1, HashMap::new));
+			nextBeverageId = beverages.keySet().stream().max(Comparator.naturalOrder()).orElse(-1) + 1;
+			System.out.println("Beverages loaded");
+		} catch (Exception e) {
+			beverages = new HashMap<>();
+			nextBeverageId = 0;
+			System.err.println("Error reading " + FILENAME_BEVERAGES + " (" + e.getClass() + ")... new beverage map used");
+		}
+		
+		/* load/create LaTazza account */
+		try {
+			laTazzaAccount = (LaTazzaAccount) loadObject(FILENAME_LA_TAZZA_ACCOUNT);
+			System.out.println("LaTazza account loaded");
+		} catch (Exception e) {
+			laTazzaAccount = new LaTazzaAccount();
+			System.err.println("Error reading " + FILENAME_LA_TAZZA_ACCOUNT + " (" + e.getClass() + ")... new LaTazza account used");
+		}
+	}
+	
 	public static Date setTimeToMidnight(Date date) {    
         Calendar cal = Calendar.getInstance();  
         cal.setTime(date);  

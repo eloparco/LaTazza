@@ -9,12 +9,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.NotEnoughBalance;
+
+/**
+ * Unit tests for class Employee
+ * 
+ * @author s267563
+ * 
+ */
 class TestLaTazzaAccount {
 	LaTazzaAccount t;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		t = new LaTazzaAccount();
 	}
 

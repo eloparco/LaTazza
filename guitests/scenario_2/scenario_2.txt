@@ -1,0 +1,40 @@
+StartFile "{ImageFolder}/../startfile.bat"
+Sleep 5000
+
+Click "{ImageFolder}/1558685816334.png"
+Click "{ImageFolder}/1558686073725.png"
+Click "{ImageFolder}/1558686190066.png" 39 83
+Click "{ImageFolder}/1558686236324.png" 62 33
+
+Type "John"
+Click "{ImageFolder}/1558686333070.png" 70 55
+Type "Doe"
+Click "{ImageFolder}/1558686732832.png" 40 93
+Click "{ImageFolder}/1558686073725.png"
+Click "{ImageFolder}/1558686190066.png" 39 83
+Click "{ImageFolder}/1558686236324.png" 62 33
+Type "Jane"
+Click "{ImageFolder}/1558686333070.png" 70 55
+Type "Doe"
+Click "{ImageFolder}/1558686732832.png" 40 93
+Click "{ImageFolder}/1558687326660.png" 43 18
+Type "5"
+Click "{ImageFolder}/1558687347789.png" 27 76
+Click "{ImageFolder}/1558688287598.png" 47 73
+
+Click "{ImageFolder}/1558686073725.png"
+Click "{ImageFolder}/1558686190066.png" 39 50
+Click "{ImageFolder}/1558687441280.png" 62 33
+Type "Coffee"
+Click "{ImageFolder}/1558687441280.png" 63 54
+Type "20"
+Click "{ImageFolder}/1558687441280.png" 66 72
+Type "5"
+Click "{ImageFolder}/1558687441280.png" 32 90
+Click "{ImageFolder}/1558688900053.png" 12 86
+Click "{ImageFolder}/1558688930229.png" 49 77
+Click "{ImageFolder}/1558688952078.png" 79 46
+Click "{ImageFolder}/1558689072699.png" 53 25
+Click "{ImageFolder}/1558689220837.png" 37 79
+Click "{ImageFolder}/1558689238905.png" 16 68
+Check "{ImageFolder}/1558689355101.png" 0 0 310 123

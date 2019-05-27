@@ -107,7 +107,7 @@ Version: 1.0.0
 
 | Sign of numberOfBoxes | Overflow of availableCapsules | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(2); | it.polito.latazza.data.TestBeverage.tc1 |
+| >= 0 | no | V | Beverage b = new Beverage(1, "Coffee", 500, 20);<br /> b.increaseAvailableCapsules(2); <br />*boundary:*<br />Beverage b = new Beverage(1, "Coffee", 5000, Integer.MAX_VALUE); <br />b.increaseAvailableCapsules(1);| it.polito.latazza.data.TestBeverage.tc1<br /><br /> <br />it.polito.latazza.data.TestBeverage.tc8<br />|
 |  | yes | I | Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(10); b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20); -> BeverageException| it.polito.latazza.data.TestBeverage.tc2 |
 | < 0 | no | I |Beverage b = new Beverage(1, "Coffee", 500, 20); b.increaseAvailableCapsules(-10); -> BeverageException| it.polito.latazza.data.TestBeverage.tc3 |
 |  | yes | / ||  |
@@ -321,9 +321,9 @@ Version: 1.0.0
 
 | Sign of amount | Valid employee | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | yes | V |Recharge(emp, 1000)|it.polito.latazza.data.TestRecharge.tc1|
+| >= 0 | yes | V |Recharge(emp, 1000)<br />*boundary:*<br />Recharge(emp, 0)<br /> Recharge(emp, MAXINT)|it.polito.latazza.data.TestRecharge.tc1<br /><br />it.polito.latazza.data.TestRecharge.tc5<br />it.polito.latazza.data.TestRecharge.tc6|
 |  | no | I |Recharge(null, 1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc2|
-| < 0 | yes | V |Recharge(emp, -1000)|it.polito.latazza.data.TestRecharge.tc3|
+| < 0 | yes | V |Recharge(emp, -1000)<br />*boundary:*<br />Recharge(emp, MININT)|it.polito.latazza.data.TestRecharge.tc3<br /><br />it.polito.latazza.data.TestRecharge.tc7|
 |  | no | I |Recharge(null, -1000) -> EmployeeException |it.polito.latazza.data.TestRecharge.tc4|
 
 ### Class DataImpl
@@ -345,7 +345,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageName:**
 
@@ -373,7 +373,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageCapsulesPerBox:**
 
@@ -403,7 +403,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getBeverageCapsules:**
 
@@ -505,7 +505,7 @@ Version: 1.0.0
 | 	| 	| no 	| I	| reset()<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1) -> NotEnoughBalance | it.polito.latazza.data.TestDataImpl.testBuyBoxes2 |
 | 	| < 0	| yes 	| I 	| reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB = createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />buyBoxes(idB, -1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes3
 | 	|  	| ~~no~~ | ~~I~~ | |
-| no	| >= 0 	| yes	| I 	| reset()<br />id=createEmployee("Mario","Rossi")<br />rechargeAccount(id, 500)<br />buyBoxes(1, 1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes4 |
+| no	| >= 0 	| yes	| I 	| reset()<br />id=createEmployee("Mario","Rossi")<br />rechargeAccount(id, 500)<br />buyBoxes(10, 1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes4 |
 | 	|  	| ~~no~~	| ~~I~~ 	| |
 | 	| ~~< 0~~ | ~~yes~~	| ~~I~~ 	| |
 | 	| 	| ~~no~~	| ~~I~~ 	| |
@@ -564,7 +564,7 @@ Version: 1.0.0
 
 | Criteria | Boundary values |
 | -------- | --------------- |
-|   Sign of numberOfBoxes       |    MININT, 0, MAXINT             |
+|   Sign of id       |    MININT, 0, MAXINT             |
 
 **Combination of predicates for method getEmployeeBalance:**
 
@@ -732,8 +732,8 @@ Version: 1.0.0
 
 | Sign of id | Sign of amountInCents | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | >= 0 | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 10);<br /> data.getEmployeeBalance(id1) -> 10 | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount2 |
-| < 0 |  | I | data.rechargeAccount(-1, 10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount1 |
+| >= 0 | >= 0 | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 10);<br /> data.getEmployeeBalance(id1) -> 10 | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount1 |
+| < 0 |  | I | data.rechargeAccount(-1, 10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount2 |
 |  | < 0 | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, -10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount3 |
 
 
@@ -892,6 +892,8 @@ Version: 1.0.0
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcReset |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testDataPersistency |
 
 

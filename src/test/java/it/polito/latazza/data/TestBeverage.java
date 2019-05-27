@@ -11,13 +11,18 @@ import org.junit.jupiter.api.Test;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
+/**
+ * Unit tests for class Beverage
+ * 
+ * @author s261072
+ *
+ */
 class TestBeverage {
 
 	Beverage b;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		// box price: 5 euro, 20 capsules per box
 		b = new Beverage(1, "Coffee", 500, 20);
 	}
@@ -124,6 +129,20 @@ class TestBeverage {
 			fail();
 		} catch (BeverageException e) {
 			
+		}
+	}
+	
+	// boundary: availableCapsules + numberOfBoxes * capsulesPerBox = MAXINT
+	@Test
+	void tc8() {
+		try {
+			// force available capsules = MAXINT
+			// box price: 50 euro, MAXINT capsules per box
+			Beverage b = new Beverage(1, "Coffee", 5000, Integer.MAX_VALUE);
+			b.increaseAvailableCapsules(1);
+			assertEquals(Integer.MAX_VALUE, b.getAvailableCapsules());
+		} catch (BeverageException e) {
+			fail();
 		}
 	}
 	

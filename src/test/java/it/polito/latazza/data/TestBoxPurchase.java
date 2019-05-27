@@ -9,6 +9,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.BeverageException;
+
+/**
+ * Integration tests for class BoxPurchase + Beverage
+ * 
+ * Since the used technique for integration is incremental bottom up
+ * (i.e. unit tests have been done previously on units this class depends on),
+ * no stubs are used.
+ * 
+ * @author s267563
+ *
+ */
 class TestBoxPurchase {
 	Beverage b;
 	BoxPurchase p;
@@ -16,7 +27,6 @@ class TestBoxPurchase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		b = new Beverage(1, "tea", 10, 10); 
 	}
 
