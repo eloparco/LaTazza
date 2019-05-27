@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -1407,27 +1406,6 @@ public class TestDataImpl {
 		} catch (NotEnoughCapsules e) {
 			fail();
 		} catch (NotEnoughBalance e) {
-			fail();
-		}
-	}
-	
-	/*
-	 * FR2
-	 */
-	@Test
-	public void testScenario3() {
-		try {
-			int beverageId = data.createBeverage("Coffee", 20, 500);
-			int employeeId = data.createEmployee("John", "Doe");
-			data.rechargeAccount(employeeId, 500);	// to have enough money to buy a box
-			data.buyBoxes(beverageId, 1);			// to have enough capsules for selling
-			
-			data.sellCapsulesToVisitor(beverageId, 1);
-			assertEquals(new Integer(19), data.getBeverageCapsules(beverageId));
-			assertEquals(new Integer(25), data.getBalance());
-		} catch (EmployeeException | NotEnoughBalance e) {
-			fail("Exception while creating the environment");
-		} catch (BeverageException | NotEnoughCapsules e) {
 			fail();
 		}
 	}
