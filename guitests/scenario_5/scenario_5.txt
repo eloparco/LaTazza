@@ -1,3 +1,6 @@
+StartFile "{ImageFolder}/../startfile.bat"
+Sleep 5000
+
 Click "{ImageFolder}/1558686073725.png"
 Click "{ImageFolder}/1558686190066.png" 59 81
 Click "{ImageFolder}/1558686236324.png" 62 33
@@ -47,5 +50,3 @@ Check "{ImageFolder}/1558941492235.png"
 Click "{ImageFolder}/1558945442266.png" 97 50
 Click "{ImageFolder}/1558945462908.png" 96 50
 Click "{ImageFolder}/1558945480654.png" 96 20
-
-StartFile "{ImageFolder}/reset.bat"

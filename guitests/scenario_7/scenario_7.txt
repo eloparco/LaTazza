@@ -1,3 +1,5 @@
+StartFile "{ImageFolder}/../startfile.bat"
+Sleep 5000
 
 Click "{ImageFolder}/1558804393198.png"
 Click "{ImageFolder}/1558706575675.png" 37 38
