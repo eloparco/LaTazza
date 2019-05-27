@@ -88,19 +88,19 @@ Version: 1.0.0
 | 2                | Administrator selects to buy one box of  T                  |
 | 3                | Deduce price of T from shared balance              |
 | 4                | Add capsules of T to avaliable capsules                  |
-# Coverage of Scenarios
 
-### 
+
+# Coverage of Scenarios
 
 | Scenario ID | Functional Requirements covered | API Test(s) | GUI Test(s) |
 | ----------- | ------------------------------- | ----------- | ----------- |
-| 1           | FR1                             | it.polito.latazza.data.TestDataImpl.testSellCapsules1			|             	|
-| 2           | FR1                             | it.polito.latazza.data.TestDataImpl.testScenario2            		|             	|
-| 3	      | FR2                             | it.polito.latazza.data.TestDataImpl.testSellCapsulesToVisitor1        |             	|
-| 4           | FR5                             | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1            |             	|
-| 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	|             	|
-| 6	      | FR8+FR3				| it.polito.latazza.data.TestDataImpl.testScenario6 			|		|
-| 7	      | FR7+FR4				| it.polito.latazza.data.TestDataImpl.testScenario7 			| 		|
+| 1           | FR1                             | it.polito.latazza.data.TestDataImpl.testSellCapsules1			| scenario_1.txt	|
+| 2           | FR1                             | it.polito.latazza.data.TestDataImpl.testScenario2            		| scenario_2.txt	|
+| 3	      | FR2                             | it.polito.latazza.data.TestDataImpl.testSellCapsulesToVisitor1        | scenario_3.txt	|
+| 4           | FR5                             | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1            |             		|
+| 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	|             		|
+| 6	      | FR8+FR3				| it.polito.latazza.data.TestDataImpl.testScenario6 			| scenario_6.txt	|
+| 7	      | FR7+FR4				| it.polito.latazza.data.TestDataImpl.testScenario7 			| scenario_7.txt	|
 
 
 # Coverage of Non Functional Requirements
