@@ -1220,76 +1220,81 @@ public class TestDataImpl {
 	public void testPerformance() {
 		data.reset();
 		try {
+			final int n = 100;
 			long begin, end;
-			int idE, idB;
+			int[] idE = new int[n], idB = new int[n];
 			Date startDate=new Date(), endDate;
 			
 			/* FR7 - create */
 			begin = System.currentTimeMillis();  
-			idB = data.createBeverage("Coffe", 2, 50);
+			for (int i=0; i<n; i++)
+				idB[i] = data.createBeverage("Coffe" + i, 2, 50);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR7 - update */
-			begin = System.currentTimeMillis();  
-			data.updateBeverage(idB, "Coffee", 20, 500);
+			begin = System.currentTimeMillis(); 
+			for (int i=0; i<n; i++)
+				data.updateBeverage(idB[i], "Coffee"+i, 20, 500);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR8 - create */
-			begin = System.currentTimeMillis();  
-			idE = data.createEmployee("Mari", "Rosi");
+			begin = System.currentTimeMillis();
+			for (int i=0; i<n; i++)
+				idE[i] = data.createEmployee("Mari"+i, "Rosi"+i);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR8 - update */
 			begin = System.currentTimeMillis();  
-			data.updateEmployee(idE, "Mario", "Rossi");
+			for (int i=0; i<n; i++)
+				data.updateEmployee(idE[i], "Mario"+i, "Rossi"+i);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR3 */
 			begin = System.currentTimeMillis();
-			data.rechargeAccount(idE, 10000);
+			for (int i=0; i<n; i++)
+				data.rechargeAccount(idE[i], 10000);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR4 */
 			begin = System.currentTimeMillis();
-			data.buyBoxes(idB, 20);
+			for (int i=0; i<n; i++)
+				data.buyBoxes(idB[i], 20);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR1 */
 			begin = System.currentTimeMillis();
-			data.sellCapsules(idE, idB, 2, true);
+			for (int i=0; i<n; i++)
+				data.sellCapsules(idE[i], idB[i], 2, true);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR2 */
 			begin = System.currentTimeMillis();
-			data.sellCapsulesToVisitor(idB, 2);
+			for (int i=0; i<n; i++)
+				data.sellCapsulesToVisitor(idB[i], 2);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
-			
-			// increase transactions for more realistic report production test
-			for (int i=0; i<100; i++) {
-				data.sellCapsules(idE, idB, 1, true);
-				data.sellCapsulesToVisitor(idB, 1);
-			}
-			endDate = new Date();
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR5 */
+			endDate = new Date();
 			begin = System.currentTimeMillis();
-			data.getEmployeeReport(idE, startDate, endDate);
+			for (int i=0; i<n; i++)
+				data.getEmployeeReport(idE[i], startDate, endDate);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 			/* FR6 */
 			begin = System.currentTimeMillis();
-			data.getReport(startDate, endDate);
+			for (int i=0; i<n; i++)
+				data.getReport(startDate, endDate);
 			end = System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue((end-begin)/((double) n) < 500);
 			
 		} catch (EmployeeException | BeverageException | NotEnoughCapsules | NotEnoughBalance | DateException e) {
 			fail();
