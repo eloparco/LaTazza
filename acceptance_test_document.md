@@ -56,15 +56,22 @@ Version: 1.0.0
 
 | Scenario ID: SC4 | Corresponds to UC4 |
 | ---------------- | ------------------ |
-| Description      | A new employee wants to be registered in the system and wants to recharge his account so that he could then buy capsules when he'll need them                |
-| Precondition     | ...                |
-| Postcondition    | The new employee is registered in the system and his account is updated with the recharged amount                |
-| Step#            | ...                |
-| 1                 | Administrator inputs employee Name and Surname                   |
-| 2                 | The new employee is registered in the system with an account balance of 0  |
-| 3                 | Administrator selects the employee  |
-| 4                 | Administrator inserts the amount A to recharge  |
-| 5                 | Increase of A the employee account balance |
+| Description      | Administrator wants to check all the transaction of a specific employee in a specific time span |
+| Precondition     | The employee is registered into the system |
+| Postcondition    | The report is shown with all the transaction made by the employee during the selected time span |
+| Step#            | Step description                |
+| 1                 | Administrator selects the employee |
+| 2                 | Administrator inputs a valid start and end date |
+| 3                 | The report is printed to the screen |
+
+| Scenario ID: SC5 | Corresponds to UC5 |
+| ---------------- | ------------------ |
+| Description      | Administrator wants to check all the transactions that occured in a specific time span |
+| Precondition     |  |
+| Postcondition    | The report is shown with all the transaction made during the selected time span |
+| Step#            | Step description                |
+| 1                 | Administrator inputs a valid start and end date |
+| 2                 | The report is printed to the screen |
 
 | Scenario ID: SC6 | Corresponds to UC3                                   |
 | ---------------- | ------------------------------------------------------ |
@@ -97,8 +104,8 @@ Version: 1.0.0
 | 1           | FR1                             | it.polito.latazza.data.TestDataImpl.testSellCapsules1			| scenario_1.txt	|
 | 2           | FR1                             | it.polito.latazza.data.TestDataImpl.testScenario2            		| scenario_2.txt	|
 | 3	      | FR2                             | it.polito.latazza.data.TestDataImpl.testSellCapsulesToVisitor1        | scenario_3.txt	|
-| 4           | FR5                             | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1            |             		|
-| 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	|             		|
+| 4           | FR5                             | it.polito.latazza.data.TestDataImpl.testGetEmployeeReport1            | scenario_4.txt	|
+| 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	| scenario_5.txt	|
 | 6	      | FR8+FR3				| it.polito.latazza.data.TestDataImpl.testScenario6 			| scenario_6.txt	|
 | 7	      | FR7+FR4				| it.polito.latazza.data.TestDataImpl.testScenario7 			| scenario_7.txt	|
 
