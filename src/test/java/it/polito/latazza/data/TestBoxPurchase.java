@@ -27,7 +27,6 @@ class TestBoxPurchase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Locale.setDefault(Locale.US);
 		b = new Beverage(1, "tea", 10, 10); 
 	}
 
