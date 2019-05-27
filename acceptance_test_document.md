@@ -14,8 +14,8 @@ Version: 1.0.0
 # Contents
 
 - [Scenarios](#scenarios)
-- [Coverage of scenarios](#scenario-coverage)
-- [Coverage of non-functional requirements](#nfr-coverage)
+- [Coverage of scenarios](#coverage-of-scenarios)
+- [Coverage of non-functional requirements](#coverage-of-non-functional-requirements)
 
 
 # Scenarios
