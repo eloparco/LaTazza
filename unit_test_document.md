@@ -505,7 +505,7 @@ Version: 1.0.0
 | 	| 	| no 	| I	| reset()<br />id = createBeverage("Coffee", 20, 500)<br />buyBoxes(id, 1) -> NotEnoughBalance | it.polito.latazza.data.TestDataImpl.testBuyBoxes2 |
 | 	| < 0	| yes 	| I 	| reset()<br />idE=createEmployee("Mario", "Rossi")<br />idB = createBeverage("Coffee", 20, 500)<br />rechargeAccount(idE, 500)<br />buyBoxes(idB, -1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes3
 | 	|  	| ~~no~~ | ~~I~~ | |
-| no	| >= 0 	| yes	| I 	| reset()<br />id=createEmployee("Mario","Rossi")<br />rechargeAccount(id, 500)<br />buyBoxes(1, 1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes4 |
+| no	| >= 0 	| yes	| I 	| reset()<br />id=createEmployee("Mario","Rossi")<br />rechargeAccount(id, 500)<br />buyBoxes(10, 1) -> BeverageException | it.polito.latazza.data.TestDataImpl.testBuyBoxes4 |
 | 	|  	| ~~no~~	| ~~I~~ 	| |
 | 	| ~~< 0~~ | ~~yes~~	| ~~I~~ 	| |
 | 	| 	| ~~no~~	| ~~I~~ 	| |
@@ -732,8 +732,8 @@ Version: 1.0.0
 
 | Sign of id | Sign of amountInCents | Valid / Invalid | Description of the test case | JUnit test case |
 |-------|-------|-------|-------|-------|
-| >= 0 | >= 0 | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 10);<br /> data.getEmployeeBalance(id1) -> 10 | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount2 |
-| < 0 |  | I | data.rechargeAccount(-1, 10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount1 |
+| >= 0 | >= 0 | V | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, 10);<br /> data.getEmployeeBalance(id1) -> 10 | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount1 |
+| < 0 |  | I | data.rechargeAccount(-1, 10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount2 |
 |  | < 0 | I | int id1 = data.createEmployee("Mario" ,"Rossi");<br />data.rechargeAccount(id1, -10); -> EmployeeException | it.polito.latazza.data.<br />TestDataImpl.testRechargeAccount3 |
 
 
@@ -892,6 +892,8 @@ Version: 1.0.0
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployeesId |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcGetEmployees |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.tcReset |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testDataPersistency |
 
 
