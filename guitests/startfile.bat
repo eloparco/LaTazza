@@ -1,3 +1,3 @@
-cd "%~dp0..\"
+cd "%~dp0..\target"
 rm -r "data"
-start "" "javaw" -jar target/latazza-1.0.0-SNAPSHOT.jar"
+start "" "javaw" -jar latazza-1.0.0-SNAPSHOT.jar"
