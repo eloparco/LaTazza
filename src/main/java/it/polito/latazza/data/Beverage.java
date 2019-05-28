@@ -19,7 +19,7 @@ public class Beverage implements Serializable {
 		
 		this.availableCapsules = 0;
 		setName(name);
-		setCapsulesPerBox(capsulesPerBox);
+		setCapsulesPerBox(capsulePerBox);
 		setBoxPrice(boxPrice);		
 	}
 
