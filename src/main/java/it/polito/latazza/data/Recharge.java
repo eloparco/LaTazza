@@ -10,8 +10,8 @@ public class Recharge extends Transaction {
 	private Employee employee;
 	private int amount;
 
-	public Recharge(Employee employee, int amount) throws EmployeeException {
-		if (employee == null || amount < 0)
+	public Recharge(Employee employee, Integer amount) throws EmployeeException {
+		if (employee == null || amount == null || amount < 0)
 			throw new EmployeeException();
 		this.employee = employee;
 		this.amount = amount;
