@@ -284,7 +284,7 @@ public class TestDataImpl {
 			List<String> l = data.getReport(d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + "€", s.substring(19, s.length()));  
+			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + " €", s.substring(19, s.length()));  
 
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
@@ -329,7 +329,7 @@ public class TestDataImpl {
 			List<String> l = data.getEmployeeReport(employeeId, d, new Date());
 			assertEquals(1, l.size());
 			String s = (String) l.get(0);
-			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + "€", s.substring(19, s.length()));  
+			assertEquals(" RECHARGE Mario Rossi " + String.format("%.2f", 100.0) + " €", s.substring(19, s.length()));  
 
 			int b = data.createBeverage("tea", 10, 1);
 			data.buyBoxes(b, 1);
@@ -808,11 +808,11 @@ public class TestDataImpl {
 			assertEquals(Integer.valueOf(100), data.getBeverageCapsules(b1));
 			data.sellCapsules(id1, b1, -5, true);
 			fail();
-		} catch (BeverageException e){
+		} catch (NotEnoughCapsules e){
 			try {
 				data.sellCapsules(id1, b1, -5, false);
 				fail();
-			} catch (BeverageException e1) {
+			} catch (NotEnoughCapsules e1) {
 				
 			} catch (Exception e2) {
 				fail();
@@ -921,7 +921,7 @@ public class TestDataImpl {
 			assertEquals(Integer.valueOf(100), data.getBeverageCapsules(b1));
 			data.sellCapsulesToVisitor(b1, -5);
 			fail();
-		} catch (BeverageException e){
+		} catch (NotEnoughCapsules e){
 		} catch (Exception e) {
 			fail();
 		}
@@ -1192,7 +1192,7 @@ public class TestDataImpl {
 			
 				
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String expected = format.format(d) + " RECHARGE Mario Rossi " + String.format("%.2f", 5.0) + "€";
+			String expected = format.format(d) + " RECHARGE Mario Rossi " + String.format("%.2f", 5.0) + " €";
 			assertEquals(expected, rechargeReport.get(0));
 		} catch (EmployeeException e) {
 			fail();
