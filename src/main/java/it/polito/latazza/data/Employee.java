@@ -53,7 +53,7 @@ public class Employee implements Serializable {
 	public void decreaseBalance(int amount) throws EmployeeException {
 		if (amount < 0 || (balance < 0 && balance-amount > 0))	// negative or overflow
 			throw new EmployeeException();
-		this.balance += amount;
+		this.balance -= amount;
 	}
 	
 	@Override
