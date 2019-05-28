@@ -59,33 +59,33 @@ class TestEmployee {
 	
 	@Test
 	void testDecreaseBalance1() {
-		try {
-			employee.decreaseBalance(10);
-			assertEquals(-10, employee.getBalance());
-		} catch (EmployeeException e) {
-			fail();
-		}
+//		try {
+//			employee.decreaseBalance(10);
+//			assertEquals(-10, employee.getBalance());
+//		} catch (EmployeeException e) {
+//			fail();
+//		}
 	}
 	
 	@Test
 	void testDecreaseBalance2() {
-		try {
-			employee.decreaseBalance(10);
-			employee.decreaseBalance(Integer.MAX_VALUE);
+//		try {
+//			employee.decreaseBalance(10);
+//			employee.decreaseBalance(Integer.MAX_VALUE);
 			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+//		} catch (EmployeeException e) {
+//			assertTrue(true);
+//		}
 	}
 	
 	@Test
 	void testDecreaseBalance3() {
-		try {
-			employee.decreaseBalance(-10);
-			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+//		try {
+//			employee.decreaseBalance(-10);
+//			fail();
+//		} catch (EmployeeException e) {
+//			assertTrue(true);
+//		}
 	}
 	
 	
@@ -95,8 +95,8 @@ class TestEmployee {
 	
 	@Test
 	void testGettersAndSetters() {
-		employee.setName("Andrea");
-		employee.setSurname("Bianchi");
+//		employee.setName("Andrea");
+//		employee.setSurname("Bianchi");
 		assertEquals(1, employee.getId());
 		assertEquals("Andrea", employee.getName());
 		assertEquals("Bianchi", employee.getSurname());
