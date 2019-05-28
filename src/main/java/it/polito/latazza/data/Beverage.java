@@ -12,14 +12,15 @@ public class Beverage implements Serializable {
 	private int id, boxPrice, capsulesPerBox, availableCapsules;
 	private String name;
 	
-	public Beverage(int id, String name, int boxPrice , int capsulePerBox) throws BeverageException {
-		if (id < 0 || boxPrice < 0 || capsulePerBox < 0)
+	public Beverage(Integer id, String name, Integer boxPrice , Integer capsulePerBox) throws BeverageException {
+		if (id < 0)
 			throw new BeverageException();
-		this.name=name;
-		this.capsulesPerBox=capsulePerBox;
-		this.availableCapsules=0;
-		this.boxPrice=boxPrice;
 		this.id = id;
+		
+		this.availableCapsules = 0;
+		setName(name);
+		setCapsulesPerBox(capsulesPerBox);
+		setBoxPrice(boxPrice);		
 	}
 
 	public int getId() {
@@ -30,7 +31,9 @@ public class Beverage implements Serializable {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(String name) throws BeverageException {
+		if (name == null || name.equals(""))
+			throw new BeverageException();
 		this.name = name;
 	}
 	
@@ -38,8 +41,8 @@ public class Beverage implements Serializable {
 		return boxPrice;
 	}
 	
-	public void setBoxPrice(int boxPrice) throws BeverageException {
-		if(boxPrice < 0)
+	public void setBoxPrice(Integer boxPrice) throws BeverageException {
+		if(boxPrice == null || boxPrice < 0)
 			throw new BeverageException();
 		this.boxPrice = boxPrice;
 	}
@@ -48,8 +51,8 @@ public class Beverage implements Serializable {
 		return capsulesPerBox;
 	}
 	
-	public void setCapsulesPerBox(int capsulesPerBox) throws BeverageException {
-		if(capsulesPerBox < 0)
+	public void setCapsulesPerBox(Integer capsulesPerBox) throws BeverageException {
+		if(capsulesPerBox == null || capsulesPerBox < 0)
 			throw new BeverageException();
 		this.capsulesPerBox = capsulesPerBox;
 	}

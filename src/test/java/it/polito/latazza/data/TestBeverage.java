@@ -177,7 +177,7 @@ class TestBeverage {
 	
 	@Test
 	// test setters
-	void tcSetters() {
+	void tcSetters() throws BeverageException {
 		b.setName("Black Tea");
 		assertEquals("Black Tea", b.getName());
 		try {
