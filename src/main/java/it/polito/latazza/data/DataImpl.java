@@ -163,7 +163,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		
-		if (startDate==null || endDate==null | startDate.after(endDate))
+		if (startDate==null || endDate==null || startDate.after(endDate))
 			throw new DateException();
 		
         return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(setTimeToMidnight(endDate)) || l.getDate().equals(setTimeToMidnight(endDate)))))
