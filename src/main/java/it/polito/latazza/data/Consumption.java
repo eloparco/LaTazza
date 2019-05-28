@@ -16,6 +16,8 @@ public class Consumption extends Transaction {
 	public Consumption(Beverage beverage, Integer numberOfCapsules) throws BeverageException, NotEnoughCapsules {
 		if(beverage == null)
 			throw new BeverageException();
+		if(numberOfCapsules == null || numberOfCapsules < 0)
+			throw new NotEnoughCapsules();
 		this.beverage = beverage;
 		this.numberOfCapsules = numberOfCapsules;
 	}
