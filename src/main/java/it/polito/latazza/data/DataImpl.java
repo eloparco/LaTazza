@@ -55,13 +55,12 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		
 		/* update */
-				
+		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		if (fromAccount)
 			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		else
 			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -88,9 +87,9 @@ public class DataImpl implements DataInterface {
 		
 		
 		/* update */
+		Consumption c = new Consumption(b, numberOfCapsules);
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		Consumption c = new Consumption(b, numberOfCapsules);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -164,7 +163,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		
-		if (startDate==null || endDate==null | startDate.after(endDate))
+		if (startDate==null || endDate==null || startDate.after(endDate))
 			throw new DateException();
 		
         return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(setTimeToMidnight(endDate)) || l.getDate().equals(setTimeToMidnight(endDate)))))
