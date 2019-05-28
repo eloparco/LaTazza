@@ -2,14 +2,11 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Locale;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.BeverageException;
-import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 /**

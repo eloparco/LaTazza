@@ -3,7 +3,6 @@ package it.polito.latazza.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,9 +59,8 @@ class TestRecharge {
 	
 	@Test
 	void tc3() {
-		Recharge r = null;
 		try {
-			r = new Recharge(e, -1000);
+			new Recharge(e, -1000);
 			fail();
 		} catch (EmployeeException e1) {
 		}
