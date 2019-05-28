@@ -10,10 +10,10 @@ public class Employee implements Serializable {
 	private int id, balance;
 	private String name, surname;
 	
-	public Employee(int id, String name, String surname) {
+	public Employee(int id, String name, String surname) throws EmployeeException {
 		this.id = id;
-		this.name = name;
-		this.surname = surname;
+		setName(name);
+		setSurname(surname);
 	}
 	
 	public int getId() {
@@ -24,7 +24,9 @@ public class Employee implements Serializable {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(String name) throws EmployeeException {
+		if (name == null || name.length() < 1)
+			throw new EmployeeException();
 		this.name = name;
 	}
 	
@@ -32,7 +34,9 @@ public class Employee implements Serializable {
 		return surname;
 	}
 	
-	public void setSurname(String surname) {
+	public void setSurname(String surname) throws EmployeeException {
+		if (surname == null || surname.length() < 1)
+			throw new EmployeeException();
 		this.surname = surname;
 	}
 	
@@ -41,17 +45,17 @@ public class Employee implements Serializable {
 	}
 	
 	public void increaseBalance(int amount) throws EmployeeException {
-		if (amount < 0 || (balance > 0 && balance+amount < 0))
+		if (amount < 0 || (balance > 0 && balance+amount < 0))	// negative or overflow
+			throw new EmployeeException();
+		this.balance += amount;
+	}
+
+	public void decreaseBalance(int amount) throws EmployeeException {
+		if (amount < 0 || (balance < 0 && balance-amount > 0))	// negative or overflow
 			throw new EmployeeException();
 		this.balance += amount;
 	}
 	
-	public void decreaseBalance(int amount) throws EmployeeException {
-		if (amount < 0 || (balance < 0 && balance-amount > 0))
-			throw new EmployeeException();
-		this.balance -= amount;
-	}
-
 	@Override
 	public String toString() {
 		return this.name + " " + this.surname;

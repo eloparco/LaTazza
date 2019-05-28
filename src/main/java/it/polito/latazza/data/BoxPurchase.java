@@ -8,8 +8,8 @@ public class BoxPurchase extends Transaction {
 	private Beverage beverage;
 	private int boxQuantity;
 
-	public BoxPurchase(Beverage beverage, int boxQuantity) throws BeverageException{
-		if (beverage == null || boxQuantity < 0)
+	public BoxPurchase(Beverage beverage, Integer boxQuantity) throws BeverageException{
+		if (beverage == null || boxQuantity == null || boxQuantity < 0)
 			throw new BeverageException();
 		this.beverage = beverage;
 		this.boxQuantity = boxQuantity;
