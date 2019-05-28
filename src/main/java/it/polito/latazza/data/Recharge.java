@@ -1,5 +1,7 @@
 package it.polito.latazza.data;
 
+import java.util.Locale;
+
 import it.polito.latazza.exceptions.EmployeeException;
 
 public class Recharge extends Transaction {
@@ -9,7 +11,7 @@ public class Recharge extends Transaction {
 	private int amount;
 
 	public Recharge(Employee employee, int amount) throws EmployeeException {
-		if (employee == null)
+		if (employee == null || amount < 0)
 			throw new EmployeeException();
 		this.employee = employee;
 		this.amount = amount;
@@ -26,6 +28,7 @@ public class Recharge extends Transaction {
 	@Override
 	public String toString() {
 		Float amount = (float) this.amount / 100;
-		return super.toString() +  " RECHARGE " + this.employee + " " + String.format("%.2f", amount) + "€";
+		Locale.setDefault(Locale.US);
+		return super.toString() +  " RECHARGE " + this.employee + " " + String.format("%.2f", amount) + " €";
 	}
 }
