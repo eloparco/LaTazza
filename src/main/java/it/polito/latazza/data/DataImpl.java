@@ -284,9 +284,22 @@ public class DataImpl implements DataInterface {
 		if (e == null)
 			throw new EmployeeException();
 		
+		/* keep for restore */
+		String n = e.getName();
+		String s = e.getSurname();
+		
 		/* update */
-		e.setName(name);
-		e.setSurname(surname);
+		try {
+			e.setName(name);
+			e.setSurname(surname);
+		} catch (Exception er) {
+			e.setName(n);
+			e.setSurname(s);
+			throw er;
+		}
+		
+		/* update */
+		
 		System.out.println(e + " updated");
 		
 		/* save */
