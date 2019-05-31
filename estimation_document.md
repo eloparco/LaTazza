@@ -27,8 +27,8 @@ Version: 1.0.0
 |         Total person hours  worked by your  team, considering period March 5 to May 26, considering ALL activities (req, des, code, test,..)    | 120 ph  |             
 |Total Java LoC delivered on May 26 (only code, without Exceptions, no Junit code) | 700 LOC |
 | Total number of Java classes delivered on May 26 (only code, no Junit code, no Exception classes)| 8 classes |
-| Productivity P =| 700/120 = 5.8 LOC/ph |
-|Average size of Java class A = | 700/8 = 87.5 LOC/class |
+| Productivity P = Total LOC / Total person hours | 700/120 = 5.8 LOC/ph |
+|Average size of Java class A = Total LOC / number of classes | 700/8 = 87.5 LOC/class |
 
 
 # Estimate by product decomposition
