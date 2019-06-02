@@ -48,16 +48,26 @@ Version: 1.0.0
 
 ### 
 
-|         Activity name    | Estimated effort    |             
-| ----------- | ------------------------------- | 
-| Requirements | 30 ph |
-| Design | 45 ph |
-| Coding | 40 ph |
-| Unit testing | 35 ph |
-| Integration testing | 45 ph |
-| Acceptance testing | 35 ph |
+| ID	|         Activity name    | Estimated effort    |             
+|:-----:| ----------- | ------------------------------- | 
+| 1  	| Requirements | 30 ph |
+| 1.1  	| Produce requirements document | 20 ph |
+| 1.2  	| Prototype UI | 3 ph |
+| 1.3 	| Inspection | 7 ph |
+| 2  	| Design | 45 ph |
+| 3  	| Coding | 40 ph |
+| 3.1  	| GUI (view + controller) | 16 ph |
+| 3.2  	| Model | 24 ph |
+| 4  	| Testing | 115 ph |
+| 4.1  	| Unit test | 35 ph |
+| 4.2  	| Integration test | 45 ph |
+| 4.3  	| Acceptance test | 35 ph |
 
 ### Gantt chart
 
 ![Gantt chart](figures/gantt_chart.png)
 
+Notice that some slack time has been inserted in order to:
+- put milestones at convenient moments (e.g. milestone for requirements document on Monday 15 April at 8:00 am instead of Friday 12 April at 4:30 pm).
+- provide a margin for the inspection, considering that it requires a meeting with external people.
+- avoid that small delays change the end of the project.
