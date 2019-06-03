@@ -8,8 +8,8 @@ public class Recharge extends Transaction {
 	private Employee employee;
 	private int amount;
 
-	public Recharge(Employee employee, int amount) throws EmployeeException {
-		if (employee == null)
+	public Recharge(Employee employee, Integer amount) throws EmployeeException {
+		if (employee == null || amount == null || amount < 0)
 			throw new EmployeeException();
 		this.employee = employee;
 		this.amount = amount;
@@ -26,6 +26,6 @@ public class Recharge extends Transaction {
 	@Override
 	public String toString() {
 		Float amount = (float) this.amount / 100;
-		return super.toString() +  " RECHARGE " + this.employee + " " + String.format("%.2f", amount) + "€";
+		return super.toString() +  " RECHARGE " + this.employee + " " + String.format("%.2f", amount) + " €";
 	}
 }

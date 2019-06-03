@@ -2,6 +2,7 @@ package it.polito.latazza.data;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
+import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class Consumption extends Transaction {
 	private static final long serialVersionUID = -5668236158408773554L;
@@ -11,18 +12,22 @@ public class Consumption extends Transaction {
 	private boolean fromAccount;
 	private int numberOfCapsules;
 	
-	public Consumption(Beverage beverage, int numberOfCapsules) throws BeverageException {
-		if(beverage == null || numberOfCapsules < 0)
+	public Consumption(Beverage beverage, Integer numberOfCapsules) throws BeverageException, NotEnoughCapsules {
+		if(beverage == null)
 			throw new BeverageException();
+		if(numberOfCapsules == null || numberOfCapsules < 0)
+			throw new NotEnoughCapsules();
 		this.beverage = beverage;
 		this.numberOfCapsules = numberOfCapsules;
 	}
 	
-	public Consumption(Employee employee, Beverage beverage, boolean fromAccount, int numberOfCapsules) throws EmployeeException, BeverageException {
+	public Consumption(Employee employee, Beverage beverage, boolean fromAccount, Integer numberOfCapsules) throws EmployeeException, BeverageException, NotEnoughCapsules {
 		if(employee == null)
 			throw new EmployeeException();
-		if(beverage == null || numberOfCapsules < 0)
+		if(beverage == null)
 			throw new BeverageException();
+		if(numberOfCapsules == null || numberOfCapsules < 0)
+			throw new NotEnoughCapsules();
 		this.employee = employee;
 		this.beverage = beverage;
 		this.fromAccount = fromAccount;

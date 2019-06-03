@@ -2,8 +2,6 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Locale;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,70 +34,38 @@ class TestBeverage {
 	 */
 	
 	@Test
-	void tc1() {
-		// initially -> box price: 5 euro, 20 capsules per box
-		try {
-			// add 2 new boxes of capsules
-			b.increaseAvailableCapsules(2);
-			assertEquals(40, b.getAvailableCapsules());
-		} catch (BeverageException e) {
-			fail();
-		}
+	void tc1() throws BeverageException {
+		// add 2 new boxes of capsules
+		b.increaseAvailableCapsules(2); 
+		assertEquals(40, b.getAvailableCapsules());
 	}
 	
 	@Test
-	void tc2() {
-		// initially -> box price: 5 euro, 20 capsules per box
-		try {
-			// add 10 new boxes of capsules, now 200 available capsules
-			b.increaseAvailableCapsules(10);
-			// cause overflow adding too much boxes
-			b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20);
-			fail();
-		} catch (BeverageException e) {
-			
-		}
+	void tc2() throws BeverageException {
+		// add 10 new boxes of capsules, now 200 available capsules
+		b.increaseAvailableCapsules(10); 
+		// cause overflow adding too much boxes
+		assertThrows(BeverageException.class, () -> b.increaseAvailableCapsules((Integer.MAX_VALUE - 100) / 20));
 	}
 	
 	@Test
 	void tc3() {
-		// initially -> box price: 5 euro, 20 capsules per box
-		try {
-			b.increaseAvailableCapsules(-10);
-			fail();
-		} catch (BeverageException e) {
-			
-		}
+		assertThrows(BeverageException.class, () -> b.increaseAvailableCapsules(-10));
 	}
 	
 	@Test
-	void tc4() {
-		// initially -> box price: 5 euro, 20 capsules per box
-		try {
-			// add 2 new boxes of capsules, now 40 capusles available
-			b.increaseAvailableCapsules(2);
-			b.decreaseAvailableCapsules(10);
-			assertEquals(30, b.getAvailableCapsules());
-		} catch (NotEnoughCapsules e) {
-			fail();
-		} catch (BeverageException e) {
-			fail();
-		}
+	void tc4() throws BeverageException, NotEnoughCapsules {
+		// add 2 new boxes of capsules, now 40 capusles available
+		b.increaseAvailableCapsules(2);
+		b.decreaseAvailableCapsules(10);
+		assertEquals(30, b.getAvailableCapsules());
 	}
 	
 	@Test
-	void tc5() {
-		// initially -> box price: 5 euro, 20 capsules per box
-		try {
-			// add 2 new boxes of capsules, now 40 capusles available
-			b.increaseAvailableCapsules(2);
-			b.decreaseAvailableCapsules(50);
-			fail();
-		} catch (NotEnoughCapsules e) {
-
-		} catch (BeverageException e) {
-			fail();
-		}
+	void tc5() throws BeverageException {
+		// add 2 new boxes of capsules, now 40 capusles available
+		b.increaseAvailableCapsules(2);
+		assertThrows(NotEnoughCapsules.class, () -> b.decreaseAvailableCapsules(50));
 	}
 	
 	@Test
@@ -177,7 +143,7 @@ class TestBeverage {
 	
 	@Test
 	// test setters
-	void tcSetters() {
+	void tcSetters() throws BeverageException {
 		b.setName("Black Tea");
 		assertEquals("Black Tea", b.getName());
 		try {

@@ -2,14 +2,13 @@ package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Locale;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
+import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 /**
  * Integration tests for class Consumption + Beverage and Employee
@@ -56,11 +55,11 @@ class TestConsumption {
 		try {
 			new Consumption(e, b, true, -10);
 			fail();
-		} catch (BeverageException er) {
+		} catch (NotEnoughCapsules er) {
 			try {
 				new Consumption(e, b, false, -10);
 				fail();
-			} catch (BeverageException e2) {
+			} catch (NotEnoughCapsules e2) {
 			} catch (Exception e) {
 				fail();
 			}
@@ -119,7 +118,7 @@ class TestConsumption {
 		try {
 			new Consumption(b, -10);
 			fail();
-		} catch (BeverageException er) {
+		} catch (NotEnoughCapsules er) {
 		} catch (Exception e) {
 			fail();
 		}

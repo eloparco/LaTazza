@@ -14,11 +14,17 @@ import it.polito.latazza.exceptions.EmployeeException;
  * 
  */
 class TestEmployee {
-	Employee employee;
+	private Employee employee;
+	
+	private static final int ID = 1;
+	private static final String MARIO = "Mario";
+	private static final String ROSSI = "Rossi";
+	private static final String ANDREA = "Andrea";
+	private static final String BIANCHI = "Bianchi";
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		employee = new Employee(1, "Mario", "Rossi");
+		employee = new Employee(ID, MARIO, ROSSI);
 	}
 	
 	
@@ -27,65 +33,37 @@ class TestEmployee {
 	 */
 	
 	@Test
-	void testIncreaseBalance1() {
-		try {
-			employee.increaseBalance(10);
-			assertEquals(10, employee.getBalance());
-		} catch (EmployeeException e) {
-			fail();
-		}
+	void testIncreaseBalance1() throws EmployeeException {
+		employee.increaseBalance(10);
+		assertEquals(10, employee.getBalance());
 	}
 
 	@Test
-	void testIncreaseBalance2() {
-		try {
-			employee.increaseBalance(10);
-			employee.increaseBalance(Integer.MAX_VALUE);
-			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+	void testIncreaseBalance2() throws EmployeeException {
+		employee.increaseBalance(10);
+		assertThrows(EmployeeException.class, () -> employee.increaseBalance(Integer.MAX_VALUE));
 	}
 	
 	@Test
-	void testIncreaseBalance3() {
-		try {
-			employee.increaseBalance(-10);
-			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+	void testIncreaseBalance3() throws EmployeeException {
+		assertThrows(EmployeeException.class, () -> employee.increaseBalance(-10));
 	}
 	
 	@Test
-	void testDecreaseBalance1() {
-		try {
-			employee.decreaseBalance(10);
-			assertEquals(-10, employee.getBalance());
-		} catch (EmployeeException e) {
-			fail();
-		}
+	void testDecreaseBalance1() throws EmployeeException {
+		employee.decreaseBalance(10);
+		assertEquals(-10, employee.getBalance());
 	}
 	
 	@Test
-	void testDecreaseBalance2() {
-		try {
-			employee.decreaseBalance(10);
-			employee.decreaseBalance(Integer.MAX_VALUE);
-			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+	void testDecreaseBalance2() throws EmployeeException {
+		employee.decreaseBalance(10);
+		assertThrows(EmployeeException.class, () -> employee.decreaseBalance(Integer.MAX_VALUE));
 	}
 	
 	@Test
 	void testDecreaseBalance3() {
-		try {
-			employee.decreaseBalance(-10);
-			fail();
-		} catch (EmployeeException e) {
-			assertTrue(true);
-		}
+		assertThrows(EmployeeException.class, () -> employee.decreaseBalance(-10));
 	}
 	
 	
@@ -94,13 +72,17 @@ class TestEmployee {
 	 */
 	
 	@Test
-	void testGettersAndSetters() {
-		employee.setName("Andrea");
-		employee.setSurname("Bianchi");
-		assertEquals(1, employee.getId());
-		assertEquals("Andrea", employee.getName());
-		assertEquals("Bianchi", employee.getSurname());
-		assertEquals("Andrea Bianchi", employee.toString());
+	void testGettersAndSetters() throws EmployeeException {
+		assertEquals(ID, employee.getId());
+		assertEquals(MARIO, employee.getName());
+		assertEquals(ROSSI, employee.getSurname());
+		assertEquals(MARIO + " " + ROSSI, employee.toString());
+		employee.setName(ANDREA);
+		employee.setSurname(BIANCHI);
+		assertEquals(ID, employee.getId());
+		assertEquals(ANDREA, employee.getName());
+		assertEquals(BIANCHI, employee.getSurname());
+		assertEquals(ANDREA + " " + BIANCHI, employee.toString());
 	}
 
 }

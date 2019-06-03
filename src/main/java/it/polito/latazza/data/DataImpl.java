@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,7 @@ public class DataImpl implements DataInterface {
     
 	public DataImpl() {
 		loadData();
+		Locale.setDefault(Locale.US);
 	}
 	
 	@Override
@@ -55,13 +57,12 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		
 		/* update */
-				
+		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		if (fromAccount)
 			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
 		else
 			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -88,9 +89,9 @@ public class DataImpl implements DataInterface {
 		
 		
 		/* update */
+		Consumption c = new Consumption(b, numberOfCapsules);
 		b.decreaseAvailableCapsules(numberOfCapsules);
 		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
-		Consumption c = new Consumption(b, numberOfCapsules);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -164,7 +165,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		
-		if (startDate==null || endDate==null | startDate.after(endDate))
+		if (startDate==null || endDate==null || startDate.after(endDate))
 			throw new DateException();
 		
         return transactions.stream().filter(l -> ((l.getDate().after(startDate) || l.getDate().equals(startDate)) && (l.getDate().before(setTimeToMidnight(endDate)) || l.getDate().equals(setTimeToMidnight(endDate)))))
@@ -285,9 +286,22 @@ public class DataImpl implements DataInterface {
 		if (e == null)
 			throw new EmployeeException();
 		
+		/* keep for restore */
+		String n = e.getName();
+		String s = e.getSurname();
+		
 		/* update */
-		e.setName(name);
-		e.setSurname(surname);
+		try {
+			e.setName(name);
+			e.setSurname(surname);
+		} catch (Exception er) {
+			e.setName(n);
+			e.setSurname(s);
+			throw er;
+		}
+		
+		/* update */
+		
 		System.out.println(e + " updated");
 		
 		/* save */
