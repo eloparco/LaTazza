@@ -68,9 +68,18 @@ public class Beverage implements Serializable {
 	
 	public void updateBeverageData(String name, Integer boxPrice , Integer capsulePerBox) throws BeverageException {
 		this.beverageData.add(new BeverageData());
-		this.setName(name);
-		this.setBoxPrice(boxPrice);
-		this.setCapsulesPerBox(capsulePerBox);
+			
+		String n = this.getName();
+		
+		try {
+			this.setName(name);
+			this.setBoxPrice(boxPrice);
+			this.setCapsulesPerBox(capsulePerBox);
+		} catch (Exception e) {
+			this.setName(n);
+			this.beverageData.remove(this.beverageData.size()-1);
+			throw e;
+		}
 	}
 	
 	public int getAvailableCapsules() {
