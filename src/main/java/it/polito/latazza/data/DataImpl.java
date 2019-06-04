@@ -58,11 +58,11 @@ public class DataImpl implements DataInterface {
 		
 		/* update */
 		Consumption c = new Consumption(e, b, fromAccount, numberOfCapsules);
-		b.decreaseAvailableCapsules(numberOfCapsules);
+		int amount = b.decreaseAvailableCapsules(numberOfCapsules);
 		if (fromAccount)
-			e.decreaseBalance(b.getCapsulesPrice() * numberOfCapsules);
+			e.decreaseBalance(amount);
 		else
-			laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
+			laTazzaAccount.increaseBalance(amount);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -196,24 +196,9 @@ public class DataImpl implements DataInterface {
 		Beverage b = beverages.get(id);
 		if (b == null)
 			throw new BeverageException();
-		
-		/* keep for restore */
-		int bp = b.getBoxPrice();
-		int cpb = b.getCapsulesPerBox();
-		String n = b.getName();
-		
+				
 		/* update */
-		try {
-			b.setBoxPrice(boxPrice);
-			b.setCapsulesPerBox(capsulesPerBox);
-			b.setName(name);
-			System.out.println(b + " updated");
-		} catch (Exception e) {
-			b.setBoxPrice(bp);
-			b.setCapsulesPerBox(cpb);
-			b.setName(n);
-			throw e;
-		}
+		b.updateBeverageData(name, boxPrice, capsulesPerBox);
 		
 		/* save */
 		storeObjects(beverages.values(), FILENAME_BEVERAGES);

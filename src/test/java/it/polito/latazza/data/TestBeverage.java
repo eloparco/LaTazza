@@ -141,7 +141,7 @@ class TestBeverage {
 		assertEquals("Coffee", b.toString());
 	}
 	
-	@Test
+	/*@Test
 	// test setters
 	void tcSetters() throws BeverageException {
 		b.setName("Black Tea");
@@ -168,6 +168,6 @@ class TestBeverage {
 		} catch (Exception e) {
 		}
 		assertEquals(25, b.getCapsulesPerBox());
-	}
+	}*/
 
 }

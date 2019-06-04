@@ -83,8 +83,7 @@ public class Beverage implements Serializable {
 	}
 	
 	public int getAvailableCapsules() {
-		BeverageData bd = this.beverageData.get(this.beverageData.size()-1); //take last updated beverage data
-		return bd.getAvailableCapsules();
+		return this.beverageData.stream().collect(java.util.stream.Collectors.summingInt(l -> l.getAvailableCapsules()));
 	}
 	
 	public int getCapsulesPrice() {
@@ -101,20 +100,21 @@ public class Beverage implements Serializable {
 		bd.setAvailableCapsules(bd.getAvailableCapsules() + (numberOfBoxes * bd.getCapsulesPerBox()));
 	}
 	
-	public void decreaseAvailableCapsules(int numberOfCapsules) throws NotEnoughCapsules, BeverageException {
+	public int decreaseAvailableCapsules(int numberOfCapsules) throws NotEnoughCapsules, BeverageException {
 		BeverageData bd = this.beverageData.get(0); //take remaining beverage data
-		Integer totalAvailable = this.beverageData.stream().collect(java.util.stream.Collectors.summingInt(l -> l.getAvailableCapsules()));
+		Integer totalAvailable = this.getAvailableCapsules();
 		if (totalAvailable < numberOfCapsules )
 			throw new NotEnoughCapsules();
 		
 		// handle negative value and overflow
 		if (numberOfCapsules < 0 || totalAvailable - numberOfCapsules < 0)
 			throw new BeverageException();
-				
+		int amnt = 0;
 		while(numberOfCapsules > 0) {
 			// take min between number of capsules to decrease or avaialbe capsules with not updated price
 			int min = (bd.getAvailableCapsules() > numberOfCapsules) ? numberOfCapsules : bd.getAvailableCapsules();
 			//remove the min number of capsules
+			amnt += min * bd.getBoxPrice() / bd.getCapsulesPerBox();
 			bd.setAvailableCapsules(bd.getAvailableCapsules() - min);
 			//update the amount of capsules to sell
 			numberOfCapsules -= min;
@@ -124,6 +124,8 @@ public class Beverage implements Serializable {
 			//update the capsules to sell
 			bd = this.beverageData.get(0);
 		}
+		return amnt;
+		
 	}
 
 	@Override
@@ -135,14 +137,8 @@ public class Beverage implements Serializable {
 	
 	
 	
-	private class BeverageData {
+	private class BeverageData implements Serializable {
 		private Integer boxPrice,capsulesPerBox, availableCapsules;
-		
-		public BeverageData(Integer boxPrice, Integer capsulesPerBox, Integer availableCapsules) {
-			this.boxPrice=boxPrice;
-			this.capsulesPerBox=capsulesPerBox;
-			this.availableCapsules=availableCapsules;
-		}
 		
 		public BeverageData() {
 			this.boxPrice=0;
