@@ -67,6 +67,7 @@ DataInterface <|-- DataImpl
 Transaction <|-- Recharge
 Transaction <|-- Consumption
 Transaction <|-- BoxPurchase
+Beverage +-- BeverageData
 
 DataImpl "1" --> "*" Transaction
 DataImpl "1" -> "1" LaTazzaAccount
@@ -120,9 +121,7 @@ DataImpl : -storeObjects(collection:Collection<?> , filename:String) : void
 
 Beverage : -id : int
 Beverage : -name : String
-Beverage : -boxPrice : int
-Beverage : -capsulesPerBox : int
-Beverage : -availableCapsules : int
+Beverage : -updatesHistory : LinkedList<BeverageData>
 Beverage : +Beverage(beverageId:int, name:String, boxPrice:int, capsulePerBox:int)
 Beverage : +getId() : int
 Beverage : +getName() : String
@@ -131,11 +130,23 @@ Beverage : +getBoxPrice() : int
 Beverage : +setBoxPrice(boxPrice:int) : void
 Beverage : +getCapsulesPerBox() : int
 Beverage : +setCapsulesPerBox(capsulesPerBox:int) : void
+Beverage : +updateBeverageData(name:String, boxPrice:Integer, capsulePerBox:Integer) : void
 Beverage : +getAvailableCapsules() : int
 Beverage : +getCapsulesPrice() : int
 Beverage : +increaseAvailableCapsules(numberOfBoxes:int) : void
 Beverage : +decreaseAvailableCapsules(numberOfCapsules:int) : void
 Beverage : +toString() : String
+
+BeverageData : -boxPrice : Integer
+BeverageData : -capsulesPerBox : Integer
+BeverageData : -availableCapsules : Integer
+BeverageData : +BeverageData()
+BeverageData : +getAvailableCapsules() : Integer
+BeverageData : +getBoxPrice() : Integer
+BeverageData : +getCapsulesPerBox() : Integer
+BeverageData : +setAvailableCapsules(availableCapsules:Integer) : void
+BeverageData : +setCapsulesPerBox(capsulesPerBox:Integer) : void
+BeverageData : +setBoxPrice(boxPrice:Integer) : void
 
 LaTazzaAccount : -balance : int
 LaTazzaAccount : +getBalance() : int
