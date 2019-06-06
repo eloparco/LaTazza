@@ -895,7 +895,9 @@ Version: 1.0.0
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testDataPersistency |
-
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testExceptionUpdateEmployee |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcExceptions |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcUpdate |
 
 ### Code coverage report
 <br />**Employee:**  <br />
