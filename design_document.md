@@ -127,9 +127,9 @@ Beverage : +getId() : int
 Beverage : +getName() : String
 Beverage : +setName(name:String) : void
 Beverage : +getBoxPrice() : int
-Beverage : +setBoxPrice(boxPrice:int) : void
+Beverage : -setBoxPrice(boxPrice:int) : void
 Beverage : +getCapsulesPerBox() : int
-Beverage : +setCapsulesPerBox(capsulesPerBox:int) : void
+Beverage : -setCapsulesPerBox(capsulesPerBox:int) : void
 Beverage : +updateBeverageData(name:String, boxPrice:Integer, capsulePerBox:Integer) : void
 Beverage : +getAvailableCapsules() : int
 Beverage : +getCapsulesPrice() : int
