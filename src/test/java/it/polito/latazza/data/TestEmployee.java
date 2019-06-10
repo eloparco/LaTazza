@@ -83,6 +83,18 @@ class TestEmployee {
 		assertEquals(ANDREA, employee.getName());
 		assertEquals(BIANCHI, employee.getSurname());
 		assertEquals(ANDREA + " " + BIANCHI, employee.toString());
+		try {
+			employee.setName("");
+			fail();
+		} catch (Exception e) {
+			
+		}
+		try {
+			employee.setSurname("");
+			fail();
+		} catch (Exception e) {
+			
+		}
 	}
 
 }

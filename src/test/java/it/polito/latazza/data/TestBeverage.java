@@ -141,7 +141,7 @@ class TestBeverage {
 		assertEquals("Coffee", b.toString());
 	}
 	
-	@Test
+	/*@Test
 	// test setters
 	void tcSetters() throws BeverageException {
 		b.setName("Black Tea");
@@ -168,6 +168,46 @@ class TestBeverage {
 		} catch (Exception e) {
 		}
 		assertEquals(25, b.getCapsulesPerBox());
+	}*/
+	
+	@Test
+	void tcExceptions() throws BeverageException {
+		try {
+			b.setName(""); 
+			fail();
+		} catch (BeverageException e) {
+			
+		}
+		try {
+			b = new Beverage(1, "Coffee", -1, 20); 
+			fail();
+		} catch (BeverageException e) {};
+		try {
+			b = new Beverage(1, "Coffee", 500, -1); 
+			fail();
+		} catch (BeverageException e) {
+			
+		}
 	}
-
+	
+	@Test
+	void tcUpdate() throws BeverageException {
+		try {
+			b.increaseAvailableCapsules(1);
+			b.updateBeverageData("", 100, 20);
+		} catch (Exception e) {
+			
+		}
+		try {
+			b.updateBeverageData("Coffee", 100, 20);
+			assertEquals(100, b.getBoxPrice());
+			b.increaseAvailableCapsules(1);
+			b.decreaseAvailableCapsules(30);
+			assertEquals(10, b.getAvailableCapsules());
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	
 }

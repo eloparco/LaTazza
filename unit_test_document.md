@@ -883,7 +883,6 @@ Version: 1.0.0
 | Employee | it.polito.latazza.data.<br />TestEmployee.testGettersAndSetters |
 | Beverage | it.polito.latazza.data.<br />TestBeverage.tcConstructor |
 | Beverage | it.polito.latazza.data.<br />TestBeverage.tcGetters |
-| Beverage | it.polito.latazza.data.<br />TestBeverage.tcSetters |
 | BoxPurchase | it.polito.latazza.data.<br />TestBoxPurchase.tcToStringFormat |
 | LaTazzaAccount | it.polito.latazza.data.<br />TestLaTazzaAccount.tcGetBalance |
 | Recharge | it.polito.latazza.data.<br />TestRecharge.tcToStringFormat |
@@ -895,7 +894,9 @@ Version: 1.0.0
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl | it.polito.latazza.data.<br />TestDataImpl.testDataPersistency |
-
+| DataImpl | it.polito.latazza.data.<br />TestDataImpl.testExceptionUpdateEmployee |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcExceptions |
+| Beverage | it.polito.latazza.data.<br />TestBeverage.tcUpdate |
 
 ### Code coverage report
 <br />**Employee:**  <br />
@@ -920,7 +921,7 @@ Version: 1.0.0
 | DataImpl  |  282    	| 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeveragesId3 |
-| DataImpl  |  287      | 0                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
+| DataImpl  |  287      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages2 |
 |           |           | 1                    | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages1 |
 |           |           | 2+                   | it.polito.latazza.data.<br />TestDataImpl.testGetBeverages3 |
 | DataImpl  |  216      | 0                    | it.polito.latazza.data.<br />TestDataImpl.testGetReport1 |

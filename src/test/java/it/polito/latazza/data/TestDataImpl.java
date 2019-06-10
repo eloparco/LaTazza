@@ -1134,6 +1134,15 @@ public class TestDataImpl {
 		}
 	}
 	
+	@Test
+	public void testExceptionUpdateEmployee() {
+		try {
+			data.updateEmployee(employeeId, "", "");
+			fail();
+		} catch (Exception e) {
+
+		}
+	}
 	
 	/*
 	 * Acceptance testing
