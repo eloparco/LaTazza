@@ -28,7 +28,7 @@ Version: 1.0.0
 | Scenario | Fragile / Non-Fragile | Number of changed screen captures | Percentage of changed screen captures |
 | -------- | --------------------- | --------------------------------- | ------------------------------------- |
 |     1     |                       |                                   |                                       |
-|     2     |            Fragile           |                5                   |      5 / 21 * 100 = 23.8%                                 |
+|     2     |            Fragile           |                5                   |      5 / 26 * 100 = 19.23%                                 |
 |     3    |                       |                                   |                                       |
 |     4     |                       |                                   |                                       |
 |     5     |                       |                                   |                                       |
