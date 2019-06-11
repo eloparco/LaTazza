@@ -3,20 +3,21 @@ Sleep 5000
 
 Click "{ImageFolder}/1558686073725.png"
 Click "{ImageFolder}/1558686190066.png" 59 81
-Click "{ImageFolder}/1558686236324.png" 62 33
+Click "{ImageFolder}/1558686732832.png" 56 30
 
 Type "John"
-Click "{ImageFolder}/1558686333070.png" 70 55
+Click "{ImageFolder}/1558686732832.png" 62 54
 Type "Doe"
-Click "{ImageFolder}/1558686732832.png" 40 93
+Click "{ImageFolder}/1558686732832.png" 27 92
 Click "{ImageFolder}/1558942759920.png" 94 24
 Click "{ImageFolder}/1558686073725.png"
 Click "{ImageFolder}/1558686190066.png" 39 83
-Click "{ImageFolder}/1558686236324.png" 62 33
+Click "{ImageFolder}/1558686732832.png" 56 30
+
 Type "Jane"
-Click "{ImageFolder}/1558686333070.png" 70 55
+Click "{ImageFolder}/1558686732832.png" 62 54
 Type "Doe"
-Click "{ImageFolder}/1558686732832.png" 28 92
+Click "{ImageFolder}/1558686732832.png" 27 92
 Click "{ImageFolder}/1558942759920.png" 94 24
 Click "{ImageFolder}/1558687326660.png" 66 12
 Type "5"
