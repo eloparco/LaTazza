@@ -16,11 +16,11 @@ Click "{ImageFolder}/1558686236324.png" 62 33
 Type "Jane"
 Click "{ImageFolder}/1558686333070.png" 70 55
 Type "Doe"
-Click "{ImageFolder}/1558686732832.png" 40 93
+Click "{ImageFolder}/1558686732832.png" 28 92
 Click "{ImageFolder}/1558942759920.png" 94 24
-Click "{ImageFolder}/1558687326660.png" 43 18
+Click "{ImageFolder}/1558687326660.png" 66 12
 Type "5"
-Click "{ImageFolder}/1558687347789.png" 27 76
+Click "{ImageFolder}/1558687347789.png" 24 85
 Click "{ImageFolder}/1558688287598.png" 49 78
 Click "{ImageFolder}/1558686073725.png"
 Click "{ImageFolder}/1558686190066.png" 39 50
@@ -32,20 +32,20 @@ Click "{ImageFolder}/1558687441280.png" 66 72
 Type "5"
 Click "{ImageFolder}/1558687441280.png" 26 92
 Click "{ImageFolder}/1558942951218.png" 94 44
-Click "{ImageFolder}/1558688900053.png" 10 85
+Click "{ImageFolder}/1558688900053.png" 26 90
 Click "{ImageFolder}/1558688930229.png" 51 81
-Click "{ImageFolder}/1558688952078.png" 71 44
-Click "{ImageFolder}/1558689072699.png" 53 25
-Click "{ImageFolder}/1558689220837.png" 24 89
-Click "{ImageFolder}/1558689238905.png" 16 68
+Click "{ImageFolder}/1558688952078.png" 57 45
+Click "{ImageFolder}/1558689072699.png" 67 57
+Click "{ImageFolder}/1558689220837.png" 22 85
+Click "{ImageFolder}/1558689238905.png" 29 86
 Click "{ImageFolder}/1558943067068.png" 50 83
 Click "{ImageFolder}/1558943346639.png" 48 81
 
 Click "{ImageFolder}/1558941978974.png"
-Click "{ImageFolder}/1558941999428.png" 59 75
-Click "{ImageFolder}/1558942023515.png" 74 90
+Click "{ImageFolder}/1558941999428.png" 56 47
+Click "{ImageFolder}/1558942023515.png" 77 77
 Click "{ImageFolder}/1558942062461.png" 26 94
-Click "{ImageFolder}/1558942038644.png" 31 88
+Click "{ImageFolder}/1558942038644.png" 16 94
 Check "{ImageFolder}/1558942111078.png"
 Click "{ImageFolder}/1558944251980.png" 96 53
 Click "{ImageFolder}/1558944276513.png" 95 50
