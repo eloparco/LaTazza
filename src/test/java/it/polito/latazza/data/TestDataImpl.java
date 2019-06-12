@@ -1226,7 +1226,7 @@ public class TestDataImpl {
 	}
 
 	@Test
-	public void testScenario3_1() throws EmployeeException, BeverageException, NotEnoughBalance, NotEnoughCapsules {
+	public void testScenario8() throws EmployeeException, BeverageException, NotEnoughBalance, NotEnoughCapsules {
 		data.reset();
 		try {
 		employeeId = data.createEmployee("Mario", "Rossi");

@@ -1,0 +1,46 @@
+StartFile "{ImageFolder}/../startfile.bat"
+Sleep 5000
+
+Click "{ImageFolder}/1558706575675.png" 46 55
+Click "{ImageFolder}/1558708883293.png" 58 84
+Click "{ImageFolder}/1558706833076.png" 57 37
+Type "Mario"
+Click "{ImageFolder}/1558707297056.png" 50 58
+Type "Rossi"
+Click "{ImageFolder}/1558707373783.png" 38 85
+Click "{ImageFolder}/1558708791176.png" 72 10
+Click "{ImageFolder}/1558708815310.png" 58 61
+Click "{ImageFolder}/1558708883293.png" 48 43
+Click "{ImageFolder}/1558804092793.png" 50 52
+Type "Coffee"
+Click "{ImageFolder}/1558804260946.png" 54 47
+Type "20"
+Click "{ImageFolder}/1558804318867.png" 51 71
+Type "500"
+Click "{ImageFolder}/1558804367551.png" 38 59
+Click "{ImageFolder}/1558804423243.png" 95 15
+Click "{ImageFolder}/1558804479854.png" 55 70
+Type "1000"
+Click "{ImageFolder}/1558804630504.png" 40 58
+Click "{ImageFolder}/1558804649429.png" 35 67
+Click "{ImageFolder}/1558804793098.png" 46 53
+Click "{ImageFolder}/1560275303045.png" 59 81
+Click "{ImageFolder}/1560334849971.png" 68 54
+Click "{ImageFolder}/1560334873305.png"
+Click "{ImageFolder}/1560335582523.png" 48 24
+Click "{ImageFolder}/1560335211686.png" 63 38
+Type [BACKSPACE]"1"
+Click "{ImageFolder}/1560335526390.png" 50 58
+Click "{ImageFolder}/1560336652831.png" 91 9
+
+Click "{ImageFolder}/1558804793098.png" 46 53
+Click "{ImageFolder}/1560275303045.png" 54 84
+Click "{ImageFolder}/1560335746096.png" 65 60
+Click "{ImageFolder}/1560335768130.png" 58 58
+Type "25[ENTER]"
+Click "{ImageFolder}/1560335859234.png"
+Click "{ImageFolder}/1560335875024.png" 60 83
+Check "{ImageFolder}/1560335890052.png" 2 1 172 21
+
+
+
