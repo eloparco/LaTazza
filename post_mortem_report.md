@@ -22,7 +22,7 @@ Our choice paid off, considering that other teams were struggling using external
 
 # Code and test cases
 
-We dedicated a lot of time in testing our code. Considering the simplicity of some classes, we decided to follow a bottom-up approach with incremental integration, avoiding to develop stubs. Most of testing was for the facade class, proportionally with its complexity.
+We dedicated a lot of time in testing our code. Considering the simplicity of some classes, we decided to follow a bottom-up approach with incremental integration, avoiding to develop stubs. Most of testing was for the facade class, proportionally with its complexity.  
 Even if the application worked properly at the deadline, some official test cases failed, due to some missing checks (e.g. null pointers). Probably we should have opened some further issues to clarify missing/ambiguous specifications of certain functions.
 However, thanks to the modularity of the code, the failed test cases were fixed very quickly.
 
@@ -32,7 +32,7 @@ The large amount of tests turned out to be very useful during changes (regressio
 
 # Build, tools and environment
 
-Git was indispensable, especially during coding and testing, to work remotely.
+Git was indispensable, especially during coding and testing, to work remotely.  
 Maven permitted us to keep aligned the versions of plugins (e.g. JUnit), external libraries, and so on.
 
 # Other observations
