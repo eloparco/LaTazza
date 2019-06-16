@@ -13,32 +13,25 @@ Click "{ImageFolder}/1558921323857.png"
 Click "{ImageFolder}/1558921331947.png"
 
 Click "{ImageFolder}/1558921364656.png"
-Click "{ImageFolder}/1558921202105.png" 57 49
+Click "{ImageFolder}/1558921202105.png" 55 49
 Click "{ImageFolder}/1558921637180.png"
 Click "{ImageFolder}/1558921842883.png" 71 51
 Type "Coffee"
 Click "{ImageFolder}/1558921875507.png" 73 47
 Type "20"
-Click "{ImageFolder}/1558921899975.png" 74 52
+Click "{ImageFolder}/1560719838144.png" 68 51
 Type "5"
 Click "{ImageFolder}/1558921418176.png"
 Click "{ImageFolder}/1558921425209.png"
 
-Click "{ImageFolder}/1558922295165.png" 62 58
+Click "{ImageFolder}/1560720456418.png"
 Type "5"
-Click "{ImageFolder}/1558922420645.png"
-Click "{ImageFolder}/1558922320174.png"
-Click "{ImageFolder}/1558922334488.png"
-Click "{ImageFolder}/1558922457385.png"
-
-Click "{ImageFolder}/1558922505499.png"
-Click "{ImageFolder}/1558922527744.png" 48 61
-Click "{ImageFolder}/1558922542393.png"
-Click "{ImageFolder}/1558922559047.png" 65 74
-Click "{ImageFolder}/1558922572143.png" 71 54
-Click "{ImageFolder}/1558922589196.png" 70 23
-Click "{ImageFolder}/1558922603961.png"
-Check "{ImageFolder}/1558922638497.png" 44 29 148 37
-Click "{ImageFolder}/1558922613640.png"
-Check "{ImageFolder}/1558922663403.png" 75 8 58 20
-Check "{ImageFolder}/1558922677986.png" 45 8 30 21
+Click "{ImageFolder}/1560720645042.png"
+Click "{ImageFolder}/1560720901669.png" 51 78
+Click "{ImageFolder}/1560720965022.png"
+Click "{ImageFolder}/1560721010877.png" 52 73
+Click "{ImageFolder}/1560721132625.png" 68 69
+Click "{ImageFolder}/1560721164542.png" 44 59
+Click "{ImageFolder}/1560721248816.png" 51 77
+Check "{ImageFolder}/1560721323874.png" 90 8 81 22
+Check "{ImageFolder}/1560721345616.png" 117 31 197 33
