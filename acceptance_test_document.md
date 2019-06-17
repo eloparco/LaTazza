@@ -96,6 +96,16 @@ Version: 1.0.0
 | 3                | Deduce price of T from shared balance              |
 | 4                | Add capsules of T to avaliable capsules                  |
 
+| Scenario ID: SC8	| Corresponds to UC2 				|
+| --------------------	| --------------------------------------------- |
+| Description     	| Visitor uses some capsules of type T 		|
+| Precondition     	| Quantity of capsule type T greater than 0, T was updated and restocked previously|
+| Postcondition    	| Balance updated, count of T updated		|
+| Step#            	| Step description      			|
+| 1             	| Administrator selects capsule type T 		|
+| 2                	| Administrator selects Visitor 		|
+| 3                	| Reduce quantity of capsule T		|
+| 4                	| Add price of capsules T to balance 			|
 
 # Coverage of Scenarios
 
@@ -108,6 +118,7 @@ Version: 1.0.0
 | 5           | FR6                             | it.polito.latazza.data.TestDataImpl.testGetReport1            	| scenario_5.txt	|
 | 6	      | FR8+FR3				| it.polito.latazza.data.TestDataImpl.testScenario6 			| scenario_6.txt	|
 | 7	      | FR7+FR4				| it.polito.latazza.data.TestDataImpl.testScenario7 			| scenario_7.txt	|
+| 8	      | FR2                             | it.polito.latazza.data.TestDataImpl.testScenario8       | scenario_8.txt	|
 
 
 # Coverage of Non Functional Requirements

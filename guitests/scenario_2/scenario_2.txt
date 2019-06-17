@@ -31,10 +31,10 @@ Type "20"
 Click "{ImageFolder}/1558687441280.png" 66 72
 Type "5"
 Click "{ImageFolder}/1558687441280.png" 32 90
-Click "{ImageFolder}/1558688900053.png" 12 86
+Click "{ImageFolder}/1558688900053.png" 31 88
 Click "{ImageFolder}/1558688930229.png" 49 77
-Click "{ImageFolder}/1558688952078.png" 79 46
-Click "{ImageFolder}/1558689072699.png" 53 25
-Click "{ImageFolder}/1558689220837.png" 37 79
-Click "{ImageFolder}/1558689238905.png" 16 68
+Click "{ImageFolder}/1558688952078.png" 26 48
+Click "{ImageFolder}/1558689072699.png" 41 16
+Click "{ImageFolder}/1558689220837.png" 19 92
+Click "{ImageFolder}/1558689238905.png" 21 72
 Check "{ImageFolder}/1558689355101.png" 0 0 310 123
