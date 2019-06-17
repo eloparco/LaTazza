@@ -1224,6 +1224,24 @@ public class TestDataImpl {
 			fail();
 		}
 	}
+
+	@Test
+	public void testScenario8() throws EmployeeException, BeverageException, NotEnoughBalance, NotEnoughCapsules {
+		data.reset();
+		try {
+		employeeId = data.createEmployee("Mario", "Rossi");
+		beverageId = data.createBeverage("Coffee", 20, 500);
+		data.rechargeAccount(employeeId, 1000);
+		data.buyBoxes(beverageId, 1);
+		data.updateBeverage(beverageId, "Coffee", 10, 500);
+		data.buyBoxes(beverageId, 1);
+		data.sellCapsulesToVisitor(beverageId, 25);
+		assertEquals(Integer.valueOf(750), data.getBalance());
+		assertEquals(Integer.valueOf(5), data.getBeverageCapsules(beverageId));
+		} catch (Exception e) {
+			fail();
+		}
+	}
 	
 	@Test
 	public void testPerformance() {

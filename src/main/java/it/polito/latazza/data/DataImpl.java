@@ -86,12 +86,10 @@ public class DataImpl implements DataInterface {
 		if (b == null)
 			throw new BeverageException();
 		
-		
-		
 		/* update */
 		Consumption c = new Consumption(b, numberOfCapsules);
-		b.decreaseAvailableCapsules(numberOfCapsules);
-		laTazzaAccount.increaseBalance(b.getCapsulesPrice() * numberOfCapsules);
+		int amount = b.decreaseAvailableCapsules(numberOfCapsules);
+		laTazzaAccount.increaseBalance(amount);
 		transactions.add(c);
 		System.out.println("Transaction completed: " + c);
 		
@@ -99,7 +97,6 @@ public class DataImpl implements DataInterface {
 		storeObject(c, FILENAME_TRANSACTIONS, true);
 		storeObjects(beverages.values(), FILENAME_BEVERAGES);
 		storeObject(laTazzaAccount, FILENAME_LA_TAZZA_ACCOUNT, false);
-
 	}
 
 	@Override
